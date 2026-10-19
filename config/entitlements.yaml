@@ -1,0 +1,28 @@
+# Who sees what (docs/architecture.md §8, decision 0015).
+#
+# PROPOSAL FOR THE OWNERS TO EDIT (the tiers' names and contents are an open question in docs/plan.md). Which feature sits in which tier is a business decision; this file is the only
+# place it is made. The web app's single tier check (web/lib/entitlements.ts) reads a copy generated from this file
+# (python -m data_platform.models.registry export-web), and CI fails if the copy is out of date.
+#
+# Tiers are ordered: a model is visible to its minimum tier and every tier above it.
+#
+#   free_preview: { delay_days: N }   tiers below the minimum see the same outputs, but only for dates at least
+#                                     N days old. Enforced on the server, like every tier rule.
+#   recent_window: { days: N, full_history_tier: T }
+#                                     tiers from the minimum up to (not including) T see only the last N days of the
+#                                     model's outputs; T and above see the whole history. Enforced on the server.
+
+tiers: [free, plus, pro, professional]
+
+models:
+  # Crypto (decision 0019; a prototype until Bitstamp's data licence is signed)
+  crypto_market:        { minimum_tier: free }    # prices, returns, drawdown from the high, volatility, ETH/BTC
+  crypto_cycle:         { minimum_tier: plus, free_preview: { delay_days: 7 } }
+                        # long averages, Pi cycle lines, halvings, cycle table, monthly returns: free sees them a week late
+  crypto_trend_bands:    { minimum_tier: pro }     # bitcoin's long-run trend bands, re-fitted daily
+
+# Computed and stored, but served to nobody until the owner decides otherwise. models.model_stats holds figures a
+# model measures from its own outputs (e.g. how often a reading was followed by a given move); beside a live reading
+# they would read as a performance claim (decision 0010 point 5), so they need a legal view first.
+unpublished_outputs:
+  - models.model_stats

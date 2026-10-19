@@ -1,0 +1,28 @@
+# The single place for disclaimer text (decision 0010). Pages, e-mails and model manifests refer to these by key; no
+# disclaimer is written anywhere else. Translations, when the site has them, live beside the English text.
+# Wording to be reviewed by the owners' lawyer before launch, including any jurisdiction-specific notice the lawyer
+# advises once the company's home and its customers' countries are settled (docs/plan.md, legal questions).
+
+general:
+  en: >-
+    Information and education only. Nothing on this site is investment advice, and nothing here is a
+    recommendation to buy, sell or hold any security or crypto-asset. Nothing here takes account of any person's
+    circumstances. Figures are computed from the sources named on each page and may contain errors or delays;
+    check the original source before relying on any number. Past values do not predict future ones.
+
+model_general:
+  en: >-
+    This is the output of a stated statistical method applied to published data. It describes how prices relate
+    to each other, and to their own history, under that method's assumptions. It is not a forecast and not advice.
+    The method, its assumptions and its limits are on the method page.
+
+data_sources:
+  en: >-
+    Data: Bitstamp (crypto prices). This service is not affiliated with or endorsed by any of its data sources.
+
+crypto_risk:
+  en: >-
+    Crypto-assets are highly volatile and largely unregulated in many countries, and in some they are restricted or
+    not recognised. Their prices can fall sharply and quickly, and holdings can be lost entirely. This section shows
+    global market prices in US dollars for information and education only. It does not offer, promote or help with
+    dealing in any crypto-asset.

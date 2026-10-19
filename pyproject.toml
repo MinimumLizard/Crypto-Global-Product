@@ -1,0 +1,36 @@
+[project]
+name = "research-terminal-data"
+version = "0.1.0"
+description = "Collectors, raw archive, database and models for the crypto and global-markets research terminal"
+requires-python = ">=3.12"
+dependencies = [
+    "requests==2.34.2",
+    "pydantic==2.13.4",
+    "psycopg[binary]==3.2.12",
+    "PyYAML==6.0.3",
+    "boto3==1.40.70",
+    "numpy==2.5.3",
+    "pandas==3.0.5",
+]
+
+[dependency-groups]
+dev = [
+    "pytest==9.1.1",
+    "moto[s3]==5.1.17",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["data_platform"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests", "data_platform/models"]
+pythonpath = ["."]
+markers = [
+    "db: needs a Postgres database (TEST_DATABASE_URL)",
+    "legacy: needs local clones of the old repos and the safety archives (slow; run before cut-over)",
+]
+addopts = "-q --import-mode=importlib"

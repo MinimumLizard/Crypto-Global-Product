@@ -1,0 +1,127 @@
+# Copy lint (decision 0010). CI fails if any user-facing text contains one of these phrases (case-insensitive,
+# whole words). User-facing text = web/messages/*.json, model manifests and METHOD.md files, compliance/*.yaml.
+#
+# The product is information, tools and education only: no buy/sell/hold language, no price targets, no "zones" to
+# buy or exit, no picks, no personalised recommendations (owner's hard rule 3). Most jurisdictions regulate
+# investment advice; the lawyer's view decides the final wording.
+#
+# It also enforces hard rule 1 (never imitate the paid crypto-research service the product is compared with): that
+# service's name, its founder's name and its product terms are banned here, so they can never reach a page, an
+# e-mail or a model label (docs/research/crypto-itc-review.md, "what that means for us", point 3).
+#
+# A factual use the product genuinely needs (e.g. "directors bought Rs 12 mn on 3 Oct", or a disclaimer that says
+# what we do NOT do) is allowed only by an entry under `allow`, naming the file, the phrase, a snippet of the
+# surrounding text that must be present on the same line, and the reason. Adding one is a deliberate, visible
+# change in code review.
+
+# Word forms are listed explicitly (not matched by stem), so the list says exactly what is caught. "held" is not
+# listed: it is ordinary English ("held fixed", "held out of the fit") and has no advice sense on its own.
+#
+# English only. A list for each other language must be added here, by its translator, before that language goes live.
+
+banned:
+  - buy
+  - buys
+  - buying
+  - sell
+  - sells
+  - selling
+  - hold
+  - holds
+  - strong buy
+  - accumulate
+  - add to
+  - trim
+  - get in
+  - get out
+  - entry point
+  - exit point
+  - price target
+  - target price
+  - fair value of
+  - undervalued
+  - overvalued
+  - undervaluation
+  - overvaluation
+  - cheap
+  - cheaper
+  - cheapest
+  - rich
+  - richer
+  - richest
+  - bargain
+  - top pick
+  - top picks
+  - our picks
+  - you should
+  - we recommend
+  - recommend
+  - recommends
+  - recommended
+  - recommending
+  - recommendation
+  - recommendations
+  - outperform
+  - outperforms
+  - outperformed
+  - outperforming
+  - underperform
+  - underperforms
+  - underperformed
+  - underperforming
+  - guaranteed
+  - sure thing
+  - can't lose
+  - switch candidate
+  - switch candidates
+  # crypto: entry and exit framing
+  - buy zone
+  - sell zone
+  - accumulation zone
+  - accumulation zones
+  - accumulation phase
+  - distribution zone
+  - take profit
+  - take profits
+  - taking profit
+  - taking profits
+  - profit taking
+  - dca into
+  - load up
+  - loading up
+  - bottom is in
+  - top is in
+  - to the moon
+  - risk metric
+  - risk score
+  - bubble risk
+  # the paid service and its terms (hard rule 1); never in the product or its marketing
+  - into the cryptoverse
+  - cryptoverse
+  - intothecryptoverse
+  - itc
+  - benjamin cowen
+  - ben cowen
+  - cowen
+  - does it bleed
+  - workbench
+  - exit strategy
+  - exit strategies
+
+allow:
+  - file: compliance/disclaimers.yaml
+    phrase: recommendation
+    context: "recommendation to buy, sell or hold any security or crypto-asset"
+    reason: The disclaimer states what the product does not do.
+  - file: compliance/disclaimers.yaml
+    phrase: buy
+    context: "recommendation to buy, sell or hold any security or crypto-asset"
+    reason: The disclaimer states what the product does not do.
+  - file: compliance/disclaimers.yaml
+    phrase: sell
+    context: "recommendation to buy, sell or hold any security or crypto-asset"
+    reason: The disclaimer states what the product does not do.
+  - file: compliance/disclaimers.yaml
+    phrase: hold
+    context: "recommendation to buy, sell or hold any security or crypto-asset"
+    reason: The disclaimer states what the product does not do.
