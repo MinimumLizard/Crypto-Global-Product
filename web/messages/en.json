@@ -1,0 +1,406 @@
+{
+  "site": {
+    "name": "Research Terminal",
+    "tagline": "Crypto and global markets, measured and explained",
+    "skip": "Skip to content"
+  },
+  "nav": {
+    "home": "Overview",
+    "crypto": "Crypto",
+    "methods": "Methods",
+    "about": "About",
+    "learn": "Learn",
+    "plans": "Plans",
+    "feedback": "Feedback",
+    "weekly": "Weekly e-mail"
+  },
+  "tiers": {
+    "free": "Free",
+    "plus": "Plus",
+    "pro": "Pro",
+    "professional": "Professional",
+    "viewing": "Access: {tier}"
+  },
+  "common": {
+    "asOf": "Data for {date}",
+    "upToDate": "Up to date with the market calendar.",
+    "behind": "{count, plural, one {# day} other {# days}} behind the market calendar. The next update may be late.",
+    "noData": "No data yet.",
+    "method": "How this is calculated",
+    "version": "Method version {version}",
+    "sources": "Sources",
+    "showing": "Showing {count} of {total}",
+    "whatIsThis": "What is this?"
+  },
+  "locked": {
+    "title": "Part of the {tier} tier",
+    "body": "This information is included in the {tier} tier and above. Accounts and subscriptions are not open yet.",
+    "preview": "Free preview, shown with a {days}-day delay: data to {date}. Current values are part of the {tier} tier.",
+    "plans": "See what each plan includes"
+  },
+  "home": {
+    "eyebrow": "Crypto and global markets",
+    "heroTitle": "Market history, measured and explained",
+    "heroSub": "Prices, long-run averages and cycle measures for the largest crypto-assets, each with its method and its limits. Macro and global markets are planned.",
+    "when": "Prices for {date} (UTC day)",
+    "snapshot": "Today's figures",
+    "today": "on the day",
+    "trend90": "last 90 days",
+    "fromHigh": "{pct} from its highest close",
+    "atHigh": "at its highest close",
+    "btcChartTitle": "Bitcoin since 2011",
+    "more": "More",
+    "learnTitle": "Start here",
+    "learnAll": "Everything in Learn",
+    "learn1Kicker": "Basics",
+    "learn1Title": "What a drawdown tells you",
+    "learn1Body": "How far a price sits below its highest close, and why that is history rather than a forecast.",
+    "learn2Kicker": "Basics",
+    "learn2Title": "Moving averages",
+    "learn2Body": "Why long averages smooth out daily moves, and what they can and cannot describe.",
+    "learn3Kicker": "Methods",
+    "learn3Title": "How every number is made",
+    "learn3Body": "Each calculation has a public method page: inputs, formulas, assumptions and limits.",
+    "plansTitle": "Plans",
+    "plansBody": "The main bitcoin and ether figures, the weekly e-mail and every Learn page are free. Paid plans add the full chart library and, later, macro and global markets with written analysis. Accounts are not open yet.",
+    "plansLink": "See the plans"
+  },
+  "methods": {
+    "title": "Methods",
+    "intro": "Every number on this site comes from one of these models. Each page states the method, its assumptions and its limits, and how it was checked.",
+    "availableFrom": "Available from: {tier}",
+    "currentVersion": "Current version {version}",
+    "versions": "Versions",
+    "status_current": "shown on the site",
+    "status_reference": "kept running for comparison",
+    "status_retired": "no longer computed",
+    "market_crypto": "Crypto (global prices, in US dollars)"
+  },
+  "about": {
+    "title": "About",
+    "what": "What this is",
+    "whatBody": "A research service for crypto and global markets: data from licensed sources, the published methods applied to it, and the limits of both. It offers information and education only.",
+    "sources": "Data sources",
+    "sourcesBody": "Crypto prices: Bitstamp's daily closes. Data is used only where the source's terms allow it, and each source is named beside the figures that use it.",
+    "tiers": "Access",
+    "tiersBody": "The main figures are free. The full chart library and deeper analysis will be part of paid plans once accounts open. Plan rules are applied on our server: information outside your plan is never sent to your browser, and the same applies to e-mail.",
+    "corrections": "Corrections",
+    "correctionsBody": "Sources are stored exactly as published, and every calculation is versioned. When a source corrects a figure, the correction is applied and the earlier value is kept on record."
+  },
+  "footer": {
+    "rights": "© Research Terminal (working name)",
+    "tagline": "Information and education on crypto and global markets. Not investment advice.",
+    "markets": "Markets",
+    "company": "About us"
+  },
+  "models": {
+    "crypto_market": {
+      "title": "Crypto prices, returns and drawdowns",
+      "summary": "Daily closing prices in US dollars for bitcoin, ether and other large crypto-assets, with returns, the fall from the highest close and realised volatility."
+    },
+    "crypto_cycle": {
+      "title": "Crypto cycles and long averages",
+      "summary": "Long moving averages, the Pi cycle lines and the days they crossed, the bitcoin halvings, each cycle's peak and low, and monthly returns."
+    },
+    "crypto_trend_bands": {
+      "title": "Bitcoin long-run trend bands",
+      "summary": "Two trend lines through bitcoin's price history on log-log axes, re-fitted every day, with bands around them and where the price sits between the bands."
+    }
+  },
+  "errors": {
+    "title": "Something went wrong",
+    "body": "This page could not be loaded. Please try again in a few minutes."
+  },
+  "plans": {
+    "title": "Plans",
+    "intro": "The main figures are free. The paid plans add the full chart library and, later, macro and global markets with written analysis. Accounts and subscriptions are not open yet; these are the planned plans, and their names and contents are still being decided.",
+    "includes": "What it includes",
+    "models": "Calculations in this plan",
+    "current": "You are viewing as: {tier}",
+    "soon": "Opening later",
+    "free": {
+      "tagline": "The main figures, explained",
+      "features": [
+        "Bitcoin and ether prices in US dollars: returns, the fall from the high and volatility",
+        "Every other tracked crypto-asset's latest figures",
+        "The weekly e-mail",
+        "Plain-language explanations and a method page for every number"
+      ]
+    },
+    "plus": {
+      "tagline": "The full chart library",
+      "features": [
+        "Everything in Free",
+        "Crypto cycles: long averages, Pi cycle lines, halvings, the cycle table and monthly returns (free a week late)",
+        "Full history for every chart",
+        "Alerts when a measure crosses a level you choose (planned)"
+      ]
+    },
+    "pro": {
+      "tagline": "Macro, global markets and analysis",
+      "features": [
+        "Everything in Plus",
+        "Bitcoin's long-run trend bands, re-fitted every day",
+        "Macro and global markets: inflation, jobs, central-bank rates, yield curves, the dollar, gold, equity indices and sectors (planned)",
+        "Written and video analysis, and the members' community (planned)"
+      ]
+    },
+    "professional": {
+      "tagline": "Members' calls",
+      "features": [
+        "Everything in Pro",
+        "A regular members' call (planned; not personal advice)"
+      ]
+    }
+  },
+  "learn": {
+    "title": "Learn the basics",
+    "intro": "Plain-language explanations of the terms used on this site.",
+    "terms": {
+      "movingAverage": {
+        "name": "Moving average",
+        "short": "The average price over a fixed number of recent days or weeks, recomputed every day.",
+        "long": "A 200-day average is the mean of the last 200 daily closes. It smooths out day-to-day moves, so it shows the longer direction of the price. An exponential average weights recent days more. Averages describe the past; they do not predict."
+      },
+      "drawdown": {
+        "name": "Drawdown",
+        "short": "How far the price is below its highest close so far.",
+        "long": "A drawdown of −50% means the price is half its highest close to date. It returns to 0 only on a day the price sets a new high. Here the high is the highest close in the data, which starts in 2011 for bitcoin."
+      },
+      "volatility": {
+        "name": "Realised volatility",
+        "short": "How much the price has been moving, as a yearly percentage.",
+        "long": "The standard deviation of daily price changes over the last 30 or 90 days, scaled to a year (√365, because crypto trades every day). 80% means typical yearly swings of that size. It measures the past, not risk to come."
+      },
+      "halving": {
+        "name": "Halving",
+        "short": "The day the number of new bitcoins created with each block halves, every 210,000 blocks (about four years).",
+        "long": "Halvings so far: 28 November 2012, 9 July 2016, 11 May 2020 and 20 April 2024. The periods between them are often called epochs. Past prices around them are shown as history, not as a pattern that must repeat."
+      },
+      "powerLaw": {
+        "name": "Power law",
+        "short": "A straight-line trend on a chart whose both axes are logarithmic.",
+        "long": "Here: log price against log of the days since bitcoin's first block (3 January 2009). The line summarises how fast the price has grown so far. It is a description of the past, not a value the price should have."
+      },
+      "methodVersion": {
+        "name": "Method version",
+        "short": "Every calculation has a version number.",
+        "long": "When we change how something is calculated, the version changes and the earlier version stays on record, so a figure can always be traced to the method that produced it."
+      },
+      "marketCap": {
+        "name": "Market capitalisation",
+        "short": "The value of all units of an asset at today's price.",
+        "long": "For a crypto-asset, the number of coins in circulation multiplied by the price; for a company, its shares in issue multiplied by the share price. It shows size as the market values it today, not what the asset is worth to anyone in particular."
+      },
+      "logScale": {
+        "name": "Logarithmic scale",
+        "short": "A chart axis where each step is the same percentage change, not the same amount.",
+        "long": "On a log scale, a rise from $100 to $200 takes the same height as one from $10,000 to $20,000: both are a doubling. It makes long histories with very large moves readable."
+      },
+      "mayer": {
+        "name": "Mayer multiple",
+        "short": "The price divided by its 200-day average.",
+        "long": "1.5 means the price is 50% above its 200-day average; 0.8 means 20% below. It describes how far the price has moved from its recent average, nothing more."
+      }
+    }
+  },
+  "feedback": {
+    "title": "Tell us what you think",
+    "intro": "This service is new, and what you tell us decides what we build next. Your message goes to the two of us who run it; it is never shown on the site.",
+    "topic": "What is it about?",
+    "topics": {
+      "data_error": "A number looks wrong or out of date",
+      "unclear": "Something is hard to understand",
+      "idea": "An idea or a request for a feature",
+      "other": "Something else"
+    },
+    "message": "Your message",
+    "messageHelp": "Between {min} and {max} characters. Please leave out your name, phone number and other personal details: we do not need them.",
+    "about": "About the page",
+    "send": "Send",
+    "privacy": "We keep your message and the page it is about. We do not keep your name, e-mail or network address; a scrambled form of the address is kept for seven days only, to stop floods of messages. Ask us and we will delete your message.",
+    "notAdvice": "We cannot answer questions about what you personally should do with your money: this service gives information and education only.",
+    "vote": {
+      "question": "Was this page useful?",
+      "yes": "Yes",
+      "no": "No",
+      "more": "Tell us more"
+    },
+    "thanks": {
+      "title": "Thank you",
+      "ok": "Your feedback has been received. We read every message.",
+      "limited": "You have sent a lot in the last hour, so this one was not stored. Please try again later.",
+      "invalid": "Something was missing, so nothing was stored. Please choose a topic and write a few words.",
+      "unavailable": "Feedback is not switched on yet on this copy of the site, so nothing was stored.",
+      "back": "Back to the page you were on",
+      "again": "Send another message"
+    }
+  },
+  "email": {
+    "preview": {
+      "title": "This week's e-mail",
+      "intro": "Subscribers will get this e-mail every Saturday morning (UTC). Everyone on the same plan gets the same e-mail: it is built once per plan, through the same plan rules as the site. Below is the version for your plan ({tier}).",
+      "markets": "Markets",
+      "notSent": "E-mails are not being sent yet: they start when accounts open.",
+      "subject": "Subject"
+    },
+    "eyebrow": "Weekly update · {tier} plan",
+    "heading": "{market}: the week to {date}",
+    "headingNoData": "{market}: no data this week",
+    "noData": "There was no new data this week.",
+    "unsubscribe": "Stop these e-mails",
+    "footer": "You get this because you asked for weekly updates on {market}. We send one e-mail per market each week, the same to everyone on your plan.",
+    "markets": {
+      "crypto": "Crypto markets"
+    },
+    "subject": "Weekly · {market} · week to {date}",
+    "subjectNoData": "Weekly · {market}",
+    "crypto": {
+      "preheader": "Bitcoin {btc} and ether {eth} over the week to {date}.",
+      "numbers": "The week in numbers",
+      "intro": "Change in each closing price over the seven UTC days to the last close, and how far each sits below its highest close.",
+      "asset": "Asset",
+      "close": "Close",
+      "week": "7 days",
+      "fromHigh": "From the high",
+      "cycle": "Long averages",
+      "cycleIntro": "Bitcoin's price against its 200-week and 200-day averages on the last day.",
+      "vs200w": "Price against the 200-week average",
+      "vs200wNote": "200-week average {value}",
+      "mayer": "Mayer multiple (price ÷ 200-day average)",
+      "halving": "Days since the last halving",
+      "cycleLocked": "Long averages, Pi cycle lines and the cycle table are part of Plus.",
+      "trend": "Long-run trend bands",
+      "trendIntro": "Where bitcoin's price sits between the outer bands of each trend fit (0 at the lower band, 1 at the upper). A description of the past, not a forecast.",
+      "fit_log_regression": "Log regression",
+      "fit_power_law": "Power law",
+      "trendLocked": "Bitcoin's long-run trend bands are part of Pro.",
+      "seePlans": "See the plans",
+      "link": "The full crypto pages",
+      "fitted": "trend line at {value}"
+    }
+  },
+  "crypto": {
+    "title": "Crypto markets",
+    "intro": "Global crypto-asset prices in US dollars, from Bitstamp's daily closes, with the history and long averages that describe them.",
+    "prototype": "Prototype: the data licence for this section is pending. Until Bitstamp's data agreement is signed, these pages are for the owners' private preview only.",
+    "history": "Price history starts where Bitstamp's does: 14 September 2011 for bitcoin, and later for every other asset. Earlier prices, including bitcoin's 2011 high, are not included.",
+    "utcDay": "Each day is a UTC day (00:00 to 24:00 UTC); its price is the day's last trade on Bitstamp.",
+    "assetsTitle": "Prices",
+    "fromHigh": "{pct} from its highest close",
+    "atHigh": "at its highest close",
+    "last90": "last 90 days",
+    "btcTitle": "Bitcoin and its 200-week average",
+    "btcChart": "Bitcoin's price and its 200-week average (weekly points, log scale)",
+    "price": "Price",
+    "sma200w": "200-week average",
+    "sma200wTile": "Bitcoin's 200-week average",
+    "sma200wChange": "{pct} over the last four weeks",
+    "priceVs200w": "Price against the 200-week average",
+    "tableTitle": "All assets",
+    "asset": "Asset",
+    "close": "Close",
+    "d1": "1 day",
+    "d7": "7 days",
+    "d30": "30 days",
+    "y1": "1 year",
+    "drawdown": "From the high",
+    "vol30": "Volatility, 30 days",
+    "details": "Details",
+    "assets": {
+      "btc": "Bitcoin",
+      "eth": "Ether",
+      "xrp": "XRP",
+      "ltc": "Litecoin",
+      "sol": "Solana",
+      "ada": "Cardano",
+      "link": "Chainlink",
+      "doge": "Dogecoin",
+      "avax": "Avalanche",
+      "dot": "Polkadot",
+      "ethbtc": "Ether in bitcoin"
+    }
+  },
+  "cryptoAsset": {
+    "pairLine": "{pair} on Bitstamp · history from {date}",
+    "latest": "Latest close",
+    "returns": "Returns",
+    "window": "Period",
+    "change": "Change",
+    "high": "Highest close so far",
+    "highOn": "on {date}, {days} days ago",
+    "drawdown": "Fall from the highest close",
+    "vol30": "Volatility, 30 days",
+    "vol90": "Volatility, 90 days",
+    "volNote": "annualised",
+    "priceChart": "Price with its 50-day and 200-day averages",
+    "priceOnly": "Price (weekly points, log scale)",
+    "sma50": "50-day average",
+    "sma200": "200-day average",
+    "drawdownChart": "Fall from the highest close to date",
+    "volChart": "Realised volatility, annualised",
+    "cycleTitle": "Cycles and long averages",
+    "mayer": "Mayer multiple",
+    "mayerNote": "price ÷ 200-day average",
+    "dist20w": "Distance from the 20-week average",
+    "sma200wNote": "{pct} over four weeks",
+    "halving": "Since the latest halving",
+    "halvingNote": "{days} days since {date}",
+    "bandChart": "Price with the 20-week and 21-week averages, and the 200-week average",
+    "sma20w": "20-week simple average",
+    "ema21w": "21-week exponential average",
+    "piChart": "Pi cycle lines",
+    "piTop": "111-day average",
+    "piTop2": "2 × 350-day average",
+    "piBottom": "150-day exponential average",
+    "piBottom2": "0.745 × 471-day average",
+    "crossings": "Days the Pi cycle lines crossed",
+    "crossTop": "111-day rose above 2 × 350-day",
+    "crossBottom": "150-day fell below 0.745 × 471-day",
+    "crossingsNone": "The lines have not crossed in this asset's Bitstamp history.",
+    "crossingsNote": "Listed as facts about past data. The settings of these lines were chosen by their author to fit past highs and lows, so their record is not a test, and it says nothing about what happens next.",
+    "cycleTable": "Halvings, cycle peaks and cycle lows",
+    "cycleTableNote": "A cycle's peak and low are the two ends of the largest fall between two halvings, on Bitstamp closes. Provisional: the epoch has not ended, so the date can still move.",
+    "event": "Event",
+    "kind_halving": "Halving {n}",
+    "kind_cycle_peak": "Cycle peak (epoch {n})",
+    "kind_cycle_low": "Cycle low (epoch {n})",
+    "date": "Date",
+    "closeAt": "Close",
+    "fromPrior": "Change from the event before",
+    "daysFromPrior": "Days from the event before",
+    "since": "Change since, to the latest close",
+    "provisional": "provisional",
+    "monthly": "Monthly returns",
+    "year": "Year",
+    "months": [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec"
+    ],
+    "monthlyNote": "Each completed month's last close against the previous month's. This month so far: {pct}.",
+    "trendTitle": "Long-run trend bands",
+    "trendNote": "Two straight lines through bitcoin's whole Bitstamp history on log-log axes, re-fitted every day on the data to that day, with bands one and two standard deviations either side. They summarise past growth; they are not a value the price should have, and not a forecast.",
+    "position": "Position between the fitted bands",
+    "positionNote": "0 at the lower outer band, 1 at the upper",
+    "fitted": "Fitted line",
+    "inner": "±1 standard deviation",
+    "outer": "±2 standard deviations",
+    "fit_log_regression": "Log regression",
+    "fit_log_regression_note": "every stretch of log-time weighted equally",
+    "fit_power_law": "Power law",
+    "fit_power_law_note": "every day weighted equally",
+    "coefficients": "Fit on {date}: exponent {slope}, {n} closes",
+    "trendBtcOnly": "The trend bands are computed for bitcoin only.",
+    "ethbtc": "Ether priced in bitcoin"
+  }
+}
