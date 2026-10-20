@@ -1,4 +1,4 @@
-// Visitors' feedback (docs/plan-retail-features.md §3 A; migration 0012). The database function checks every field
+// Visitors' feedback (migration 0004; users talk to us, never to each other). The database function checks every field
 // again; these checks are here so a bad form never reaches it, and so the tests can say exactly what is accepted.
 // Nothing a visitor writes is ever shown on the site.
 import { createHmac } from "node:crypto";
