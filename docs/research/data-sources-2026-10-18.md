@@ -25,7 +25,7 @@ Prohibited or paid-only for us:
 - **General finance sites:** Yahoo Finance.
 - **Unclear:** mempool.space's hosted API says nothing on commercial use; ask before relying on it.
 
-**Sri Lanka's position on crypto** (legal context: the founders are there; not the product's market by default):
+**Sri Lanka's position on crypto** (legal context while either founder lives in, or the product is marketed to, Sri Lanka):
 - CBSL (2021): virtual currencies are not legal tender, and no entity is licensed to deal in them.
 - CBSL (2023): crypto is "not recognized as an asset-class". It "urges those who are engaged in promoting and
   facilitating the promotion of investing and trading in cryptocurrency to refrain from such activities".

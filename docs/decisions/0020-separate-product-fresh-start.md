@@ -5,7 +5,7 @@
 
 ## Context
 
-The owners run two separate companies. One builds ZinvestIQ (Sri Lankan markets, in the TBD repository); this product
+The owners run two separate companies. One builds a Sri Lankan markets portal (in the TBD repository); this product
 (crypto and global markets) belongs to the other. A working crypto section, its data platform and its website shell
 were built inside TBD and then moved out; commit `ca7e44c` is the last one that holds them.
 
@@ -16,9 +16,9 @@ were built inside TBD and then moved out; commit `ca7e44c` is the last one that 
    website shell with its tier check and tier-leak suite. There is no shared package or submodule, so the two
    products can change independently. Who owns the copied code is a question for the lawyer (an assignment or licence
    between the two companies: docs/plan.md).
-2. **Nothing Sri Lankan, nothing ZinvestIQ.** Every Sri Lankan collector, model, migration, fixture, calendar, page,
+2. **Nothing Sri Lankan, nothing of the other company's product.** Every Sri Lankan collector, model, migration, fixture, calendar, page,
    message and document was left out, and a search for leftovers is part of the checks. This product never uses the
-   ZinvestIQ name, links to it or shares its accounts.
+   other company's product name, links to it or shares its accounts.
 3. **A fresh migration sequence.** No migration had been applied to a production database, so the sequence starts
    again: 0001 ops, 0002 model bookkeeping, 0003 website access and row-level security, 0004 feedback, 0005 crypto.
    The generic ones merge what were TBD's 0001, 0004 (bookkeeping only), 0006, 0007 (the web-access parts) and 0012;

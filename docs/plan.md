@@ -1,0 +1,325 @@
+# Plan: a subscription research terminal for crypto and global markets
+
+**Status:** Phase 0 proposal, **awaiting the owners' approval**. Nothing here is bought, signed or launched.
+**Date:** 2026-10-19 (prices and terms checked on that day; sources in §11).
+**Reads with:** `docs/audit.md` (the old Crypto terminal), `docs/architecture.md` (how the platform works),
+`docs/research/crypto-itc-review.md` (the compared paid service: offer, prices, what is public, what not to copy),
+`docs/decisions/` (one record per decision).
+
+---
+
+## 0. In one page
+
+**What exists today (Phase 0, done).** A working platform copied from the shared one: raw archive, append-only
+database, collectors, model plug-ins, a website whose tier check runs only on the server, a weekly e-mail built through
+the same check, and a tier-leak test suite that attacks every page, API route and e-mail as every tier. Three crypto
+models on Bitstamp's daily prices since 2011 pass 30 cross-checks against public reference points. All tests pass,
+locally and in CI. The old Crypto terminal is backed up, verified and audited; it keeps running untouched.
+
+**What the product is.** A research service in four tiers: a free weekly e-mail with the main bitcoin and ether
+figures and education; a chart library; macro and global markets with your written (and later video) analysis; and a
+small premium tier with a members' call. It is built only from published methods and licensed data, and it is
+information and education, never advice.
+
+**What it needs from you before anything is public** (each is explained below):
+
+| # | Decision or action | Why it blocks | Section |
+|---|---|---|---|
+| 1 | **Where the company is incorporated, and who the customers are** | Decides the lawyer, the payment provider, the privacy law and the advice rules | §5, §8 |
+| 2 | **A lawyer's view** on the questions in §5 | Advice rules for crypto and market research differ by country; the founders' own analysis is the riskiest part | §5 |
+| 3 | **The name** (three options with free .com domains, §7) | Domain, accounts, letters to data vendors and the trademark search all need it | §7 |
+| 4 | **Send the Bitstamp licence request** (draft ready) | Every crypto page uses Bitstamp prices; its Data License Agreement is unsigned | §4 |
+| 5 | **A data budget** (§6: about US$80/month for crypto market caps, US$250/month for US end-of-day prices with display rights, on-chain later) | Decides which indicators come first | §4, §6 |
+| 6 | **The weekly content commitment** (§2: about 8–14 hours a week between you at launch) | The paid tiers are mostly your analysis | §2 |
+| 7 | **Approve the tiers, their names and prices** (§1) | The plans page, e-mails and the tier file follow them | §1 |
+| 8 | **Who owns the platform code** copied from the other company's repository | Needs an assignment or licence between the two companies | §5 |
+
+---
+
+## 1. The product and its tiers
+
+### 1.1 What the compared service offers (public pages only; details in `docs/research/crypto-itc-review.md`)
+
+Four plans: a free tier (weekly newsletter, a few long-run charts); about US$49/month for "all risk indicators and
+historical charts" (150+ charts); about US$109/month adding three weekly videos, a private chat group, a macro
+section and an indicator builder (300+ charts); and a US$9,700 / 3-month one-to-one tier for five members. Its core is
+a proprietary 0–1 "risk" score and the founder's own analysis. **We copy none of it:** no risk score, no names, no
+charts, no text, no calibration against it (hard rule 1).
+
+### 1.2 Our version (proposal for you to edit)
+
+Tier names are neutral and descriptive, and avoid the compared service's plan names (Lite, Standard, Pro, Direct
+Access). The internal ids in `config/entitlements.yaml` stay `free < plus < pro < professional`; only the names shown
+to people change, in one message file.
+
+| Tier (proposed name) | Internal id | Proposed price | What it includes |
+|---|---|---|---|
+| **Free** | `free` | US$0 | The weekly e-mail (numbers for everyone, plus a short note from you); bitcoin and ether prices, returns, drawdowns and volatility; every Learn page and method page; the archive of free notes |
+| **Charts** | `plus` | US$19/month or US$190/year | The full crypto chart library with full history: long averages, Pi cycle lines, halvings and the cycle table, monthly and quarterly returns, RSI, MACD, Bollinger bands, correlations, dominance and an altcoin index (as licensed data arrives, §4); alerts when a measure crosses a level the subscriber chooses (after the lawyer's view, §5) |
+| **Research** | `pro` | US$49/month or US$490/year | Everything in Charts; macro and global markets (inflation, jobs, central-bank rates, yield curves, the dollar, gold, equity indices and sectors); bitcoin's long-run trend bands; your weekly written analysis and its archive; later, video and the members' community |
+| **Research + Calls** | `professional` | US$149/month, capped at about 30 members | Everything in Research; a monthly members' call with Q&A on the published research (never on anyone's own holdings: §5) |
+
+Why these prices: a new name without an audience cannot charge the compared service's prices at first. US$19 is an
+impulse price for a chart library; US$49 matches the compared service's lower tier for a bigger offer. At the costs in
+§6, about 15–30 paying subscribers cover the fixed costs. Prices are a business decision: change them freely.
+
+What the free tier sees of paid models is decided per model in `config/entitlements.yaml` (for example, the cycle
+measures a week late), and enforced on the server and in the e-mail.
+
+---
+
+## 2. The content you and Janu would produce, and how the platform supports it
+
+Much of the compared service's value is its founder's own analysis. The data and charts here can be built once and
+run themselves; the analysis cannot. This is the honest weekly workload.
+
+### 2.1 Weekly (at launch)
+
+| Piece | Tier | Length | Time (estimate) | Who |
+|---|---|---|---|---|
+| **Free e-mail note**: 150–250 words on what moved this week, above the automatic figures | Free | short | 1 hour | either |
+| **Crypto note**: what the charts show this week (cycle measures, drawdowns, volatility, correlations), with 3–5 charts | Research | 800–1,200 words | 3–4 hours | one of you |
+| **Macro and markets note**: inflation, jobs, rates, the curve, the dollar, gold, equities (from Phase 3) | Research | 600–1,000 words | 3–4 hours | the other |
+| **Review and copy check** of both notes before publishing (the build's copy lint also checks them) | — | — | 1 hour | the one who didn't write it |
+| **Reading feedback** (the feedback job) | — | — | 30 minutes | either |
+| **Total** | | | **about 8–10 hours a week** (crypto only: about 5) | |
+
+### 2.2 Later (each is a separate decision)
+
+| Piece | Tier | Time | Note |
+|---|---|---|---|
+| One 15–25 minute video a week (screen recording of the week's charts) | Research | 3–4 hours | The compared service's top tier offers three; one is plenty to start |
+| Community moderation | Research | 2–3 hours a week | People talking to each other changes the legal picture (§5) |
+| Monthly members' call (60 minutes plus preparation) | Research + Calls | about 3 hours a month | Only on the published research; recorded; never on anyone's holdings |
+
+**The writing rule that matters most** (hard rule 3): describe what the data shows and how it compares with history;
+never say what to do, never give a price target or a "zone", never say what price something "should" be. The copy
+lint catches the obvious words; it cannot catch a sentence like "bitcoin is likely to reach X". That is what the review
+step and the lawyer's guidance (§5) are for.
+
+### 2.3 How the platform supports it (to build in Phase 1)
+
+- **Publishing workflow.** Each note is a Markdown file in `content/notes/<date>-<slug>.md` with a short header (title,
+  date, tier, market, the free excerpt). You write it in GitHub's web editor (or any editor) and open a pull request.
+  CI runs the copy lint on it like any other text; the preview deployment shows it exactly as it will appear, for the
+  tier it is set to. Merging publishes it. Charts in a note are embedded by name (for example
+  `{{chart crypto_cycle btcusd sma_200w}}`), so they are drawn from the live models, through the same tier check, not
+  pasted as images. *Why files in git rather than a content system:* nothing new to pay for or learn, every edit is on
+  record, and the copy lint and the tier check already cover files. If writing in GitHub turns out to be awkward, a
+  small owner-only editor page can write the same files later.
+- **The weekly e-mail per tier.** One e-mail per tier per week (Saturday morning UTC), built by
+  `web/lib/email/weekly.ts` through the tier check: the automatic figures, then the week's notes (the free excerpt
+  and an invitation for lower tiers; the full note for the tier it belongs to). Everyone on a tier gets the same
+  e-mail. Sending: Resend (§6). The tier-leak suite already checks the e-mail; it will also check the notes.
+- **The archive.** `/notes` lists every note by date and market; each note's page shows the full text to its tier and
+  the excerpt to others. Search by market and month.
+- **Video** (later). Hosted on Bunny Stream with signed, expiring links issued only after the tier check; the page
+  never contains a playable link for a visitor below the tier.
+- **Community** (later). Discord with a bot that gives and removes the members' role from the subscription record, or
+  Circle (about US$89/month, a hosted community with paid gating). Decide after the lawyer's view.
+
+---
+
+## 3. Indicators: order and method
+
+All from published definitions, each with a METHOD.md, tests, a point-in-time test and (where the old tool computed
+it) an exact-parity test (`docs/audit.md` §7).
+
+| Order | Indicators | Data | Licence status | Phase |
+|---|---|---|---|---|
+| 1 | Existing: returns, drawdown, volatility; long averages, 200-week average, 20W/21W band, Mayer multiple, Pi cycle lines, halvings, cycle table, monthly returns; log-regression and power-law bands | Bitstamp | DLA to sign | done |
+| 2 | RSI, MACD, Bollinger bands, ATR; rolling correlations; quarterly returns; running 1-year return and returns from cycle peaks and lows | Bitstamp | as above | 2 |
+| 3 | Fear & Greed, with alternative.me's attribution beside every display | alternative.me | allowed with attribution | 2 |
+| 4 | Market-cap dominance (BTC, ETH, stablecoins), an altcoin index (share of the top 50, ex stablecoins and wrapped tokens, beating BTC over 90 days), the ETH/BTC market-cap ratio | CoinMarketCap Startup | commercial use included; confirm in writing (letter ready) | 2 |
+| 5 | Macro: CPI and core CPI, PCE, payrolls, unemployment and the Sahm rule (computed by us), claims, job openings, the Fed funds rate, the Fed's balance sheet and net liquidity, the Treasury yield curve and its 10y−2y and 10y−3m spreads (computed by us), the Fed's broad dollar index, oil | BLS, BEA, Department of Labor, the Federal Reserve Board, Treasury, EIA: each agency's own API | public domain (US government works); cite the agency | 3 |
+| 6 | Index and sector performance (the S&P 500, Nasdaq-100, world regions and the eleven US sectors through the ETFs that track them), gold (through a gold ETF), returns and drawdowns | Tiingo end-of-day with display licence | US$250/month start-up licence | 3 |
+| 7 | Other central banks' rates and inflation (ECB, Bank of England, Bank of Japan and others) | each bank's or statistics office's own data | most allow reuse with attribution; to confirm one by one | 3 |
+| 8 | Valuation series (P/E, cyclically adjusted P/E, earnings) | needs licensed fundamentals or index data | not yet found at a sensible price | later |
+| 9 | On-chain: realized price, MVRV, supply in profit, Puell multiple | Glassnode Professional with redistribution rights (price on request), or our own Bitcoin node | licence or own node | 4 |
+
+**Why ETFs for indices.** Index values belong to their owners (S&P, Nasdaq, MSCI, FTSE Russell), who license display
+separately and expensively; FRED marks its S&P 500 series "pre-approval required" and allows only non-commercial use.
+The ETFs that track them are exchange-traded prices that Tiingo's display licence covers. The pages say "the SPDR S&P
+500 ETF (SPY)", never "the S&P 500", and note that an ETF's price includes its fees and dividends policy.
+
+**On-chain, the choice.** Glassnode's terms allow commercial use only on its Professional plan, with redistribution
+rights bought on top (price on request). Our own node is allowed (public chain, open-source software) but means a
+dedicated server with about 1 TB of fast disk (the full chain was about 760 GB in August 2026), an indexer, and
+upkeep, which is against your preference for managed services. Recommendation: ask Glassnode for a quote in Phase 3;
+build the node only if the quote is out of reach.
+
+---
+
+## 4. Data sources and licences: the short list
+
+The rule (decision 0009): a source is used only if its terms allow commercial use or are silent, with the evidence in
+`config/sources.yaml`. Free crypto APIs mostly prohibit it (`docs/research/data-sources-2026-10-18.md`).
+
+| Need | Choice | Price | Terms, in short | Status | Alternatives |
+|---|---|---|---|---|---|
+| Crypto prices, 2011 on | **Bitstamp** | not published | Commercial use and redistribution once a Data License Agreement is signed | **launch blocker**; request drafted (`docs/letters/`) | Kraken (needs permission); CoinGecko Analyst US$129/month (attribution "Data provided by CoinGecko"; daily history from 2013 only) |
+| Crypto market caps, supply | **CoinMarketCap Startup** | US$79/month (US$948/year) | "Commercial use rights", one product up to 100,000 users, data must be part of a larger product, no resale | to confirm in writing (letter drafted), then subscribe | CoinGecko Analyst US$129/month |
+| Sentiment | **alternative.me Fear & Greed** | free | Commercial use allowed with attribution right next to the data | ready | — |
+| US macro | **BLS, BEA, Department of Labor, Federal Reserve Board, Treasury, EIA** (their own APIs) | free (BLS and BEA need a free key) | US government works: public domain; cite the agency | ready | FRED for development only: its full terms need the St. Louis Fed's written consent for commercial use of the service, and 10 of the old tool's 32 series are third-party copyrighted (`docs/audit.md` §4) |
+| Other central banks, international | ECB, Bank of England, OECD, World Bank and others | free | Mostly reuse with attribution (several under CC BY 4.0) | **to confirm one by one** in Phase 3 | — |
+| US equities and ETFs, end of day | **Tiingo, "EOD + IEX Redistribution", start-up** | US$250/month (US$500 for "enterprise") | Explicit "display redistribution" licence; US equities, ETFs and mutual funds from 1962 | ready to buy when Phase 3 starts | Massive (formerly Polygon) business plans from US$2,499/month; EODHD, Twelve Data, Financial Modeling Prep: commercial or display use only by custom agreement (FMP's standard terms forbid it) |
+| Index values themselves | index owners (S&P DJI, Nasdaq, MSCI) | quotes needed | Display licences | not planned; ETFs instead (§3) | — |
+| Gold | through a gold ETF (Tiingo) | in the Tiingo licence | as above | Phase 3 | LBMA prices are licensed; FRED's gold series were third-party |
+| On-chain | **Glassnode Professional + redistribution rights** | on request | Commercial use only on Professional; redistribution rights purchased separately | quote in Phase 3 | CryptoQuant (its data-distribution policy was unreadable here: confirm); Coin Metrics (paid licence; community tier is CC BY-NC); own node |
+
+**Monthly data cost by phase:** launch (crypto) ≈ US$79 + Bitstamp's fee; with macro and global markets ≈ US$329 +
+Bitstamp; with on-chain, add Glassnode's quote.
+
+---
+
+## 5. Legal questions for the lawyer
+
+These reduce risk; they do not replace advice. Put them to a lawyer in the country where the company is incorporated,
+with a view on the main customer countries.
+
+1. **Jurisdiction.** Where should the company be incorporated, given where you and Janu live and work, where the
+   customers will be (worldwide, English-speaking first), and the payment provider (Stripe does not serve Sri Lankan
+   businesses; it does serve Australia, the UK, Singapore and the US, §8)? The old tool's records suggest at least
+   one founder works in Australian time and reports in Australian dollars.
+2. **Information versus advice, by country.** Is a subscription that publishes charts, statistics, education and the
+   founders' written and video analysis of crypto and markets "advice" anywhere you sell it? Specifically: Australia
+   (general advice and the licensing of financial services, and the new rules for digital assets); the US (the
+   publisher's exclusion for impersonal, regularly published research); the UK (the regime for promoting
+   crypto-assets to consumers); the EU (whether research on crypto-assets is an authorised service under MiCA);
+   Sri Lanka (the Central Bank's 2023 statement urging those "engaged in promoting and facilitating the promotion of
+   investing and trading in cryptocurrency to refrain from such activities", and the SEC's approach), while either
+   founder lives or markets there.
+3. **The riskiest features, one by one:** the 0–1 "position between the fitted bands" (hard rule 3: shown only as a
+   description and only after this view); user-chosen alerts; the members' call; the community (members talking to
+   each other); the founders' own written analysis and video. What wording and process keep each on the right side?
+4. **Disclaimers** (`compliance/disclaimers.yaml`): the wording, and any country-specific notices.
+5. **The compared service.** Confirm that building from published definitions, never subscribing to calibrate,
+   never using its names, and the old tool's provenance finding (`docs/audit.md` §6) leave no exposure.
+6. **Ownership of the platform code** copied from the other company's repository (decision 0020): an assignment or a
+   licence between the two companies, and who may use later improvements.
+7. **Data licences:** review Bitstamp's agreement and CoinMarketCap's confirmation before signing.
+8. **The name:** a proper trademark search in the chosen countries before buying the domain (§7 is only an
+   obvious-conflict check).
+9. **Consumer and subscription law:** automatic renewal and cancellation rules, refunds and cooling-off periods in the
+   customer countries; terms of service.
+10. **Privacy:** accounts, e-mail lists and the feedback form under the applicable privacy laws (for example
+    Australia's Privacy Act, the UK and EU GDPR); a privacy policy; consent for marketing e-mail.
+11. **Tax:** sales tax, VAT and GST on digital subscriptions sold worldwide (Stripe Tax can collect it; registration
+    is still yours, §8).
+12. **Employment:** does either founder's employer restrict publishing market research or running this business?
+
+---
+
+## 6. Costs (US$ per month, checked 2026-10-19)
+
+| Item | Launch (0–500 subscribers) | 5,000 on the list, ~500 paying | Basis |
+|---|---|---|---|
+| Supabase Pro (production) | 25 | 25–40 | US$25 including US$10 compute credit (one Micro instance); Small is US$15 |
+| Supabase staging project | 10 | 10 | one Micro instance |
+| Vercel Pro | 20–40 | 40 | US$20 per developer seat, US$20 usage credit; the free plan forbids commercial use |
+| Cloudflare R2 + Backblaze B2 | 0–2 | 1–3 | a few GB of raw files |
+| Resend: transactional (log-in links, receipts) | 0–20 | 20 | free 3,000/month (100/day); Pro US$20 for 50,000 |
+| Resend: weekly e-mail to the list | 0–40 | 180 | free up to 1,000 contacts; US$40 for 5,000; US$180 for 25,000 |
+| GitHub Team (private repositories, when you choose) | 0–8 | 8 | US$4 per user; the repository is public for now (decision 0021) |
+| Healthchecks.io, domain | 2–7 | 2–7 | |
+| Video (Bunny Stream), later | 1–10 | 10–30 | from US$0.01/GB stored, US$0.005/GB delivered |
+| Community (Circle), later and optional | 0 | 89 | Discord with a bot instead: about US$0 |
+| **Platform subtotal** | **≈ 60–150** | **≈ 300–430** | |
+| Data: CoinMarketCap Startup | 79 | 79 | |
+| Data: Tiingo display licence (from Phase 3) | 0 | 250 | |
+| Data: Bitstamp | unknown | unknown | request sent in Phase 1 |
+| Data: on-chain | 0 | quote | Phase 4 |
+| **Fixed total, before Bitstamp and on-chain** | **≈ 140–230** | **≈ 630–760** | |
+| Payments (Stripe, Australia as an example) | per sale | per sale | 1.65% + A$0.30 domestic cards, 3.5% + A$0.30 international, +2% if converted; Billing 0.7%; Stripe Tax 0.5% |
+| Legal | quote | — | one-off advice in §5, per country |
+
+**Break-even, roughly:** at launch about 10–15 Charts subscribers (US$19) cover the fixed costs; with macro and
+global markets, about 15 Research subscribers (US$49). Your time (§2) is the real cost.
+
+---
+
+## 7. The name
+
+Neutral, global, easy to say, no hype or advice words ("signals", "alpha", "edge", "profit"), nothing that echoes the
+compared service ("verse", "risk", "metric"). Each was checked on 2026-10-19 for a free .com domain (Verisign's
+registry: no registration found) and for obvious conflicts among financial or crypto businesses (web search). **This
+is not a trademark search**: the lawyer should run one (USPTO, EUIPO, UK IPO, IP Australia, WIPO) before you buy.
+
+| Name | .com | Obvious conflicts found | Notes |
+|---|---|---|---|
+| **Long Run Markets** (recommended) | longrunmarkets.com: free | none | Plain English everywhere; says "long horizons, not trading"; fits cycles and macro equally |
+| **Long Horizon Markets** | longhorizonmarkets.com: free | none (the phrase is common in investing) | Similar idea; a little longer |
+| **Fieldnote Markets** | fieldnotemarkets.com: free | none in finance; "Field Notes" is a notebook brand (another class of goods) | Suggests observation and record-keeping, not advice |
+| Even Keel Research | evenkeelresearch.com: free | an Australian fund product called "Even Keel Strategy" | Avoid if the company is Australian |
+| Observatory Markets | observatorymarkets.com: free | similar names: "Coin Observatory" (a crypto research firm), "Market Observation" (a newsletter) | Fits "information only", but crowded |
+| *Rejected* | | Sextant (Saturna Capital's Sextant funds); Orrery (an existing prediction-market research product); Lantern Markets (an options start-up; Lantern Finance, crypto lending); about 30 others already registered as .com | |
+
+Until you choose, the site uses the placeholder "Research Terminal" and a neutral mark.
+
+---
+
+## 8. Payments and accounts
+
+- **Payments: Stripe**, with Stripe Billing (subscriptions) and Stripe Tax. Stripe serves businesses in Australia, the
+  UK, Singapore and the US (not Sri Lanka), so it depends on §5 question 1. Its restricted-business list does not
+  prohibit a market-information publisher (crypto exchanges, wallets and "other financial services" need approval;
+  "get rich quick" claims are prohibited): describe the business accurately when applying.
+- **Not Paddle.** Paddle (a merchant of record that would handle worldwide tax for 5% + 50¢) lists among products it
+  does not allow "cryptocurrencies", "trading and financial services/advice" and "investment or financial advice,
+  including trading signals and strategies". A crypto research subscription would probably be refused.
+- **Accounts and logins:** Supabase Auth, e-mail magic links first (no passwords to manage). The subscription record
+  (from Stripe's webhooks) sets the tier; `web/lib/viewer.ts` is the one file that changes.
+- **Hosting:** Vercel Pro for the site, Supabase Pro for the database. **Region:** where most customers are; if
+  undecided, a US or EU region (decision 0004 reopened it).
+- **E-mail:** Resend for log-in links, receipts and the weekly e-mail. A separate sending domain for the newsletter.
+
+---
+
+## 9. Order of work (each phase ends with a stop for your approval)
+
+| Phase | What I build | What you do meanwhile | Ends when |
+|---|---|---|---|
+| **0 (this one)** | Safety copy, the platform port, the audit, this plan | read and decide (§0) | you approve |
+| **1. Foundations** | Notes publishing (§2.3) and the archive; accounts (Supabase Auth); Stripe checkout and webhooks setting the tier; the weekly e-mail sending through Resend; deploy to Vercel staging; the old Crypto terminal's history archived into the raw archive (`docs/audit.md` §8); the name and plans pages | incorporate (on the lawyer's advice); choose the name; send the Bitstamp and CoinMarketCap letters; create the accounts (architecture §19) | a private staging site where you can sign up, subscribe in test mode and publish a note |
+| **2. The crypto chart library** | RSI, MACD, Bollinger, ATR, correlations, quarterly and running returns (with exact-parity tests against the old tool); Fear & Greed; market caps → dominance and the altcoin index; alerts (if the lawyer agrees) | write the first notes; get the lawyer's view (§5) | the Charts tier is complete on staging |
+| **3. Macro and global markets** | Collectors for BLS, BEA, the Fed Board, Treasury and EIA; Tiingo prices for index, sector and gold ETFs; models for inflation, jobs, rates, the curve, the dollar, gold, indices and sectors, recession indicators; other central banks once their terms are confirmed | the Tiingo licence; start the macro note | the Research tier is complete on staging |
+| **Launch** | Switch-on checklist: Bitstamp licence signed and `config/sources.yaml` updated; lawyer's view applied (including whether to show the 0–1 band position at all); terms, privacy policy, disclaimers; production accounts; monitoring live; a restore test passed | approve the launch | the site is public |
+| **4. After launch** | Video, community, members' call, on-chain data (Glassnode quote or own node) | decide each | each is its own approval |
+
+**The old Crypto terminal** keeps running untouched until you approve its migration plan (`docs/audit.md` §8); the
+proposal is to archive it in Phase 1 and stop its daily job only after the new crypto pages are live.
+
+---
+
+## 10. Risks
+
+| Risk | Effect | Mitigation |
+|---|---|---|
+| Bitstamp's fee is too high, or it declines | No licensed crypto price history | CoinGecko Analyst (US$129/month, daily from 2013) or Kraken by permission; the collector framework makes a second source a small job |
+| The lawyer finds the founders' analysis or the members' call is advice where you sell | The paid tiers' main content changes | Ask early (Phase 1); keep everything impersonal, published to all subscribers alike, never about anyone's holdings |
+| Not enough time for weekly writing | Paid tiers feel empty | Start with crypto only (about 5 hours a week); the automatic figures carry the free e-mail |
+| A data vendor changes its terms | A section must switch off | Rights are configuration (`config/sources.yaml`); history stays archived internally |
+| The repository is public (decision 0021) | Plans and code are visible to competitors | Nothing secret is committed (CI checks); make it private with a paid GitHub plan when convenient |
+
+---
+
+## 11. Sources (read 2026-10-19 unless stated)
+
+- Compared service's plans and terms: `docs/research/crypto-itc-review.md` (read 2026-10-18).
+- CoinMarketCap API pricing and licence FAQ: https://coinmarketcap.com/api/pricing/
+- CoinGecko API pricing and licence FAQ: https://www.coingecko.com/en/api/pricing
+- Tiingo end-of-day licence prices: https://www.tiingo.com/products/end-of-day-stock-price-data and
+  https://www.tiingo.com/about/pricing
+- Massive (formerly Polygon) business plans: https://massive.com/business; individual plans: https://massive.com/pricing
+- EODHD plans: https://eodhd.com/pricing; Twelve Data plans: https://twelvedata.com/pricing
+- Financial Modeling Prep terms: https://site.financialmodelingprep.com/terms-of-service
+- Glassnode terms (updated 2026-05-21): https://studio.glassnode.com/terms-and-conditions
+- FRED terms: https://fred.stlouisfed.org/legal/; each series page for its rights tag (`docs/audit.md` §4)
+- Bitcoin chain size (about 760 GB, August 2026): https://www.spark.money/tools/bitcoin-node-storage-calculator
+- Stripe countries: https://stripe.com/global; Stripe restricted businesses: https://stripe.com/legal/restricted-businesses;
+  Stripe Australia fees: https://stripe.com/au/pricing; Stripe Tax: https://stripe.com/tax/pricing
+- Paddle pricing: https://www.paddle.com/pricing; Paddle's prohibited products:
+  https://paddle.com/support/what-products-am-i-not-allowed-to-sell-on-paddle
+- Supabase: https://supabase.com/pricing; Vercel: https://vercel.com/pricing; Resend: https://resend.com/pricing;
+  GitHub: https://github.com/pricing; Bunny Stream: https://bunny.net/pricing/stream/; Circle: https://circle.so/pricing
+- Domain registrations: Verisign RDAP, https://rdap.verisign.com/com/v1/domain/<name>.com

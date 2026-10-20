@@ -5,7 +5,7 @@ One short record per decision, so a later session (or a person) can see what was
 **Numbering.** This product's platform was carried over from the shared platform in the TBD repository at commit
 `ca7e44c` (decision 0020). Records 0001–0019 are that platform's; the ones that still apply are kept here **under their
 original numbers**, so references in code and config (for example "decision 0019") stay valid. Each says at the top
-how it was adapted. Missing numbers were Sri Lankan or ZinvestIQ-specific and do not apply. This repository's own
+how it was adapted. Missing numbers were specific to the other company's Sri Lankan portal and do not apply. This repository's own
 decisions start at **0020**.
 
 | # | Decision | Origin |
