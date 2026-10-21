@@ -1,6 +1,7 @@
 # Plan: a subscription research terminal for crypto and global markets
 
-**Status:** Phase 0 proposal, **awaiting the owners' approval**. Nothing here is bought, signed or launched.
+**Status:** Phases 0 and 1 **approved by the owners on 2026-10-21** (decision 0023); Phase 1 in progress. Nothing here is
+bought, signed or launched.
 **Date:** 2026-10-19 (prices and terms checked on that day; sources in §11). **Updated 2026-10-21** with the owners'
 first answers: the name is **Cointrigue**, the tiers and prices are approved, crypto comes first (decision 0022);
 their questions on incorporation, Whop and data licences are answered in §12.
@@ -286,7 +287,7 @@ after the lawyer's view.
 | Phase | What I build | What you do meanwhile | Ends when |
 |---|---|---|---|
 | **0 (approved 2026-10-21)** | Safety copy, the platform port, the audit, this plan, the private preview, the blue and white retail look (decision 0023) | read and decide (§0) | ~~you approve~~ approved |
-| **1. Foundations: a real site you can log into** | The site online on Vercel with its database on Supabase, behind a password until a price licence is signed; Whop memberships setting each subscriber's tier (Whop's API and webhooks); notes publishing (§2.3) and the archive; the weekly e-mail sending through Resend; a CoinMarketCap collector for prices and market caps if you choose it (§12.2); the old terminal's history archived (`docs/audit.md` §8) | ask Whop to approve the category; send the Bitstamp and CoinMarketCap letters; create the Vercel, Supabase, Resend and Whop accounts and the domain; the ABN and a written agreement between you (§12.1) | you can log in to the live site, subscribe in Whop's test mode, see your tier's pages, and publish a note |
+| **1. Foundations: a free public site, then logins** | (a) **A free public site at no monthly cost** (§12.6): a collector for CoinMarketCap's free Basic plan (today's prices and short-run changes), the pages that need only that data public, the long-history pages (bitcoin since 2011, long averages, cycles, trend bands) kept private until a long history is licensed; lessons illustrated with clearly labelled made-up examples where real history is not yet licensed; published daily as plain files to Cloudflare Pages (`publish-site.yml`, built); the database on Supabase's free plan with our own backups. (b) **Logins and paid tiers**, switched on when the first paid tier is ready: Whop memberships setting each subscriber's tier (Whop checkout, webhooks and its access check), the site moved to a host that runs server code (Cloudflare Workers paid, US$5/month, or Vercel Pro, US$20/month). Also: notes publishing (§2.3), the weekly e-mail sending (Resend's free plan), the old terminal's history archived (`docs/audit.md` §8) | create the free accounts (CoinMarketCap API, Supabase, Cloudflare, Cloudflare R2 or Backblaze B2 for backups, Resend), buy the domain; send the CoinMarketCap and Bitstamp letters (they cost nothing); set up the Whop business (§12.1) and a written agreement between you | the free site is live on your domain, updating daily; then you can log in, subscribe in Whop's test mode and see your tier's pages |
 | **2. The terminal** | The MiniLizard terminal's licensed parts, rebuilt: the ticker strip; the grid of every tracked name; each asset's page with the indicator library (ported with exact-parity tests); long averages and weekly-close facts; the cycle page; breadth (dominance, names above their averages, names beating bitcoin); sectors; correlations; Fear & Greed; quarterly and running returns. **The rebalancing lab** (decision 0023; `docs/minilizard-gap.md` version B), shown publicly only after the lawyer's view. Optionally the macro page from free public-domain agency data (net liquidity, rates, inflation, labour) | write the first notes; the lawyer's view (§5) | the Charts tier is complete and live behind the password |
 | **Launch** | Switch-on checklist: a price source whose terms allow display, with `config/sources.yaml` updated; the lawyer's view applied (including the 0–1 band position and the rebalancing lab); terms, privacy policy, disclaimers; monitoring live; a restore test passed; the password removed | approve the launch; set up the Whop business (§12.1) | the site is public and taking payments |
 | **3. Paid-data sections** | Each only if you choose to pay for its data: derivatives (CoinGlass, from US$299/month); valuation multiples (protocol fees and revenue, DefiLlama Pro US$300/month or Token Terminal); on-chain (Glassnode quote or our own node); global markets (Tiingo US$250/month) | decide each against its cost | each is its own approval |
@@ -472,3 +473,51 @@ the site. That also defers the US$250/month equity data licence.
   4. the domain (§12.3).
   Until a price licence is signed, that site must sit behind a login or password, so it is not public. Adding a
   simple password gate is a small Phase 1 task.
+- *Revised 2026-10-21 (decision 0023), after the owners asked to run it through GitHub:* **GitHub Pages is not
+  allowed** for this site: GitHub's terms say Pages is not "a free web-hosting service to run your online business,
+  e-commerce site, or any other website that is primarily directed at either facilitating commercial transactions",
+  and Pages serves only fixed files. **Vercel's free plan is not allowed either** ("Hobby teams are restricted to
+  non-commercial personal use only"). **Cloudflare Pages' free plan allows commercial use** (its terms have no
+  non-commercial clause; one rule: no card details collected on a free-plan site, which suits Whop's own checkout
+  pages). So the code stays on GitHub and a GitHub job publishes the free site to Cloudflare Pages every day, at no
+  cost; a custom domain is free to connect. Logins and paid pages need code running on a server, which comes with
+  the first paid tier (Cloudflare Workers paid, US$5/month, or Vercel Pro, US$20/month). Supabase's free plan allows
+  commercial use but has no backups and pauses after a week without activity: the daily jobs keep it active and the
+  platform's own backup job copies it to free storage.
+
+### 12.6 Starting without paying for data (2026-10-21)
+
+*The owners asked:* crypto trades on a decentralised market, so why can't we use (or scrape) the prices for free,
+and can we keep using what the preview uses until there is revenue?
+
+- **Who owns crypto prices.** The blockchain records transfers between wallets, not prices. Prices are made where
+  coins are traded, and almost all trading happens on exchanges run by companies (Bitstamp, Coinbase, Kraken,
+  Binance). Each one runs its own order book and its own record of trades, and the terms of its website and API say
+  what others may do with that record. A single price is a fact, and facts are generally not protected by copyright
+  (in the US, *Feist v. Rural*, 1991; in Australia, *IceTV v Nine*, 2009), but the terms are a contract: using an API
+  or a website means accepting them. Scraping does not avoid this; it is usually itself forbidden by the same terms.
+  Truly decentralised exchanges (such as Uniswap) do record their prices on the blockchain, which anyone may read,
+  but their history starts in 2020 and bitcoin itself hardly trades there.
+- **What the preview uses.** Bitstamp's free public API, collected into a private development database. Bitstamp's
+  own API page sends commercial users to a signed Data License Agreement. Showing that data on the public site,
+  which promotes paid plans, would breach Bitstamp's terms and hard rule 2. Realistically the risk while the site is
+  small is a takedown request or a blocked connection rather than a lawsuit, but it would also weaken the position
+  when asking Bitstamp for that very licence, and a business reviewer (Whop's included) may ask where the data comes
+  from. Recommendation: do not; hard rule 2 stays unless the owners relax it in writing.
+- **What is free and allowed** (sources read 2026-10-21; `config/sources.yaml`): **CoinMarketCap's free Basic API
+  plan** grants commercial use, including for a paid product, with the credit "Data provided by CoinMarketCap.com".
+  It gives the latest prices and their changes over 1, 7, 30 and 90 days, and one year of daily history. It cannot
+  supply bitcoin's history since 2011, so the 200-week average, the cycle table, the trend bands and the "since 2011"
+  chart stay private until a long history is licensed. Its terms allow storing data only "temporarily … to the extent
+  necessary", so keeping our own growing daily record needs CoinMarketCap's written confirmation (letter drafted).
+  Every other free source checked (CoinGecko's Demo plan, CoinPaprika, CoinCap, CoinDesk, Kraken, Coinbase, Gemini,
+  Binance, Bitfinex, Pyth, DefiLlama, Alpha Vantage, Twelve Data, Tiingo and others) either forbids commercial display
+  or does not say clearly that it allows it.
+- **Free openly licensed datasets** (for example on Kaggle, labelled "CC0" or "CC BY-SA") are copies of Bitstamp or
+  CoinMarketCap data; an uploader cannot give away rights they never had. Not a safe source.
+- **Cheapest ways to the long history, when there is revenue:** Bitstamp's licence (fee unknown, possibly low or free
+  for a small business: the letter asks), CoinMarketCap Startup (US$79/month, history from 2010), CoinGecko Analyst
+  (US$129/month, from 2013, with storage clauses to clear first). Everything else is internal-use only or costs
+  US$499/month or more.
+- **Plan:** launch the free site on CoinMarketCap Basic and the lessons; send the Bitstamp and CoinMarketCap letters
+  now (free); turn on the long-history pages when one of the two is licensed.

@@ -101,10 +101,11 @@ kraken:
   rights:
     status: prohibited
     evidence: >-
-      Global Terms (updated 2026-10-06) §9: you will not "distribute or otherwise commercially exploit or make
-      available to any third party Our Content in any way" without permission. Ask in writing before any use.
+      Global Terms (updated 2026-10-19) §8 "Our Content": you may not "license, sublicense, sell, resell, transfer,
+      assign, distribute or otherwise commercially exploit or make available to any third party Our Content in any
+      way" without permission. Ask in writing before any use.
     url: https://www.kraken.com/legal/global-terms
-    checked: 2026-10-18
+    checked: 2026-10-21
   datasets: []
 
 coinmarketcap_startup:
@@ -122,6 +123,29 @@ coinmarketcap_startup:
     attribution: "Data provided by CoinMarketCap.com"
   datasets: []
   notes: For market caps and dominance, if subscribed.
+
+coinmarketcap_basic:
+  name: CoinMarketCap API, Basic plan (free)
+  homepage: https://coinmarketcap.com/api/
+  enabled: false
+  rights:
+    status: allowed
+    evidence: >-
+      Pricing FAQ (read 2026-10-21): "Basic through Professional all include commercial use rights — the free Basic
+      tier included … covers one product with up to 100k users." Commercial terms: display "solely on Your Product
+      provided solely to end users … for their own personal, non-commercial purposes"; you "may (a) charge a fee for
+      such usage by End Users, (b) temporarily store the Content to the extent necessary in order to make the Content
+      available via Your Product, and (c) only distribute the Content as part of Your Product but not on a standalone
+      basis". Basic carries one year of daily history only. Before relying on it, confirm in writing that Basic covers
+      a paid educational site and that keeping our own daily history is allowed (letter in
+      docs/letters/data-permission-requests.md).
+    url: https://pro.coinmarketcap.com/user-agreement-commercial/
+    checked: 2026-10-21
+    attribution: "Data provided by CoinMarketCap.com"
+  datasets: []
+  notes: >-
+    The no-cost start (plan §12.6): today's prices and short-run changes on the public site until revenue pays for
+    a long history (Bitstamp's licence or CoinMarketCap Startup).
 
 alternative_me_fng:
   name: alternative.me Crypto Fear & Greed Index

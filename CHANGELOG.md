@@ -1,5 +1,24 @@
 # Changelog
 
+## 2026-10-21 (evening) — Phases 0 and 1 approved; blue and white for everyday investors; a free way to launch
+
+- **Phases 0 and 1 approved** (decision 0023). The terminal look was too technical for retail investors: the site
+  is now white and blue with serif headings (Source Serif 4, open font licence), plain sentences first, "What this
+  means" notes, simpler tables, a numbered path of six lessons (the Learn page follows the same order), the coming
+  rebalancing lab and "How we work". The private preview was republished (same link).
+- **No advance request to Whop**; the site stays plainly educational. Plan 12.1: how two people share one Whop
+  business (both Owners; the first linked payout account owns the revenue in Whop's records), payouts to Australia or
+  Sri Lanka, identity checks.
+- **The rebalancing lab** (educational version) moves into Phase 2; public only after the lawyer's view.
+- **Hosting:** GitHub Pages and Vercel's free plan forbid commercial sites; Cloudflare Pages' free plan does not.
+  `export-static.mjs --public` copies what an anonymous visitor sees as plain files (own fonts and chart library);
+  `.github/workflows/publish-site.yml` publishes it daily to Cloudflare Pages once enabled, and refuses while any
+  enabled data source still needs permission.
+- **Data without cost** (plan 12.6): CoinMarketCap's free Basic API plan allows commercial display (one year of
+  history); it is recorded in `config/sources.yaml`. Every other free source checked forbids it or is unclear. The
+  Bitstamp and CoinMarketCap letters now ask about a small-business rate and about keeping our own daily record.
+- Checks: Python tests pass, web unit 58, type check, build, tier-leak 28, copy lint clean.
+
 ## 2026-10-21 (later) — A terminal look, the MiniLizard map, the phases revised
 
 - **The site redesigned** after the owners said it looked "too AI-generated": dark by default (a light theme follows
