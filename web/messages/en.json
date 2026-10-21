@@ -5,8 +5,8 @@
     "skip": "Skip to content"
   },
   "nav": {
-    "home": "Overview",
-    "crypto": "Crypto",
+    "home": "Home",
+    "crypto": "Prices",
     "methods": "Methods",
     "about": "About",
     "learn": "Learn",
@@ -20,7 +20,7 @@
     "plus": "Charts",
     "pro": "Research",
     "professional": "Research + Calls",
-    "viewing": "Access: {tier}"
+    "viewing": "{tier} plan"
   },
   "common": {
     "asOf": "Data for {date}",
@@ -40,39 +40,95 @@
     "plans": "See what each plan includes"
   },
   "home": {
-    "eyebrow": "Daily briefing",
-    "heroTitle": "Crypto markets, measured and explained",
-    "heroSub": "Every figure has a public method page. Information and education only: what happened, not what to do.",
+    "eyebrow": "Crypto, explained",
+    "heroTitle": "Understand crypto markets, one chart at a time",
+    "heroSub": "Plain-English lessons and charts on bitcoin and the largest coins. Every number comes with what it means, how it is calculated and what it cannot tell you.",
+    "ctaLearn": "Start with the basics",
+    "ctaPrices": "See today's prices",
+    "todayTitle": "Today in 30 seconds",
+    "todayWhen": "Closing prices for {date}",
+    "briefAsset": "{name} closed at {price}, {change} on the day. That is {below} below its highest close so far.",
+    "briefAssetHigh": "{name} closed at {price}, {change} on the day, its highest close so far.",
+    "briefBreadth": "{up} of the {total} coins we follow closed higher than the day before.",
+    "todayLearn": "What does “below its highest close” mean?",
+    "pricesTitle": "Today's prices",
+    "pricesMore": "All coins in detail",
+    "pricesSub": "The latest closing price of each coin we follow, in US dollars, with how it has changed.",
+    "coin": "Coin",
+    "price": "Price",
+    "belowHigh": "Below its high",
+    "atHighShort": "at its high",
     "trend90": "last 90 days",
-    "fromHigh": "{pct} from its highest close",
-    "atHigh": "at its highest close",
-    "btcChartTitle": "Bitcoin since 2011",
-    "more": "More",
-    "learn1Kicker": "Basics",
-    "learn1Title": "What a drawdown tells you",
-    "learn1Body": "How far a price sits below its highest close, and why that is history rather than a forecast.",
-    "learn2Kicker": "Basics",
-    "learn2Title": "Moving averages",
-    "learn2Body": "Why long averages smooth out daily moves, and what they can and cannot describe.",
-    "learn3Kicker": "Methods",
-    "learn3Title": "How every number is made",
-    "learn3Body": "Each calculation has a public method page: inputs, formulas, assumptions and limits.",
+    "chartTitle": "Bitcoin since 2011",
+    "chartMore": "Bitcoin in detail",
+    "explainLabel": "What this means",
+    "chartExplain": "The side of this chart goes up in steps of ten: $10, $100, $1,000 and so on. That is called a logarithmic scale. It lets a rise from $10 to $100 look as big as a rise from $10,000 to $100,000, because both are the same tenfold increase.",
+    "chartDrawdown": "Bitcoin's latest close is {below} below its highest close, {high} on {date}. That gap is called a drawdown.",
+    "chartLearn": "Lesson: reading long charts",
+    "averagesTitle": "Bitcoin and its long averages",
+    "averagesIntro": "A moving average is the average closing price over a recent stretch of time. It smooths out the daily ups and downs.",
+    "avg": {
+      "sma50": "50-day average",
+      "sma50Note": "about seven weeks",
+      "sma200": "200-day average",
+      "sma200Note": "about six and a half months",
+      "sma200w": "200-week average",
+      "sma200wNote": "almost four years"
+    },
+    "avgAbove": "Bitcoin's close was {pct} above it.",
+    "avgBelow": "Bitcoin's close was {pct} below it.",
+    "averagesExplain": "These averages are for {date}, when bitcoin closed at {price}. An average describes where the price has been. It does not say where the price is going.",
+    "averagesLearn": "Lesson: moving averages",
+    "pathTitle": "Learn the basics",
+    "pathSub": "Six short lessons, in order. Each one explains an idea you will see in the charts on this site.",
+    "pathAll": "All lessons",
+    "lesson": {
+      "drawdown": {
+        "title": "How far from the top? Drawdowns",
+        "body": "How to read the gap between today's price and the highest price so far."
+      },
+      "volatility": {
+        "title": "How bumpy is the ride? Volatility",
+        "body": "What it means when a price swings a lot from day to day, and how that is measured."
+      },
+      "movingAverage": {
+        "title": "Smoothing out the noise: moving averages",
+        "body": "Why averages over weeks or years can make a long price history easier to read."
+      },
+      "logScale": {
+        "title": "Reading long charts: log scales",
+        "body": "Why charts of bitcoin's whole history go up in steps of ten."
+      },
+      "halving": {
+        "title": "Bitcoin's halvings",
+        "body": "What happens to new bitcoin roughly every four years, in plain terms."
+      },
+      "marketCap": {
+        "title": "What “market cap” means",
+        "body": "How the size of a coin is measured, and what that number leaves out."
+      }
+    },
+    "labTag": "Coming later",
+    "labTitle": "The rebalancing lab",
+    "labBody": "Choose a pretend basket of coins and a simple rule, such as resetting the mix every three months, then see how that basket would have behaved on past prices compared with leaving it alone. A hands-on way to learn how rebalancing works, with no real money and no suggestions.",
+    "principlesTitle": "How we work",
+    "principles": {
+      "facts": {
+        "title": "Explanations, not tips",
+        "body": "We explain what happened and what a measure means. We never tell anyone what to do with their money, and we make no predictions."
+      },
+      "methods": {
+        "title": "Every number shows its working",
+        "body": "Each figure links to a method page with its formula, its assumptions and its limits."
+      },
+      "sources": {
+        "title": "Sources and dates on everything",
+        "body": "Every chart says where its data comes from and which day it is for."
+      }
+    },
     "plansTitle": "Plans",
     "plansBody": "The main bitcoin and ether figures, the weekly e-mail and every Learn page are free. Paid plans add the full chart library and, later, macro and global markets with written analysis. Accounts are not open yet.",
-    "plansLink": "See the plans",
-    "eyebrowDay": "Daily briefing · close of {date} (UTC)",
-    "briefAsset": "{name} closed at {price}, {change} on the day and {high}.",
-    "briefBreadth": "{up} of {total} tracked assets closed higher on the day and {down} lower.",
-    "briefLargest": "The largest move on the day: {name}, {change}.",
-    "briefRatio": "Ether in bitcoin closed at {ratio}, {change} over 30 days.",
-    "marketsTitle": "Markets",
-    "close": "Close {date}",
-    "levelsTitle": "Bitcoin's long averages",
-    "levelsMeasure": "Average",
-    "levelsValue": "Level",
-    "levelsDistance": "Price against it",
-    "levelsNote": "Bitcoin's close on {date}: {price}. Distances are the close against each average; they describe where the price sits, not where it goes next.",
-    "plansCard": "Four plans, from free"
+    "plansLink": "See the plans"
   },
   "methods": {
     "title": "Methods",
@@ -168,7 +224,7 @@
   },
   "learn": {
     "title": "Learn the basics",
-    "intro": "Plain-language explanations of the terms used on this site.",
+    "intro": "Short, plain-English lessons on the ideas behind every chart on this site. Start at the top, or jump straight to a term.",
     "terms": {
       "movingAverage": {
         "name": "Moving average",
@@ -215,7 +271,8 @@
         "short": "The price divided by its 200-day average.",
         "long": "1.5 means the price is 50% above its 200-day average; 0.8 means 20% below. It describes how far the price has moved from its recent average, nothing more."
       }
-    }
+    },
+    "lessonN": "Lesson {n}"
   },
   "feedback": {
     "title": "Tell us what you think",
@@ -417,8 +474,7 @@
     "ethbtc": "Ether priced in bitcoin"
   },
   "ticker": {
-    "label": "Latest closes",
-    "close": "Close (UTC)",
-    "today": "Today (UTC)"
+    "label": "Latest closing prices",
+    "close": "Closing prices, {date}"
   }
 }

@@ -24,8 +24,7 @@ export default async function Ticker({ viewer }: { viewer: Viewer }) {
     <div className="ticker" aria-label={t("ticker.label")}>
       <ul>
         <li className="asof-cell">
-          <span className="sym">{t("ticker.close")}</span>
-          <span className="px">{date(overview.data.day)}</span>
+          {t("ticker.close", { date: date(overview.data.day) })}
         </li>
         {rows.map((r) => {
           const asset = assetByPair(r.pair)!;

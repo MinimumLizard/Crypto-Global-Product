@@ -35,14 +35,14 @@ export function themed(option: Obj, p: Palette): Obj {
   };
 }
 
-/** The palette from CSS custom properties (in the browser), with the dark theme's values as a fallback. */
+/** The palette from CSS custom properties (in the browser), with the site's values as a fallback. */
 export function paletteFrom(get: (name: string) => string): Palette {
   const v = (name: string, fallback: string) => get(name).replace(/^\s+|\s+$/g, "") || fallback;
   return {
-    text: v("--text", "#e8e6e1"),
-    muted: v("--muted", "#8e939a"),
-    border: v("--border", "#2a2e34"),
-    surface: v("--surface", "#15171a"),
-    series: [v("--accent", "#d4a64a"), v("--plus", "#79aee0"), v("--series-3", "#9b8cf0"), v("--down", "#ef6b5e"), v("--up", "#4cc38a")],
+    text: v("--text", "#0f1f3a"),
+    muted: v("--muted", "#56637b"),
+    border: v("--border", "#dde4ef"),
+    surface: v("--surface", "#ffffff"),
+    series: [v("--accent", "#1d5fd6"), v("--plus", "#0e7490"), v("--series-3", "#d97706"), v("--down", "#c2412d"), v("--up", "#12805c")],
   };
 }

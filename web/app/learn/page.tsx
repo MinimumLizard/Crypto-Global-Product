@@ -20,9 +20,10 @@ export default async function LearnPage() {
         ))}
       </div>
       <div className="learn-grid">
-        {GLOSSARY.map((id) => (
+        {GLOSSARY.map((id, i) => (
           <section key={id} id={id} className="card">
-            <h2 style={{ fontSize: "1.05rem" }}>{t(`learn.terms.${id}.name` as never)}</h2>
+            <span className="kicker">{t("learn.lessonN", { n: i + 1 })}</span>
+            <h2 style={{ fontSize: "1.3rem", marginTop: 4 }}>{t(`learn.terms.${id}.name` as never)}</h2>
             <p><strong>{t(`learn.terms.${id}.short` as never)}</strong></p>
             <p className="muted" style={{ marginBottom: 0 }}>{t(`learn.terms.${id}.long` as never)}</p>
           </section>
