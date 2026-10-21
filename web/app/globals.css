@@ -201,6 +201,8 @@ td .sub { display: block; font-size: 0.78rem; color: var(--muted); white-space: 
 .plan { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: var(--s5); box-shadow: var(--shadow); display: flex; flex-direction: column; gap: var(--s2); }
 .plan.featured { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-soft), var(--shadow); }
 .plan h2 { margin: 0; }
+.plan .plan-price { font-family: var(--display); font-size: 1.15rem; color: var(--text); }
+.plan .plan-price { font-family: var(--display, inherit); font-size: 1.15rem; color: var(--navy); }
 .plan .tier-pill { align-self: flex-start; }
 .plan ul { margin: 0; padding-left: 1.1em; display: grid; gap: var(--s1); }
 

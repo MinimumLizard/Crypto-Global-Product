@@ -1,6 +1,6 @@
 {
   "site": {
-    "name": "Research Terminal",
+    "name": "Cointrigue",
     "tagline": "Crypto and global markets, measured and explained",
     "skip": "Skip to content"
   },
@@ -16,9 +16,9 @@
   },
   "tiers": {
     "free": "Free",
-    "plus": "Plus",
-    "pro": "Pro",
-    "professional": "Professional",
+    "plus": "Charts",
+    "pro": "Research",
+    "professional": "Research + Calls",
     "viewing": "Access: {tier}"
   },
   "common": {
@@ -88,7 +88,7 @@
     "correctionsBody": "Sources are stored exactly as published, and every calculation is versioned. When a source corrects a figure, the correction is applied and the earlier value is kept on record."
   },
   "footer": {
-    "rights": "© Research Terminal (working name)",
+    "rights": "© Cointrigue",
     "tagline": "Information and education on crypto and global markets. Not investment advice.",
     "markets": "Markets",
     "company": "About us"
@@ -113,7 +113,7 @@
   },
   "plans": {
     "title": "Plans",
-    "intro": "The main figures are free. The paid plans add the full chart library and, later, macro and global markets with written analysis. Accounts and subscriptions are not open yet; these are the planned plans, and their names and contents are still being decided.",
+    "intro": "The main figures are free. The paid plans add the full chart library and, later, macro and global markets with written analysis. Accounts and subscriptions are not open yet; these are the planned plans and prices.",
     "includes": "What it includes",
     "models": "Calculations in this plan",
     "current": "You are viewing as: {tier}",
@@ -125,7 +125,8 @@
         "Every other tracked crypto-asset's latest figures",
         "The weekly e-mail",
         "Plain-language explanations and a method page for every number"
-      ]
+      ],
+      "price": "Free"
     },
     "plus": {
       "tagline": "The full chart library",
@@ -134,7 +135,8 @@
         "Crypto cycles: long averages, Pi cycle lines, halvings, the cycle table and monthly returns (free a week late)",
         "Full history for every chart",
         "Alerts when a measure crosses a level you choose (planned)"
-      ]
+      ],
+      "price": "US$19 a month, or US$190 a year"
     },
     "pro": {
       "tagline": "Macro, global markets and analysis",
@@ -143,14 +145,16 @@
         "Bitcoin's long-run trend bands, re-fitted every day",
         "Macro and global markets: inflation, jobs, central-bank rates, yield curves, the dollar, gold, equity indices and sectors (planned)",
         "Written and video analysis, and the members' community (planned)"
-      ]
+      ],
+      "price": "US$49 a month, or US$490 a year"
     },
     "professional": {
       "tagline": "Members' calls",
       "features": [
         "Everything in Pro",
         "A regular members' call (planned; not personal advice)"
-      ]
+      ],
+      "price": "US$149 a month · limited to about 30 members"
     }
   },
   "learn": {

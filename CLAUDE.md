@@ -4,9 +4,10 @@ Hand-over notes between sessions. Keep this file current: future sessions rely o
 
 ## What this is
 
-A paid research terminal for crypto and global markets, sold as a subscription (free, Charts, Research, Research +
-Calls: names and prices are a proposal in `docs/plan.md`). Built from public methods and licensed data only. The
-product has no name yet; the site uses the placeholder "Research Terminal".
+**Cointrigue**: a paid research service for crypto (and possibly, later, global markets), sold as a subscription:
+Free; Charts US$19/month; Research US$49/month; Research + Calls US$149/month (decision 0022). Built from public
+methods and licensed data only. Crypto comes first; whether to add macro and global markets is the owners' decision
+after they have seen the site.
 
 The owner works in finance, is fluent in R and learning Python, and is not a professional engineer. Their partner is
 Janu. Explain decisions in plain language. Prefer boring, well-documented, managed services over clever or self-hosted
@@ -20,7 +21,11 @@ us.
 ## Current phase
 
 **Phase 0 is done and awaits the owners' approval** (`docs/plan.md` §0 lists their decisions). Do not start Phase 1
-until they approve.
+until they approve. On 2026-10-21 they answered part of it (decision 0022): the name, the tiers and prices, crypto
+first. They are not incorporated and want to take payments through Whop: `docs/plan.md` §12 sets out what that means
+(Whop approval first; personal liability; tax residence still unknown). Price data: send the Bitstamp request, or use
+CoinMarketCap Startup instead (§12.2). A private clickable preview was published for them on 2026-10-21 with
+`web/scripts/export-static.mjs` (private claude.ai artifact; never share it publicly before a price licence).
 
 - Done: verified safety copy of the old Crypto repo; the platform, Bitstamp collector, three crypto models, website,
   weekly e-mail, CI and tier-leak suite ported, with every test passing locally and in CI; 30 public cross-checks pass

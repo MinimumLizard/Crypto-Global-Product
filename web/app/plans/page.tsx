@@ -28,7 +28,8 @@ export default async function PlansPage() {
             <section key={tier} className={`plan${tier === "plus" ? " featured" : ""}`}>
               <span className={`tier-pill ${tier}`}>{t(`tiers.${tier}`)}</span>
               <h2>{t(`plans.${tier}.tagline`)}</h2>
-              <span className="small muted">{tier === "free" ? t("tiers.free") : t("plans.soon")}</span>
+              <strong className="plan-price">{t(`plans.${tier}.price`)}</strong>
+              {tier !== "free" && <span className="small muted">{t("plans.soon")}</span>}
               <strong className="small">{t("plans.includes")}</strong>
               <ul>
                 {features.map((f) => <li key={f}>{f}</li>)}

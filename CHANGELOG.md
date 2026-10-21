@@ -1,5 +1,17 @@
 # Changelog
 
+## 2026-10-21 — The owners' first answers
+
+- **Name: Cointrigue**; tier names (Free, Charts, Research, Research + Calls) and prices approved and shown on the plans
+  page; crypto first (decision 0022). `cointrigue.com` is registered by someone else; other endings are free.
+- **Plan §12:** starting without a company and selling through Whop (fees, Whop's approval for crypto education,
+  liability and tax); licensed price data without Bitstamp (CoinMarketCap Startup, CoinGecko Analyst); the name; how
+  to get a real live site.
+- **A private clickable preview** of the site on real Bitstamp prices to the 2026-10-20 close (36 pages, Free and
+  Research views), published for the owners only. The export banner's tier switch now says "Research".
+- Bitstamp history refreshed in the development database (+22 candles); the models added only new rows and changed
+  no earlier ones. Checks: web unit 58, type check, build, tier-leak 28, copy lint clean.
+
 ## 2026-10-19 — Phase 0 (awaiting approval)
 
 - **Safety copy of the old Crypto terminal**: `scripts/backup_repos.sh` (adapted from the shared platform's, narrowed

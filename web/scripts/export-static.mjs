@@ -110,9 +110,9 @@ function banner(path, tier) {
   const style = "background:#0b2545;color:#e6edf7;font:13px/1.4 system-ui,sans-serif;padding:8px 16px;display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:center";
   const pill = (label, on) => `<span style="padding:2px 10px;border-radius:999px;border:1px solid #6fd8d3;${on ? "background:#6fd8d3;color:#0b2545;font-weight:700" : ""}">${label}</span>`;
   const view = tier === "free"
-    ? `${pill("Free", true)} ${other ? `<a href="${other}" style="color:#e6edf7">${pill("Pro", false)}</a>` : `<span style="opacity:.6">${pill("Pro", false)}</span>`}`
-    : `<a href="${other}" style="color:#e6edf7">${pill("Free", false)}</a> ${pill("Pro", true)}`;
-  return `<div style="${style}"><strong>Preview copy of the research terminal</strong><span>Real data${AS_OF ? ` to ${AS_OF}` : ""}; not yet the live site.</span><span>Viewing as:</span>${view}</div>`;
+    ? `${pill("Free", true)} ${other ? `<a href="${other}" style="color:#e6edf7">${pill("Research", false)}</a>` : `<span style="opacity:.6">${pill("Research", false)}</span>`}`
+    : `<a href="${other}" style="color:#e6edf7">${pill("Free", false)}</a> ${pill("Research", true)}`;
+  return `<div style="${style}"><strong>Preview copy of Cointrigue</strong><span>Real data${AS_OF ? ` to ${AS_OF}` : ""}; not yet the live site.</span><span>Viewing as:</span>${view}</div>`;
 }
 
 function rewrite(html, path, tier) {

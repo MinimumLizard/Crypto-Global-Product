@@ -25,3 +25,4 @@ decisions start at **0020**.
 | 0019 | The crypto section: public methods on Bitstamp prices | inherited |
 | 0020 | A separate product, started from the shared platform with a fresh database history | this repository |
 | 0021 | The repository stays public until a paid GitHub plan (owner, 2026-10-19) | this repository (owner's answer) |
+| 0022 | The name is Cointrigue; tier names and prices approved; crypto first | this repository (owners' answers) |

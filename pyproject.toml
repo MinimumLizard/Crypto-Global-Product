@@ -1,7 +1,7 @@
 [project]
-name = "research-terminal-data"
+name = "cointrigue-data"
 version = "0.1.0"
-description = "Collectors, raw archive, database and models for the crypto and global-markets research terminal"
+description = "Collectors, raw archive, database and models for Cointrigue, a crypto and global-markets research service"
 requires-python = ">=3.12"
 dependencies = [
     "requests==2.34.2",

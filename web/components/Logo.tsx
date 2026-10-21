@@ -1,5 +1,5 @@
-// A neutral placeholder mark until the product is named: a rising line in a rounded square, with a gold point at its
-// end. Colours come from the theme.
+// A neutral placeholder mark until Cointrigue has a designed logo: a rising line in a rounded square, with a gold
+// point at its end. Colours come from the theme.
 export default function Logo({ size = 28 }: { size?: number }) {
   return (
     <svg viewBox="0 0 32 32" width={size} height={size} aria-hidden="true" focusable="false">

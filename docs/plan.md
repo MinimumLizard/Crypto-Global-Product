@@ -1,7 +1,9 @@
 # Plan: a subscription research terminal for crypto and global markets
 
 **Status:** Phase 0 proposal, **awaiting the owners' approval**. Nothing here is bought, signed or launched.
-**Date:** 2026-10-19 (prices and terms checked on that day; sources in §11).
+**Date:** 2026-10-19 (prices and terms checked on that day; sources in §11). **Updated 2026-10-21** with the owners'
+first answers: the name is **Cointrigue**, the tiers and prices are approved, crypto comes first (decision 0022);
+their questions on incorporation, Whop and data licences are answered in §12.
 **Reads with:** `docs/audit.md` (the old Crypto terminal), `docs/architecture.md` (how the platform works),
 `docs/research/crypto-itc-review.md` (the compared paid service: offer, prices, what is public, what not to copy),
 `docs/decisions/` (one record per decision).
@@ -25,13 +27,13 @@ information and education, never advice.
 
 | # | Decision or action | Why it blocks | Section |
 |---|---|---|---|
-| 1 | **Where the company is incorporated, and who the customers are** | Decides the lawyer, the payment provider, the privacy law and the advice rules | §5, §8 |
+| 1 | **Where the company is incorporated, and who the customers are.** The owners would rather start without a company and take payments through Whop: §12.1 sets out what that means | Decides the lawyer, the payment provider, the privacy law and the advice rules | §5, §8, §12.1 |
 | 2 | **A lawyer's view** on the questions in §5 | Advice rules for crypto and market research differ by country; the founders' own analysis is the riskiest part | §5 |
-| 3 | **The name** (three options with free .com domains, §7) | Domain, accounts, letters to data vendors and the trademark search all need it | §7 |
-| 4 | **Send the Bitstamp licence request** (draft ready) | Every crypto page uses Bitstamp prices; its Data License Agreement is unsigned | §4 |
+| 3 | ~~The name~~ **Cointrigue** (decision 0022). Still open: the domain (`.com` is taken; §12.3) and a trademark search | Domain, accounts and letters need it | §7, §12.3 |
+| 4 | **Send the Bitstamp licence request** (draft ready), and decide whether CoinMarketCap's US$79/month plan should be the price source instead | Every crypto page needs licensed prices | §4, §12.2 |
 | 5 | **A data budget** (§6: about US$80/month for crypto market caps, US$250/month for US end-of-day prices with display rights, on-chain later) | Decides which indicators come first | §4, §6 |
 | 6 | **The weekly content commitment** (§2: about 8–14 hours a week between you at launch) | The paid tiers are mostly your analysis | §2 |
-| 7 | **Approve the tiers, their names and prices** (§1) | The plans page, e-mails and the tier file follow them | §1 |
+| 7 | ~~Approve the tiers, their names and prices~~ **Approved** (decision 0022) | | §1 |
 | 8 | **Who owns the platform code** copied from the other company's repository | Needs an assignment or licence between the two companies | §5 |
 
 ---
@@ -323,3 +325,118 @@ proposal is to archive it in Phase 1 and stop its daily job only after the new c
 - Supabase: https://supabase.com/pricing; Vercel: https://vercel.com/pricing; Resend: https://resend.com/pricing;
   GitHub: https://github.com/pricing; Bunny Stream: https://bunny.net/pricing/stream/; Circle: https://circle.so/pricing
 - Domain registrations: Verisign RDAP, https://rdap.verisign.com/com/v1/domain/<name>.com
+
+---
+
+## 12. The owners' questions of 2026-10-21
+
+### 12.1 Starting without a company, and taking payments through Whop
+
+*The owners' position:* not incorporated yet; customers worldwide; the two of them run it. One owner holds Australian
+and Sri Lankan citizenship, the other Sri Lankan. The idea is to sell through Whop and skip incorporating for now.
+
+**What Whop is and charges** (its own fee page, docs.whop.com/fees, read 2026-10-21): a platform for selling
+memberships, communities and digital products, with checkout and Discord or Telegram access built in. Card payments
+cost 2.7% + US$0.30, plus 1.5% for international cards and 1% when currency is converted; collecting sales tax is an
+optional 2%; disputes cost US$15 each; payouts cost from US$2.50 (US bank) to a country-dependent fee abroad.
+Identity is verified through Stripe, and the payout bank account must be in the country the account is registered
+in. **Expect about 5–7% of each sale in total, before payout fees.**
+
+**Whether Whop will accept this product** (its "What is not allowed" page, read 2026-10-21): selling cryptocurrencies
+is prohibited, but "Whop may permit educational or informational content" that "doesn't involve direct sales,
+exchanges, or investment solicitation"; crypto is a restricted category that needs Whop's approval through its
+support team. Investment products offered without registration are prohibited, and any earnings claims must be
+"accurate, substantiated, and not misleading". So: **ask Whop for written approval first**, describing the product
+exactly as it is (charts, statistics, education and written analysis; no trading, no custody, no personal advice,
+no "signals"). Many communities on Whop sell trading signals; Cointrigue's pages, marketing and listing must not
+look like one of them.
+
+**What not incorporating means** (general information, not legal or tax advice; the lawyer and an accountant confirm):
+
+- You can legally sell before forming a company. But the business still exists in law: two people running a business
+  together for profit are usually treated as a **partnership**, and each partner is **personally liable** for the
+  business's debts and for claims against it, including a customer who says the research cost them money. A company
+  limits that liability to the company's own assets.
+- **Tax** is due in each partner's country of tax residence on their share. In Australia, a person carrying on a
+  business normally needs an ABN (free), and must register for GST once turnover reaches A$75,000 a year (check both
+  with the ATO). In Sri Lanka, the Inland Revenue rules apply to Janu's share. Where the account holder lives decides
+  which country's rules apply to Whop's payouts: **which country does each of you live in, for tax?**
+- **Contracts usually need a party:** a data licence (Bitstamp, CoinMarketCap), a domain and the cloud accounts can be
+  signed by an individual, but a vendor may prefer a company, and the person who signs is personally bound.
+- **The advice rules do not depend on having a company.** Whether the founders' written analysis or the members' call
+  counts as financial advice (§5, question 2) is the same question either way. The Central Bank of Sri Lanka's 2023
+  statement on "promoting" crypto (§5) is relevant while either of you lives in, or markets to, Sri Lanka.
+- **Between the two of you:** a short written agreement (who owns the name, the code and the content, how money is
+  split, what happens if one leaves) protects you both, company or not.
+
+**Recommendation.**
+1. Ask Whop for written approval of the product category before building anything for it.
+2. Start as individuals if Whop approves, with the Australian citizen as the account holder if they live in
+   Australia (Stripe, which Whop uses, serves Australia, not Sri Lanka), an ABN, and a written agreement between you.
+   Enable Whop's tax collection (2%) so sales tax and VAT are handled.
+3. Form a company (an Australian Pty Ltd costs about A$636 to register and A$342 a year, per third-party summaries of
+   ASIC's 2026 fees: check asic.gov.au) before signing a data licence that costs real money, or as soon as revenue is
+   steady, mainly to limit personal liability.
+4. Get the lawyer's view on the advice question (§5) before charging anyone, with or without a company.
+
+**For the platform:** Whop changes Phase 1. Instead of building a Stripe checkout, subscribers would pay on Whop, and
+the site would learn each subscriber's tier from Whop (Whop has an API and sends webhooks when a membership starts or
+ends). `web/lib/viewer.ts` remains the one place a tier is read, and the tier-leak tests stay as they are. Whop's
+Discord integration could also handle the community (§2.2).
+
+### 12.2 Licensed prices without Bitstamp
+
+**Why a licence at all.** An exchange's price history is its data, and its terms say what others may do with it.
+Bitstamp's terms allow commercial use once its Data License Agreement is signed. The free crypto APIs mostly forbid
+commercial use (`docs/research/data-sources-2026-10-18.md`). Free datasets on sites such as Kaggle are copies of exchange
+data; an uploader's "CC0" or "public domain" label does not override the exchange's terms, because the uploader never
+had those rights to give away.
+
+**What a Bitstamp licence costs.** Not published. Bitstamp's API page sends commercial users to partners@bitstamp.net
+for the agreement, and nothing public gives a figure. Market-data licences in general range very widely (one
+industry overview cites US$32 to over US$20,000 a month per exchange, mostly for traditional exchanges). The only way
+to know is to ask; the request is drafted and costs nothing to send.
+
+**How the compared service gets its data.** Nothing public says, and finding out by subscribing or probing its
+service would break hard rule 1. Research services of this kind usually license aggregated data from paid providers,
+which is the route below.
+
+**The licensed alternatives, without negotiation** (each is a paid plan whose terms include commercial use):
+
+| Option | Price | History | Terms | Trade-off |
+|---|---|---|---|---|
+| **CoinMarketCap Startup** | US$79/month (US$948/year) | daily price and market-cap quotes over the whole of its data; market-wide totals (for dominance) from 2013 | commercial use for one product up to 100,000 users; data must be part of a larger product; no resale; confirm in writing (letter drafted) | One source for prices **and** market caps, which the plan needs anyway (dominance, altcoin index). Prices are an average across exchanges, not one exchange. Its plan table says daily history "from 2010", but its bitcoin records are believed to begin on 28 April 2013 (confirm with a test download before relying on it); if so, bitcoin's 2011–2013 history is lost: the 200-week average then starts in 2017 instead of 2015, and the two 2013 Pi cycle crossings disappear |
+| **CoinGecko Analyst** | US$129/month | daily from 2013; daily open/high/low/close from 2018 | commercial use; "Data provided by CoinGecko" with a link beside the data | Dearer and shorter than CoinMarketCap for this purpose |
+| **Bitstamp Data License Agreement** | unknown | daily from 2011-09-14 (measured) | commercial use and redistribution once signed | Longest bitcoin history from one exchange; already built and cross-checked; price and timing unknown |
+
+**Recommendation.** Send the Bitstamp request now. Plan on CoinMarketCap Startup either way (it is needed for market
+caps). If Bitstamp is expensive or slow, switch the price source to CoinMarketCap: a new collector and a re-run of
+the cross-checks, about a week of work, with the history trade-off above stated on every page it affects. Until one
+of the two is licensed, the site can be shown privately (as the 2026-10-21 preview is) but not published.
+
+### 12.3 The name
+
+Cointrigue (decision 0022). `cointrigue.com` was registered by someone else on 2023-06-28 through GoDaddy and shows a
+parked page; it may be for sale (GoDaddy's domain broker service can ask the owner, for a fee plus the price).
+`cointrigue.io`, `.co`, `.app`, `.net` and `.xyz` were free on 2026-10-21. No business using the name turned up in a
+web search. A trademark search (USPTO, IP Australia, EUIPO, UK IPO) is still needed before marketing.
+
+### 12.4 Crypto first
+
+Agreed (decision 0022). The order of work becomes: Phase 1 (foundations, now built around Whop if it approves), then
+Phase 2 (the crypto chart library); macro and global markets (Phase 3) only if you decide to add them after seeing
+the site. That also defers the US$250/month equity data licence.
+
+### 12.5 Seeing the live website
+
+- **Now:** a private, clickable copy of the site on real Bitstamp prices (to the 20 October close) was published for
+  you as a private claude.ai page (link in the session; open its Share menu only to share with Janu). The banner on
+  each page switches between the Free view and the Research view. It is a snapshot: links, charts and tier views
+  work, but the feedback form and sign-up do not.
+- **A real site on the internet** needs three accounts in your names and a domain:
+  1. **Vercel** (hosting the site): free Hobby plan for a private preview; Pro (US$20/month) once it is commercial;
+  2. **Supabase** (the database): free plan for the preview; Pro (US$25/month) for launch;
+  3. **GitHub Actions secrets** for the daily price collection (no new account; settings in this repository);
+  4. the domain (§12.3).
+  Until a price licence is signed, that site must sit behind a login or password, so it is not public. Adding a
+  simple password gate is a small Phase 1 task.
