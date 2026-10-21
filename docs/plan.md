@@ -279,14 +279,18 @@ Until you choose, the site uses the placeholder "Research Terminal" and a neutra
 
 ## 9. Order of work (each phase ends with a stop for your approval)
 
+*Revised 2026-10-21* after the owners' answers: payments through Whop rather than Stripe (§12.1), crypto first
+(decision 0022), the MiniLizard terminal's licensed parts rebuilt (`docs/minilizard-gap.md`), and a rebalancing lab
+after the lawyer's view.
+
 | Phase | What I build | What you do meanwhile | Ends when |
 |---|---|---|---|
-| **0 (this one)** | Safety copy, the platform port, the audit, this plan | read and decide (§0) | you approve |
-| **1. Foundations** | Notes publishing (§2.3) and the archive; accounts (Supabase Auth); Stripe checkout and webhooks setting the tier; the weekly e-mail sending through Resend; deploy to Vercel staging; the old Crypto terminal's history archived into the raw archive (`docs/audit.md` §8); the name and plans pages | incorporate (on the lawyer's advice); choose the name; send the Bitstamp and CoinMarketCap letters; create the accounts (architecture §19) | a private staging site where you can sign up, subscribe in test mode and publish a note |
-| **2. The crypto chart library** | RSI, MACD, Bollinger, ATR, correlations, quarterly and running returns (with exact-parity tests against the old tool); Fear & Greed; market caps → dominance and the altcoin index; alerts (if the lawyer agrees) | write the first notes; get the lawyer's view (§5) | the Charts tier is complete on staging |
-| **3. Macro and global markets** | Collectors for BLS, BEA, the Fed Board, Treasury and EIA; Tiingo prices for index, sector and gold ETFs; models for inflation, jobs, rates, the curve, the dollar, gold, indices and sectors, recession indicators; other central banks once their terms are confirmed | the Tiingo licence; start the macro note | the Research tier is complete on staging |
-| **Launch** | Switch-on checklist: Bitstamp licence signed and `config/sources.yaml` updated; lawyer's view applied (including whether to show the 0–1 band position at all); terms, privacy policy, disclaimers; production accounts; monitoring live; a restore test passed | approve the launch | the site is public |
-| **4. After launch** | Video, community, members' call, on-chain data (Glassnode quote or own node) | decide each | each is its own approval |
+| **0 (this one)** | Safety copy, the platform port, the audit, this plan, the private preview, the new look | read and decide (§0) | you approve |
+| **1. Foundations: a real site you can log into** | The site online on Vercel with its database on Supabase, behind a password until a price licence is signed; Whop memberships setting each subscriber's tier (Whop's API and webhooks); notes publishing (§2.3) and the archive; the weekly e-mail sending through Resend; a CoinMarketCap collector for prices and market caps if you choose it (§12.2); the old terminal's history archived (`docs/audit.md` §8) | ask Whop to approve the category; send the Bitstamp and CoinMarketCap letters; create the Vercel, Supabase, Resend and Whop accounts and the domain; the ABN and a written agreement between you (§12.1) | you can log in to the live site, subscribe in Whop's test mode, see your tier's pages, and publish a note |
+| **2. The terminal** | The MiniLizard terminal's licensed parts, rebuilt: the ticker strip; the grid of every tracked name; each asset's page with the indicator library (ported with exact-parity tests); long averages and weekly-close facts; the cycle page; breadth (dominance, names above their averages, names beating bitcoin); sectors; correlations; Fear & Greed; quarterly and running returns. Optionally the macro page from free public-domain agency data (net liquidity, rates, inflation, labour) | write the first notes; the lawyer's view (§5) | the Charts tier is complete and live behind the password |
+| **Launch** | Switch-on checklist: a price licence in place and `config/sources.yaml` updated; the lawyer's view applied (including the 0–1 band position); Whop's written approval; terms, privacy policy, disclaimers; monitoring live; a restore test passed; the password removed | approve the launch | the site is public and taking payments |
+| **3. Paid-data sections** | Each only if you choose to pay for its data: derivatives (CoinGlass, from US$299/month); valuation multiples (protocol fees and revenue, DefiLlama Pro US$300/month or Token Terminal); on-chain (Glassnode quote or our own node); global markets (Tiingo US$250/month) | decide each against its cost | each is its own approval |
+| **4. Rebalancing lab and community** | The rebalancing lab (`docs/minilizard-gap.md`, version B), after the lawyer's view; video, community, the members' call | decide each | each is its own approval |
 
 **The old Crypto terminal** keeps running untouched until you approve its migration plan (`docs/audit.md` §8); the
 proposal is to archive it in Phase 1 and stop its daily job only after the new crypto pages are live.
@@ -332,8 +336,10 @@ proposal is to archive it in Phase 1 and stop its daily job only after the new c
 
 ### 12.1 Starting without a company, and taking payments through Whop
 
-*The owners' position:* not incorporated yet; customers worldwide; the two of them run it. One owner holds Australian
-and Sri Lankan citizenship, the other Sri Lankan. The idea is to sell through Whop and skip incorporating for now.
+*The owners' position:* not incorporated yet; customers worldwide; the two of them run it. The owner lives in
+Australia (Australian and Sri Lankan citizen); Janu lives in Sri Lanka (Sri Lankan citizen) (owner, 2026-10-21). The
+idea is to sell through Whop and skip incorporating for now. With the owner in Australia, the Whop account, its
+Stripe identity check and the payout bank account would be the owner's, in Australia.
 
 **What Whop is and charges** (its own fee page, docs.whop.com/fees, read 2026-10-21): a platform for selling
 memberships, communities and digital products, with checkout and Discord or Telegram access built in. Card payments
@@ -350,6 +356,18 @@ support team. Investment products offered without registration are prohibited, a
 exactly as it is (charts, statistics, education and written analysis; no trading, no custody, no personal advice,
 no "signals"). Many communities on Whop sell trading signals; Cointrigue's pages, marketing and listing must not
 look like one of them.
+
+**How Whop enforces its rules** (its community guidelines, suspension and risk-score pages, read 2026-10-21; and
+sellers' public reviews, which are one side of the story): mostly **after** you start selling, through your money.
+Whop scores each account's risk; if it cannot verify what a seller sells, it pauses payouts and asks for proof; its
+Trust & Safety team can withhold payouts, hold funds in reserve for up to 120 days (the card-dispute window), refund
+customers, claw back withdrawals, suspend the account or ban it. Appeals go to support within 30 days. In one public
+case a seller said support had approved their business model, and Whop later suspended it anyway for falling into
+a prohibited financial category, holding the balance for up to 120 days; Whop replied that earlier guidance "does not
+constitute approval" of a business outside its policies. Whop's payment partners (Stripe among them) can also refuse
+a category on their own. So the practical risk is not a refusal at sign-up but money held later. Hence: get the
+category approved **in writing**, keep every page and the listing plainly educational, avoid earnings claims, keep
+refunds simple, and do not let a large balance build up on Whop (withdraw regularly).
 
 **What not incorporating means** (general information, not legal or tax advice; the lawyer and an accountant confirm):
 
