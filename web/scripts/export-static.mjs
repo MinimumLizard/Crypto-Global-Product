@@ -1,7 +1,14 @@
-// A static, clickable copy of the running site, for the owner's private preview (an Artifact on claude.ai).
+// A static, clickable copy of the running site: the owner's private preview (an Artifact on claude.ai), or with
+// --public the free site as plain files for a static host (plan §12.5).
 //
 //   DATABASE_URL=... ALLOW_TEST_TIERS=1 npx next start -p 3100 &      # the site, on the data to show
 //   node scripts/export-static.mjs <out_dir> [--as-of "16 Oct 2026"] [--pro-details N]
+//   DATABASE_URL=... npx next start -p 3100 &                          # public: no test tiers at all
+//   node scripts/export-static.mjs <out_dir> --public
+//
+// --public crawls only what a free visitor sees (never a paid view: hard rule 4 holds because the crawler is an
+// anonymous visitor of the real site), writes each page as <path>/index.html with ordinary links, adds no banner,
+// and serves its own fonts and chart library from the copy instead of from Google and cdnjs.
 //
 // It crawls every page a visitor can reach (free tier), and the crypto pages and e-mail again as a Pro subscriber, then for each
 // page: removes the app's scripts (the copy is plain HTML), inlines the stylesheet, loads the heading font from
@@ -16,9 +23,10 @@ const BASE = process.env.BASE ?? "http://127.0.0.1:3100";
 const OUT = process.argv[2];
 const arg = (name) => (process.argv.includes(name) ? process.argv[process.argv.indexOf(name) + 1] : undefined);
 const AS_OF = arg("--as-of") ?? "";
+const PUBLIC = process.argv.includes("--public");
 // A published preview holds at most 511 files, so the Pro copy can be limited to the first N asset pages (the other
 // asset pages then show the Pro view greyed out in the banner). Unset: every asset page gets a Pro copy.
-const PRO_DETAILS = arg("--pro-details") === undefined ? Infinity : Number(arg("--pro-details"));
+const PRO_DETAILS = PUBLIC ? 0 : arg("--pro-details") === undefined ? Infinity : Number(arg("--pro-details"));
 if (!OUT) throw new Error("usage: node scripts/export-static.mjs <out_dir> [--as-of <date text>]");
 mkdirSync(OUT, { recursive: true });
 
@@ -30,6 +38,7 @@ const FONTS = "https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400..
 
 function fileName(path, tier) {
   if (path === "/" && tier === "free") return "index.html";
+  if (PUBLIC) return path.replace(/^\//, "").split("/").map(encodeURIComponent).join("/") + "/index.html";
   const segments = (decodeURIComponent(path).replace(/^\//, "") || "home").split("/");
   const safe = segments.map((s) => s.replace(/[^A-Za-z0-9._-]+/g, "_"));
   // a segment that had to change (one with characters a file name cannot hold) gets a short hash, so two different
@@ -67,7 +76,7 @@ while (queue.length) {
 const proPages = new Map();
 let assetDetails = 0;
 for (const path of pages.keys()) {
-  if (!proPage(path)) continue;
+  if (PUBLIC || !proPage(path)) continue;
   if (/^\/crypto\/[^/]+$/.test(path) && ++assetDetails > PRO_DETAILS) continue;
   proPages.set(path, await get(path, "pro"));
 }
@@ -76,7 +85,18 @@ for (const path of pages.keys()) {
 const cssHref = [...pages.get("/").matchAll(/<link rel="stylesheet" href="([^"]+\.css)"[^>]*>/g)].map((m) => m[1]);
 let css = "";
 for (const href of cssHref) css += await (await fetch(BASE + href)).text();
-css = css.replace(/@font-face\s*{[^}]*(IBM Plex|Source Serif)[^}]*}/g, "");
+if (PUBLIC) {
+  // the copy serves the site's own font files, at /fonts/<name>
+  mkdirSync(join(OUT, "fonts"), { recursive: true });
+  for (const m of new Set([...css.matchAll(/url\((?:\.\.\/media\/|\/_next\/static\/media\/)([^)]+\.woff2)\)/g)].map((x) => x[1]))) {
+    writeFileSync(join(OUT, "fonts", m), Buffer.from(await (await fetch(`${BASE}/_next/static/media/${m}`)).arrayBuffer()));
+  }
+  css = css.replace(/url\((?:\.\.\/media\/|\/_next\/static\/media\/)([^)]+\.woff2)\)/g, "url(/fonts/$1)");
+  mkdirSync(join(OUT, "assets"), { recursive: true });
+  writeFileSync(join(OUT, "assets", "echarts.min.js"), await (await fetch(ECHARTS)).text());
+} else {
+  css = css.replace(/@font-face\s*{[^}]*(IBM Plex|Source Serif)[^}]*}/g, "");
+}
 
 const CHART_SCRIPT = `
 (function () {
@@ -127,12 +147,14 @@ function rewrite(html, path, tier) {
     if (p.startsWith("/api")) return 'href="#"';
     const target = p.replace(/\/$/, "") || "/";
     if (!pages.has(target)) return 'href="#"';
+    if (PUBLIC) return `href="${target === "/" ? "/" : `${target}/`}${hash}"`;
     const t = tier === "pro" && proPages.has(target) ? "pro" : "free";
     return `href="${fileName(target, t)}${hash}"`;
   });
-  const head = `<link rel="stylesheet" href="${FONTS}"><style>${css}</style>`;
-  const tail = `<script src="${ECHARTS}"></script><script>${CHART_SCRIPT}</script>`;
-  out = out.replace("</head>", `${head}</head>`).replace(/<body([^>]*)>/, (m) => `${m}${banner(path, tier)}`).replace("</body>", `${tail}</body>`);
+  const head = PUBLIC ? `<style>${css}</style>` : `<link rel="stylesheet" href="${FONTS}"><style>${css}</style>`;
+  const tail = `<script src="${PUBLIC ? "/assets/echarts.min.js" : ECHARTS}"></script><script>${CHART_SCRIPT}</script>`;
+  out = out.replace("</head>", `${head}</head>`).replace("</body>", `${tail}</body>`);
+  if (!PUBLIC) out = out.replace(/<body([^>]*)>/, (m) => `${m}${banner(path, tier)}`);
   return out;
 }
 
@@ -150,11 +172,12 @@ for (const [tier, map] of [["free", pages], ["pro", proPages]]) {
   for (const [path, html] of map) {
     const name = fileName(path, tier);
     const page = rewrite(html, path, tier);
-    const body = name === "index.html" ? bodyOnly(page) : page;
+    const body = name === "index.html" && !PUBLIC ? bodyOnly(page) : page;
+    mkdirSync(join(OUT, name, ".."), { recursive: true });
     writeFileSync(join(OUT, name), body);
     files[name] = path + (tier === "pro" ? " (pro)" : "");
     bytes += body.length;
   }
 }
-writeFileSync(join(OUT, "manifest.json"), JSON.stringify(files, null, 1));
+if (!PUBLIC) writeFileSync(join(OUT, "manifest.json"), JSON.stringify(files, null, 1));
 console.log(`${Object.keys(files).length} pages (${pages.size} free, ${proPages.size} pro), ${(bytes / 1e6).toFixed(1)} MB`);

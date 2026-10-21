@@ -285,12 +285,12 @@ after the lawyer's view.
 
 | Phase | What I build | What you do meanwhile | Ends when |
 |---|---|---|---|
-| **0 (this one)** | Safety copy, the platform port, the audit, this plan, the private preview, the new look | read and decide (§0) | you approve |
+| **0 (approved 2026-10-21)** | Safety copy, the platform port, the audit, this plan, the private preview, the blue and white retail look (decision 0023) | read and decide (§0) | ~~you approve~~ approved |
 | **1. Foundations: a real site you can log into** | The site online on Vercel with its database on Supabase, behind a password until a price licence is signed; Whop memberships setting each subscriber's tier (Whop's API and webhooks); notes publishing (§2.3) and the archive; the weekly e-mail sending through Resend; a CoinMarketCap collector for prices and market caps if you choose it (§12.2); the old terminal's history archived (`docs/audit.md` §8) | ask Whop to approve the category; send the Bitstamp and CoinMarketCap letters; create the Vercel, Supabase, Resend and Whop accounts and the domain; the ABN and a written agreement between you (§12.1) | you can log in to the live site, subscribe in Whop's test mode, see your tier's pages, and publish a note |
-| **2. The terminal** | The MiniLizard terminal's licensed parts, rebuilt: the ticker strip; the grid of every tracked name; each asset's page with the indicator library (ported with exact-parity tests); long averages and weekly-close facts; the cycle page; breadth (dominance, names above their averages, names beating bitcoin); sectors; correlations; Fear & Greed; quarterly and running returns. Optionally the macro page from free public-domain agency data (net liquidity, rates, inflation, labour) | write the first notes; the lawyer's view (§5) | the Charts tier is complete and live behind the password |
-| **Launch** | Switch-on checklist: a price licence in place and `config/sources.yaml` updated; the lawyer's view applied (including the 0–1 band position); Whop's written approval; terms, privacy policy, disclaimers; monitoring live; a restore test passed; the password removed | approve the launch | the site is public and taking payments |
+| **2. The terminal** | The MiniLizard terminal's licensed parts, rebuilt: the ticker strip; the grid of every tracked name; each asset's page with the indicator library (ported with exact-parity tests); long averages and weekly-close facts; the cycle page; breadth (dominance, names above their averages, names beating bitcoin); sectors; correlations; Fear & Greed; quarterly and running returns. **The rebalancing lab** (decision 0023; `docs/minilizard-gap.md` version B), shown publicly only after the lawyer's view. Optionally the macro page from free public-domain agency data (net liquidity, rates, inflation, labour) | write the first notes; the lawyer's view (§5) | the Charts tier is complete and live behind the password |
+| **Launch** | Switch-on checklist: a price source whose terms allow display, with `config/sources.yaml` updated; the lawyer's view applied (including the 0–1 band position and the rebalancing lab); terms, privacy policy, disclaimers; monitoring live; a restore test passed; the password removed | approve the launch; set up the Whop business (§12.1) | the site is public and taking payments |
 | **3. Paid-data sections** | Each only if you choose to pay for its data: derivatives (CoinGlass, from US$299/month); valuation multiples (protocol fees and revenue, DefiLlama Pro US$300/month or Token Terminal); on-chain (Glassnode quote or our own node); global markets (Tiingo US$250/month) | decide each against its cost | each is its own approval |
-| **4. Rebalancing lab and community** | The rebalancing lab (`docs/minilizard-gap.md`, version B), after the lawyer's view; video, community, the members' call | decide each | each is its own approval |
+| **4. Community** | Video, community, the members' call (the rebalancing lab moved to Phase 2: decision 0023) | decide each | each is its own approval |
 
 **The old Crypto terminal** keeps running untouched until you approve its migration plan (`docs/audit.md` §8); the
 proposal is to archive it in Phase 1 and stop its daily job only after the new crypto pages are live.
@@ -338,24 +338,37 @@ proposal is to archive it in Phase 1 and stop its daily job only after the new c
 
 *The owners' position:* not incorporated yet; customers worldwide; the two of them run it. The owner lives in
 Australia (Australian and Sri Lankan citizen); Janu lives in Sri Lanka (Sri Lankan citizen) (owner, 2026-10-21). The
-idea is to sell through Whop and skip incorporating for now. With the owner in Australia, the Whop account, its
-Stripe identity check and the payout bank account would be the owner's, in Australia.
+idea is to sell through Whop and skip incorporating for now. Janu already has a personal Whop account.
 
 **What Whop is and charges** (its own fee page, docs.whop.com/fees, read 2026-10-21): a platform for selling
 memberships, communities and digital products, with checkout and Discord or Telegram access built in. Card payments
 cost 2.7% + US$0.30, plus 1.5% for international cards and 1% when currency is converted; collecting sales tax is an
 optional 2%; disputes cost US$15 each; payouts cost from US$2.50 (US bank) to a country-dependent fee abroad.
-Identity is verified through Stripe, and the payout bank account must be in the country the account is registered
-in. **Expect about 5–7% of each sale in total, before payout fees.**
+Identity is verified by Whop's verification provider (an ID and a selfie); an individual can be verified without a
+company. Whop pays out to "over 200 different countries", Australia and Sri Lanka among them, in the payout country's
+own currency (docs.whop.com, set-up-payouts and payout-methods pages, read 2026-10-21). **Expect about 5–7% of each
+sale in total, before payout fees.** Listing on Whop's marketplace also lets its affiliates promote the product for a
+default 30% commission, which can be changed per product.
+
+**Setting up the business with two people** (docs.whop.com, manage-team-roles page and Terms of Service, read
+2026-10-21). Each person keeps their own personal Whop account. One of them creates the business ("Start selling")
+from their account, then invites the other by e-mail (Dashboard → Team) with a role. Whop has five roles; **Owner**
+has "full access to everything", including payouts, withdrawals and the API keys, and can invite "other Owners", so
+both of you can be Owners. Whop's terms add one rule to settle between you first: "The owner of the first Linked
+Account with a payment method connected to your account is considered the owner of all associated revenue", and Whop
+does not mediate disputes between partners. So agree in writing who links the payout bank account, in which country
+(Australia in AUD, or Sri Lanka in LKR), before anyone links one: it decides whose income it is in Whop's records and,
+in practice, which country's tax rules apply first.
 
 **Whether Whop will accept this product** (its "What is not allowed" page, read 2026-10-21): selling cryptocurrencies
 is prohibited, but "Whop may permit educational or informational content" that "doesn't involve direct sales,
 exchanges, or investment solicitation"; crypto is a restricted category that needs Whop's approval through its
 support team. Investment products offered without registration are prohibited, and any earnings claims must be
-"accurate, substantiated, and not misleading". So: **ask Whop for written approval first**, describing the product
-exactly as it is (charts, statistics, education and written analysis; no trading, no custody, no personal advice,
-no "signals"). Many communities on Whop sell trading signals; Cointrigue's pages, marketing and listing must not
-look like one of them.
+"accurate, substantiated, and not misleading". *The owners' decision (0023):* no advance request to Whop; Whop's own
+sign-up review sees the website and the product description, so those must describe the product exactly as it is
+(charts, statistics, education and written analysis; no trading, no custody, no personal advice, no "signals").
+Many communities on Whop sell trading signals; Cointrigue's pages, marketing and listing must not look like one of
+them.
 
 **How Whop enforces its rules** (its community guidelines, suspension and risk-score pages, read 2026-10-21; and
 sellers' public reviews, which are one side of the story): mostly **after** you start selling, through your money.
@@ -365,9 +378,9 @@ customers, claw back withdrawals, suspend the account or ban it. Appeals go to s
 case a seller said support had approved their business model, and Whop later suspended it anyway for falling into
 a prohibited financial category, holding the balance for up to 120 days; Whop replied that earlier guidance "does not
 constitute approval" of a business outside its policies. Whop's payment partners (Stripe among them) can also refuse
-a category on their own. So the practical risk is not a refusal at sign-up but money held later. Hence: get the
-category approved **in writing**, keep every page and the listing plainly educational, avoid earnings claims, keep
-refunds simple, and do not let a large balance build up on Whop (withdraw regularly).
+a category on their own. So the practical risk is not a refusal at sign-up but money held later. Hence: keep every
+page and the listing plainly educational, avoid earnings claims, keep refunds simple, and do not let a large balance
+build up on Whop (withdraw regularly).
 
 **What not incorporating means** (general information, not legal or tax advice; the lawyer and an accountant confirm):
 
@@ -388,10 +401,11 @@ refunds simple, and do not let a large balance build up on Whop (withdraw regula
   split, what happens if one leaves) protects you both, company or not.
 
 **Recommendation.**
-1. Ask Whop for written approval of the product category before building anything for it.
-2. Start as individuals if Whop approves, with the Australian citizen as the account holder if they live in
-   Australia (Stripe, which Whop uses, serves Australia, not Sri Lanka), an ABN, and a written agreement between you.
-   Enable Whop's tax collection (2%) so sales tax and VAT are handled.
+1. ~~Ask Whop for written approval first~~ (the owners chose not to: decision 0023).
+2. Start as individuals: one Whop business with both of you as Owners, the payout account chosen on purpose (above),
+   an ABN if the Australian side carries on the business, and a written agreement between you. Enable Whop's tax
+   collection (2%); Whop's terms say it is merchant of record only for card-network purposes, so you remain the
+   supplier for tax and consumer law.
 3. Form a company (an Australian Pty Ltd costs about A$636 to register and A$342 a year, per third-party summaries of
    ASIC's 2026 fees: check asic.gov.au) before signing a data licence that costs real money, or as soon as revenue is
    steady, mainly to limit personal liability.
