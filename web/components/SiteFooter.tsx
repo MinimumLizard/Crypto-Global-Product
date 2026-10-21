@@ -11,8 +11,8 @@ export default async function SiteFooter() {
       <div className="container">
         <div className="cols">
           <div>
-            <p className="display" style={{ display: "flex", gap: 8, alignItems: "center", fontWeight: 800, color: "#fff", fontSize: "1.05rem" }}>
-              <Logo size={24} /> {t("site.name")}
+            <p className="brand-line">
+              <Logo size={20} /> {t("site.name")}
             </p>
             <p>{t("footer.tagline")}</p>
           </div>

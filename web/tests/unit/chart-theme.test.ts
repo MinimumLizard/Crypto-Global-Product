@@ -7,10 +7,10 @@ describe("chart theme", () => {
   const dark: Record<string, string> = { "--text": "#e7edf6", "--muted": "#97a6bb", "--border": "#233149", "--surface": "#111b2c", "--accent": "#3cc6c0" };
   const p = paletteFrom((n) => dark[n] ?? "");
 
-  test("takes the theme's tokens, with the light theme as fallback", () => {
+  test("takes the theme's tokens, with the dark theme as fallback", () => {
     expect(p.text).toBe("#e7edf6");
     expect(p.series[0]).toBe("#3cc6c0");
-    expect(p.series[1]).toBe("#e09f3e");
+    expect(p.series[1]).toBe("#79aee0");
   });
 
   test("colours axes, labels and legend without touching the data", () => {

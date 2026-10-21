@@ -79,7 +79,7 @@ function sectionHtml(s: Section): string {
 
 /** The e-mail's HTML: tables and inline styles only, which is what e-mail programs display reliably. */
 export function renderHtml(d: Digest): string {
-  const font = "Manrope,'Segoe UI',Helvetica,Arial,sans-serif";
+  const font = "'IBM Plex Sans','Segoe UI',Helvetica,Arial,sans-serif";
   return [
     `<div style="background:${COLOURS.soft};padding:24px 8px;font-family:${font};color:${COLOURS.text}">`,
     `<span style="display:none;max-height:0;overflow:hidden">${escape(d.preheader)}</span>`,

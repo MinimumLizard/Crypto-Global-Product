@@ -12,7 +12,8 @@
     "learn": "Learn",
     "plans": "Plans",
     "feedback": "Feedback",
-    "weekly": "Weekly e-mail"
+    "weekly": "Weekly e-mail",
+    "label": "Main"
   },
   "tiers": {
     "free": "Free",
@@ -39,19 +40,14 @@
     "plans": "See what each plan includes"
   },
   "home": {
-    "eyebrow": "Crypto and global markets",
-    "heroTitle": "Market history, measured and explained",
-    "heroSub": "Prices, long-run averages and cycle measures for the largest crypto-assets, each with its method and its limits. Macro and global markets are planned.",
-    "when": "Prices for {date} (UTC day)",
-    "snapshot": "Today's figures",
-    "today": "on the day",
+    "eyebrow": "Daily briefing",
+    "heroTitle": "Crypto markets, measured and explained",
+    "heroSub": "Every figure has a public method page. Information and education only: what happened, not what to do.",
     "trend90": "last 90 days",
     "fromHigh": "{pct} from its highest close",
     "atHigh": "at its highest close",
     "btcChartTitle": "Bitcoin since 2011",
     "more": "More",
-    "learnTitle": "Start here",
-    "learnAll": "Everything in Learn",
     "learn1Kicker": "Basics",
     "learn1Title": "What a drawdown tells you",
     "learn1Body": "How far a price sits below its highest close, and why that is history rather than a forecast.",
@@ -63,7 +59,20 @@
     "learn3Body": "Each calculation has a public method page: inputs, formulas, assumptions and limits.",
     "plansTitle": "Plans",
     "plansBody": "The main bitcoin and ether figures, the weekly e-mail and every Learn page are free. Paid plans add the full chart library and, later, macro and global markets with written analysis. Accounts are not open yet.",
-    "plansLink": "See the plans"
+    "plansLink": "See the plans",
+    "eyebrowDay": "Daily briefing · close of {date} (UTC)",
+    "briefAsset": "{name} closed at {price}, {change} on the day and {high}.",
+    "briefBreadth": "{up} of {total} tracked assets closed higher on the day and {down} lower.",
+    "briefLargest": "The largest move on the day: {name}, {change}.",
+    "briefRatio": "Ether in bitcoin closed at {ratio}, {change} over 30 days.",
+    "marketsTitle": "Markets",
+    "close": "Close {date}",
+    "levelsTitle": "Bitcoin's long averages",
+    "levelsMeasure": "Average",
+    "levelsValue": "Level",
+    "levelsDistance": "Price against it",
+    "levelsNote": "Bitcoin's close on {date}: {price}. Distances are the close against each average; they describe where the price sits, not where it goes next.",
+    "plansCard": "Four plans, from free"
   },
   "methods": {
     "title": "Methods",
@@ -406,5 +415,10 @@
     "coefficients": "Fit on {date}: exponent {slope}, {n} closes",
     "trendBtcOnly": "The trend bands are computed for bitcoin only.",
     "ethbtc": "Ether priced in bitcoin"
+  },
+  "ticker": {
+    "label": "Latest closes",
+    "close": "Close (UTC)",
+    "today": "Today (UTC)"
   }
 }

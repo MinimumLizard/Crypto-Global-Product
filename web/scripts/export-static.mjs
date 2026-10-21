@@ -26,7 +26,7 @@ const SEEDS = ["/", "/crypto", "/learn", "/plans", "/methods", "/about", "/feedb
 // the pages a Pro subscriber sees differently
 const proPage = (path) => path === "/" || path === "/email/crypto" || path === "/crypto" || path.startsWith("/crypto/");
 const ECHARTS = "https://cdnjs.cloudflare.com/ajax/libs/echarts/6.0.0/echarts.min.js";
-const FONTS = "https://fonts.googleapis.com/css2?family=Manrope:wght@500..800&display=swap";
+const FONTS = "https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400..700&family=IBM+Plex+Mono:wght@400;500;600&display=swap";
 
 function fileName(path, tier) {
   if (path === "/" && tier === "free") return "index.html";
@@ -76,7 +76,7 @@ for (const path of pages.keys()) {
 const cssHref = [...pages.get("/").matchAll(/<link rel="stylesheet" href="([^"]+\.css)"[^>]*>/g)].map((m) => m[1]);
 let css = "";
 for (const href of cssHref) css += await (await fetch(BASE + href)).text();
-css = css.replace(/@font-face\s*{[^}]*Manrope[^}]*}/g, "");
+css = css.replace(/@font-face\s*{[^}]*IBM Plex[^}]*}/g, "");
 
 const CHART_SCRIPT = `
 (function () {
@@ -90,8 +90,8 @@ const CHART_SCRIPT = `
       splitLine: Object.assign({ lineStyle: { color: p.border, opacity: 0.7 } }, o.splitLine) });
   }
   function draw() {
-    var p = { text: v("--text", "#0f1b2d"), muted: v("--muted", "#5a6a80"), border: v("--border", "#dfe5ee"), surface: v("--surface", "#ffffff"),
-              series: [v("--accent", "#0f7c86"), v("--gold", "#e09f3e"), v("--plus", "#6247c9"), v("--down", "#c2412d"), v("--up", "#12805c")] };
+    var p = { text: v("--text", "#e8e6e1"), muted: v("--muted", "#8e939a"), border: v("--border", "#2a2e34"), surface: v("--surface", "#15171a"),
+              series: [v("--accent", "#d4a64a"), v("--plus", "#79aee0"), v("--series-3", "#9b8cf0"), v("--down", "#ef6b5e"), v("--up", "#4cc38a")] };
     document.querySelectorAll("[data-chart]").forEach(function (el) {
       var o = JSON.parse(el.getAttribute("data-chart"));
       var t = Object.assign({}, o, { color: p.series, textStyle: { color: p.text, fontFamily: "inherit" }, xAxis: axis(o.xAxis, p), yAxis: axis(o.yAxis, p) });

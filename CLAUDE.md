@@ -25,7 +25,11 @@ until they approve. On 2026-10-21 they answered part of it (decision 0022): the 
 first. They are not incorporated and want to take payments through Whop: `docs/plan.md` §12 sets out what that means
 (Whop approval first; personal liability; tax residence still unknown). Price data: send the Bitstamp request, or use
 CoinMarketCap Startup instead (§12.2). A private clickable preview was published for them on 2026-10-21 with
-`web/scripts/export-static.mjs` (private claude.ai artifact; never share it publicly before a price licence).
+`web/scripts/export-static.mjs` (private claude.ai artifact; never share it publicly before a price licence). The
+owner lives in Australia and Janu in Sri Lanka (plan §12.1). They found Phase 0 "nowhere close" to the old MiniLizard
+terminal and asked about portfolio rebalancing: `docs/minilizard-gap.md` maps what comes back and what cannot, and
+plan §9 now puts the terminal's licensed parts in Phase 2 and an educational rebalancing lab in Phase 4. The site was
+redesigned the same day as a dark, dense terminal (IBM Plex, brass accent, ticker strip); keep that look.
 
 - Done: verified safety copy of the old Crypto repo; the platform, Bitstamp collector, three crypto models, website,
   weekly e-mail, CI and tier-leak suite ported, with every test passing locally and in CI; 30 public cross-checks pass

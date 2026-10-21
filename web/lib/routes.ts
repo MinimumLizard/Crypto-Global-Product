@@ -6,7 +6,7 @@ import type { ModelName } from "./registry";
 // preview in an e-mail), which its own leak test checks for every model.
 export const MODEL_ROUTES: Record<ModelName, { api: string[]; pages: string[] }> = {
   crypto_market: { api: ["/api/v1/crypto/market"], pages: ["/", "/crypto"] },
-  crypto_cycle: { api: ["/api/v1/crypto/cycle"], pages: ["/crypto", "/crypto/btc"] },
+  crypto_cycle: { api: ["/api/v1/crypto/cycle"], pages: ["/", "/crypto", "/crypto/btc"] },
   crypto_trend_bands: { api: ["/api/v1/crypto/trend-bands"], pages: ["/crypto/btc"] },
 };
 

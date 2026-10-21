@@ -1,5 +1,24 @@
 # Changelog
 
+## 2026-10-21 (later) — A terminal look, the MiniLizard map, the phases revised
+
+- **The site redesigned** after the owners said it looked "too AI-generated": dark by default (a light theme follows
+  the visitor's setting), IBM Plex Sans with Plex Mono for every number, a brass accent, square panels with a heading
+  row and a date chip, a ticker strip of every tracked asset's latest close under the header, today's UTC date, and
+  the current section marked in the navigation. The front page is now a "today" screen: a briefing written from the
+  day's closes (facts only), every asset in one table with 90-day trend lines, bitcoin's history, and bitcoin's long
+  averages (Charts tier; free visitors see them a week late). Manrope removed; Plex is under the SIL Open Font
+  Licence (`web/app/fonts/IBM-Plex-OFL.txt`). Chart colours no longer repeat the accent as the second series.
+- The front page now shows `crypto_cycle`, so the tier-leak suite checks `/` for it too (`web/lib/routes.ts`).
+- **`docs/minilizard-gap.md`**: every part of the old MiniLizard terminal mapped to what comes back, reframed, cannot
+  come back (and which hard rule stops it), or needs paid data (with prices); three versions of portfolio rebalancing
+  and their legal weight.
+- **Plan §9 revised**: Phase 1 foundations (accounts through Whop, staging behind a password, notes, e-mail),
+  Phase 2 the terminal's licensed parts, launch gate, Phase 3 paid-data sections, Phase 4 the rebalancing lab.
+  Plan §12.1 records where the owners live and how Whop enforces its rules.
+- The private preview republished with the new look (same link). Checks: Python 114 passed + 2 skipped, web unit 58,
+  type check, build, tier-leak 28, copy lint clean.
+
 ## 2026-10-21 — The owners' first answers
 
 - **Name: Cointrigue**; tier names (Free, Charts, Research, Research + Calls) and prices approved and shown on the plans
