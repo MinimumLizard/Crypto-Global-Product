@@ -81,34 +81,8 @@
     "averagesExplain": "These averages are for {date}, when bitcoin closed at {price}. An average describes where the price has been. It does not say where the price is going.",
     "averagesLearn": "Lesson: moving averages",
     "pathTitle": "Learn the basics",
-    "pathSub": "Six short lessons, in order. Each one explains an idea you will see in the charts on this site.",
+    "pathSub": "Ten short lessons for anyone new to crypto, in order. Here are the first six.",
     "pathAll": "All lessons",
-    "lesson": {
-      "drawdown": {
-        "title": "How far from the top? Drawdowns",
-        "body": "How to read the gap between today's price and the highest price so far."
-      },
-      "volatility": {
-        "title": "How bumpy is the ride? Volatility",
-        "body": "What it means when a price swings a lot from day to day, and how that is measured."
-      },
-      "movingAverage": {
-        "title": "Smoothing out the noise: moving averages",
-        "body": "Why averages over weeks or years can make a long price history easier to read."
-      },
-      "logScale": {
-        "title": "Reading long charts: log scales",
-        "body": "Why charts of bitcoin's whole history go up in steps of ten."
-      },
-      "halving": {
-        "title": "Bitcoin's halvings",
-        "body": "What happens to new bitcoin roughly every four years, in plain terms."
-      },
-      "marketCap": {
-        "title": "What “market cap” means",
-        "body": "How the size of a coin is measured, and what that number leaves out."
-      }
-    },
     "labTag": "Coming later",
     "labTitle": "The rebalancing lab",
     "labBody": "Choose a pretend basket of coins and a simple rule, such as resetting the mix every three months, then see how that basket would have behaved on past prices compared with leaving it alone. A hands-on way to learn how rebalancing works, with no real money and no suggestions.",
@@ -232,7 +206,7 @@
     }
   },
   "learn": {
-    "title": "Learn the basics",
+    "title": "Learn",
     "intro": "Short, plain-English lessons on the ideas behind every chart on this site. Start at the top, or jump straight to a term.",
     "terms": {
       "movingAverage": {
@@ -281,7 +255,8 @@
         "long": "1.5 means the price is 50% above its 200-day average; 0.8 means 20% below. It describes how far the price has moved from its recent average, nothing more."
       }
     },
-    "lessonN": "Lesson {n}"
+    "lessonN": "Lesson {n}",
+    "glossaryTitle": "Terms used in the charts"
   },
   "feedback": {
     "title": "Tell us what you think",
@@ -1021,5 +996,317 @@
         "read": "Needs a display licence."
       }
     }
+  },
+  "basics": {
+    "title": "Crypto basics",
+    "intro": "Ten short lessons for anyone new to crypto. Plain explanations, no jargon left unexplained, and nothing that tells you what to do with your money.",
+    "lesson": "Lesson {n}",
+    "minutes": "{n} min read",
+    "points": "Key points",
+    "next": "Next lesson",
+    "back": "All lessons",
+    "lessons": {
+      "what-is-bitcoin": {
+        "title": "What bitcoin is",
+        "summary": "A form of money that no company or government runs, and why that matters.",
+        "minutes": 4,
+        "sections": [
+          {
+            "heading": "The short version",
+            "paragraphs": [
+              "Bitcoin is digital money that works without a bank in the middle. It started in January 2009, from a paper published the year before under the name Satoshi Nakamoto, whose identity is still unknown.",
+              "Instead of one company keeping the records, thousands of computers around the world each keep a full copy of every bitcoin transaction ever made, and agree on which new transactions to add. Anyone can run one of these computers, and anyone can check the record."
+            ]
+          },
+          {
+            "heading": "What makes it different",
+            "paragraphs": [
+              "Its supply is fixed by its rules: just under 21 million bitcoin will ever exist, released on a schedule that halves roughly every four years. No one can decide to create more.",
+              "Bitcoin can be sent to anyone in the world without asking permission, and once a payment is confirmed it cannot be reversed. That is useful, and it is also why mistakes and scams in crypto are so costly."
+            ]
+          },
+          {
+            "heading": "What it is not",
+            "paragraphs": [
+              "Bitcoin is not issued or backed by a government, and in most countries it is not protected the way bank deposits are. Its price is set only by what people pay for it at any moment, which is why it moves so much."
+            ]
+          }
+        ],
+        "points": [
+          "Bitcoin is digital money run by a network of computers, not by a company.",
+          "Its supply is capped at just under 21 million, released on a fixed schedule.",
+          "Payments cannot be reversed, and coins are not protected like bank deposits."
+        ]
+      },
+      "what-is-a-blockchain": {
+        "title": "What a blockchain is",
+        "summary": "The public record behind bitcoin: blocks, miners and why the record is hard to change.",
+        "minutes": 5,
+        "sections": [
+          {
+            "heading": "A shared record",
+            "paragraphs": [
+              "A blockchain is a list of transactions grouped into blocks, each block linked to the one before it. Every computer in the network keeps the same list, so there is no single copy to alter or lose."
+            ]
+          },
+          {
+            "heading": "How new blocks are added",
+            "paragraphs": [
+              "In bitcoin, new blocks are added by miners: computers that compete to solve a puzzle that takes a great deal of computing work. The first to solve it adds the next block and receives newly created bitcoin plus the fees paid by the transactions in it. A block is added about every ten minutes, and the puzzle's difficulty adjusts every 2,016 blocks to keep that pace.",
+              "Because each block depends on the one before, changing an old transaction would mean redoing the work for that block and every block after it, faster than the rest of the network. That is what makes the record so hard to rewrite."
+            ]
+          },
+          {
+            "heading": "Why it matters here",
+            "paragraphs": [
+              "The record is public. Our charts of bitcoin's supply, issuance and mining come straight from it: we download every block's header from the network and check each one ourselves. Nobody owns that record."
+            ]
+          }
+        ],
+        "points": [
+          "A blockchain is a shared, linked list of transactions kept by many computers.",
+          "Miners add a block about every ten minutes by doing costly computing work.",
+          "The record is public and very hard to change."
+        ]
+      },
+      "keys-and-wallets": {
+        "title": "Keys, wallets and keeping coins safe",
+        "summary": "Who really controls crypto, what a seed phrase is, and the most common ways people lose coins.",
+        "minutes": 6,
+        "sections": [
+          {
+            "heading": "Keys, not accounts",
+            "paragraphs": [
+              "Crypto is controlled by private keys: long secret numbers that let their owner move coins. Whoever has the key controls the coins. There is no bank to call and no password reset.",
+              "A wallet is software or a small device that stores keys and signs payments. Most wallets show a seed phrase (usually 12 or 24 words) when they are set up; the seed phrase can recreate every key in the wallet."
+            ]
+          },
+          {
+            "heading": "Two ways to keep crypto",
+            "paragraphs": [
+              "Some people leave coins with an exchange or app, which keeps the keys for them (custody). That is convenient, but the coins are only as safe as that company: exchanges have collapsed or been hacked, including Mt. Gox in 2014 and FTX in 2022, and customers lost money.",
+              "Others keep their own keys in a wallet they control (self-custody). That removes the company risk but puts all the responsibility on the owner: a lost seed phrase means lost coins, and anyone who sees it can take them."
+            ]
+          },
+          {
+            "heading": "Habits that prevent losses",
+            "paragraphs": [
+              "Never type a seed phrase into a website, message or form, and never share it with anyone, including someone claiming to be support staff. Keep it offline, written down, somewhere safe. Check a payment address carefully before sending: payments cannot be reversed."
+            ]
+          }
+        ],
+        "points": [
+          "Whoever has the private key controls the coins.",
+          "A seed phrase can recreate a wallet; anyone who sees it can take everything.",
+          "Leaving coins with a company carries that company's risk; keeping them yourself puts the responsibility on you."
+        ]
+      },
+      "exchanges": {
+        "title": "What exchanges do",
+        "summary": "How crypto changes hands, what an exchange actually is, and the risks that come with one.",
+        "minutes": 5,
+        "sections": [
+          {
+            "heading": "Where prices come from",
+            "paragraphs": [
+              "Most crypto trading happens on exchanges: companies that match people who want to swap crypto for dollars (or other coins) and the other way round. The price you see quoted is simply the last price at which a trade happened there. Different exchanges show slightly different prices.",
+              "This is also why price data has owners: each exchange keeps its own record of the trades it matched, and sets the terms on which others may use it."
+            ]
+          },
+          {
+            "heading": "What to understand about an exchange",
+            "paragraphs": [
+              "An exchange usually keeps its customers' coins and money, so its safety, honesty and regulation matter. In Australia, exchanges must be registered with AUSTRAC; other countries have their own rules, and some have none. Fees, the spread between quoted prices, and withdrawal limits all differ.",
+              "Decentralised exchanges also exist: programs running on a blockchain that let people swap coins directly from their own wallets. They have no company keeping funds, but they carry their own risks, such as faulty code and fake tokens."
+            ]
+          },
+          {
+            "heading": "This site and exchanges",
+            "paragraphs": [
+              "We do not offer, promote or link to any exchange, and nothing here is a suggestion to trade. This lesson explains how the market works so that the charts make sense."
+            ]
+          }
+        ],
+        "points": [
+          "An exchange matches trades; a quoted price is the last trade on one venue.",
+          "Exchanges usually keep customers' funds, so regulation and safety matter.",
+          "Decentralised exchanges remove the company but add other risks."
+        ]
+      },
+      "stablecoins": {
+        "title": "Stablecoins",
+        "summary": "Coins designed to stay at one dollar, how they try to do it, and what can go wrong.",
+        "minutes": 4,
+        "sections": [
+          {
+            "heading": "What they are",
+            "paragraphs": [
+              "A stablecoin is a crypto token meant to keep a steady value, usually one US dollar. The largest, such as USDT (Tether) and USDC, are issued by companies that say they keep cash and short-term government bonds to back every token.",
+              "They are used inside crypto markets as a dollar substitute: moving between coins without leaving the crypto world, or sending dollars across borders."
+            ]
+          },
+          {
+            "heading": "The risks",
+            "paragraphs": [
+              "A stablecoin is only as good as what backs it and the company behind it. Some have briefly traded below a dollar when people doubted their reserves. Others, backed only by other crypto or by an algorithm, have collapsed entirely: TerraUSD lost almost all its value in May 2022.",
+              "Stablecoins are not bank deposits, and in most countries they are not protected the same way."
+            ]
+          }
+        ],
+        "points": [
+          "Stablecoins aim to stay worth one dollar.",
+          "The large ones are backed by reserves held by a company.",
+          "Their value depends on that backing; some have failed."
+        ]
+      },
+      "scams": {
+        "title": "Scams and red flags",
+        "summary": "The tricks that cost people the most, and the warning signs they share.",
+        "minutes": 6,
+        "sections": [
+          {
+            "heading": "Why crypto attracts scams",
+            "paragraphs": [
+              "Payments cannot be reversed, accounts are easy to create, and prices make headlines. Scammers use all three. Regulators such as ASIC (in Australia, through Moneysmart) and the US FTC publish warnings because losses are large and rising."
+            ]
+          },
+          {
+            "heading": "Common scams",
+            "paragraphs": [
+              "Investment platforms that show large, steady profits on a dashboard but never let you withdraw; often found through social media or dating apps. Impersonation: fake support staff, fake celebrities and fake government officials asking for coins or a seed phrase. Giveaways that promise to send back double what you send. Pump-and-dump schemes and newly created tokens whose creators cash out once others have paid in."
+            ]
+          },
+          {
+            "heading": "Red flags",
+            "paragraphs": [
+              "Promises of high returns with little or no risk. Pressure to act quickly or keep it secret. Requests for your seed phrase, remote access to your computer, or payment in crypto. A website or app you found through an unsolicited message. Anyone who contacts you first offering to help with crypto."
+            ]
+          },
+          {
+            "heading": "If something seems wrong",
+            "paragraphs": [
+              "Stop sending money. Report it: in Australia to Scamwatch and ReportCyber, elsewhere to your national consumer or police agency. Be wary of recovery services that promise to get the money back for a fee; many are a second scam."
+            ]
+          }
+        ],
+        "points": [
+          "No legitimate service asks for your seed phrase.",
+          "Returns described as high and risk-free are a warning sign, not an opportunity.",
+          "Payments in crypto cannot be reversed, so pause before sending."
+        ]
+      },
+      "volatility": {
+        "title": "Volatility and risk",
+        "summary": "Why crypto prices swing so much, and how large past falls have been.",
+        "minutes": 5,
+        "sections": [
+          {
+            "heading": "How big the swings are",
+            "paragraphs": [
+              "Crypto prices move far more than most shares or currencies. Bitcoin's yearly volatility has often been several times that of a broad stock index, and smaller coins swing more still. Our volatility chart shows how this has changed over time."
+            ]
+          },
+          {
+            "heading": "Falls from the top",
+            "paragraphs": [
+              "Bitcoin has fallen by more than 70% from a previous high several times, and other coins have fallen further and some never recovered. The drawdown chart shows every fall since our data begins.",
+              "A past recovery is history, not a promise. Many coins that were among the largest a few years ago have since lost almost all their value."
+            ]
+          },
+          {
+            "heading": "Why it moves",
+            "paragraphs": [
+              "Crypto has no earnings or interest to anchor a price, so its price reflects what people expect and how much money is flowing in or out. News, regulation, interest rates and the mood of other markets all play a part."
+            ]
+          }
+        ],
+        "points": [
+          "Crypto prices swing far more than most other assets.",
+          "Falls of 70% or more from a high have happened repeatedly.",
+          "Past recoveries say nothing certain about the future."
+        ]
+      },
+      "reading-charts": {
+        "title": "Reading a price chart",
+        "summary": "Linear and log scales, averages, and the traps in a long chart.",
+        "minutes": 5,
+        "sections": [
+          {
+            "heading": "Two kinds of scale",
+            "paragraphs": [
+              "On a normal (linear) chart, each step up the side adds the same amount. On a logarithmic chart, each step multiplies by the same amount: $10, $100, $1,000. For a price that has grown many thousands of times, a log chart is the only way to see the early years at all, and it shows a doubling from $10 to $20 as the same height as one from $10,000 to $20,000."
+            ]
+          },
+          {
+            "heading": "Averages",
+            "paragraphs": [
+              "A moving average is the average closing price over a recent stretch, recalculated each day. It smooths out noise and makes a trend easier to see, but it always lags behind the price."
+            ]
+          },
+          {
+            "heading": "Traps",
+            "paragraphs": [
+              "The start and end dates of a chart change the story it tells. Patterns that look obvious afterwards were rarely clear at the time. And a line on a chart is a description of the past: none of our charts says what a price will do next."
+            ]
+          }
+        ],
+        "points": [
+          "Log charts show percentage changes; linear charts show amounts.",
+          "Averages smooth the price and always lag it.",
+          "Every chart describes the past, not the future."
+        ]
+      },
+      "supply-and-halvings": {
+        "title": "Bitcoin's supply and the halvings",
+        "summary": "How new bitcoin are created, why the amount halves every four years, and when the next halving is due.",
+        "minutes": 4,
+        "sections": [
+          {
+            "heading": "The schedule",
+            "paragraphs": [
+              "Every new block creates new bitcoin for the miner who found it. At the start this was 50 bitcoin per block. Every 210,000 blocks (about four years) the amount halves: 25 in 2012, 12.5 in 2016, 6.25 in 2020 and 3.125 in 2024. The halvings continue until about the year 2140, when the total reaches just under 21 million."
+            ]
+          },
+          {
+            "heading": "What it means",
+            "paragraphs": [
+              "Each halving cuts the flow of new coins in half overnight, so the yearly growth of the supply keeps shrinking. Over 19.9 million bitcoin already exist; the remaining coins will be created more and more slowly.",
+              "Our network charts track the supply, the daily issuance and an estimated date for the next halving, read directly from the Bitcoin network."
+            ]
+          }
+        ],
+        "points": [
+          "New bitcoin are created with each block, on a fixed schedule.",
+          "The amount halves every 210,000 blocks, about every four years.",
+          "The total will never exceed 21 million."
+        ]
+      },
+      "market-cap": {
+        "title": "Market capitalisation",
+        "summary": "Why a coin's price alone tells you little, and what its market value adds.",
+        "minutes": 4,
+        "sections": [
+          {
+            "heading": "Price times supply",
+            "paragraphs": [
+              "A coin's market capitalisation is its price multiplied by the number of coins in circulation. A coin priced at $0.10 with 100 billion coins is worth more in total than one priced at $1,000 with a million coins.",
+              "That is why a low price per coin does not make a coin small, and why comparing coins by price alone is misleading."
+            ]
+          },
+          {
+            "heading": "The limits",
+            "paragraphs": [
+              "Circulating supply figures for smaller coins can be uncertain, some coins are locked up or held by their creators, and a market value is only what the last trade implies: a large trade would usually move the price. Market capitalisation is a useful size measure, not a valuation."
+            ]
+          }
+        ],
+        "points": [
+          "Market capitalisation is price times circulating supply.",
+          "A low price per coin does not mean a small or small coin by value.",
+          "Market value is a size measure, not a fair value."
+        ]
+      }
+    },
+    "see": "See it on the site:"
   }
 }

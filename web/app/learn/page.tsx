@@ -1,6 +1,9 @@
 import { getTranslations } from "next-intl/server";
 
+import Link from "next/link";
+
 import { GLOSSARY } from "@/lib/glossary";
+import { LESSONS } from "@/lib/lessons";
 
 export async function generateMetadata() {
   const t = await getTranslations();
@@ -12,7 +15,19 @@ export default async function LearnPage() {
   const t = await getTranslations();
   return (
     <>
-      <h1>{t("learn.title")}</h1>
+      <h1>{t("basics.title")}</h1>
+      <p className="lead">{t("basics.intro")}</p>
+      <ol className="steps" style={{ marginBottom: 40 }}>
+        {LESSONS.map((l) => (
+          <li key={l.slug}>
+            <Link href={`/learn/basics/${l.slug}`}>
+              <strong>{t(`basics.lessons.${l.slug}.title` as never)}</strong>
+              <span>{t(`basics.lessons.${l.slug}.summary` as never)}</span>
+            </Link>
+          </li>
+        ))}
+      </ol>
+      <h2>{t("learn.glossaryTitle")}</h2>
       <p className="lead">{t("learn.intro")}</p>
       <div className="letters" aria-label={t("learn.title")}>
         {GLOSSARY.map((id) => (

@@ -12,12 +12,11 @@ import { lineOption, weeklyPoints } from "@/lib/charts";
 import { CRYPTO_ASSETS, assetByPair, price } from "@/lib/crypto-display";
 import { type MarketDay, cryptoCycle, cryptoHistory, cryptoOverview } from "@/lib/data/crypto";
 import { date, pct, percent, tone } from "@/lib/format";
+import { LESSONS } from "@/lib/lessons";
 import { getViewer } from "@/lib/viewer";
 
 export const dynamic = "force-dynamic";
 
-// The lessons the front page walks a beginner through, in order (Learn page anchors; text in messages).
-const PATH = ["drawdown", "volatility", "movingAverage", "logScale", "halving", "marketCap"] as const;
 
 // The front page, written for everyday investors: what the site is, the day in a few plain sentences, today's
 // prices, one chart explained, bitcoin's long averages (Charts tier; free visitors see them a week late) and a path
@@ -197,11 +196,11 @@ export default async function Home() {
       </div>
       <p className="section-sub">{t("home.pathSub")}</p>
       <ol className="steps">
-        {PATH.map((id) => (
-          <li key={id}>
-            <Link href={`/learn#${id}`}>
-              <strong>{t(`home.lesson.${id}.title`)}</strong>
-              <span>{t(`home.lesson.${id}.body`)}</span>
+        {LESSONS.slice(0, 6).map((l) => (
+          <li key={l.slug}>
+            <Link href={`/learn/basics/${l.slug}`}>
+              <strong>{t(`basics.lessons.${l.slug}.title` as never)}</strong>
+              <span>{t(`basics.lessons.${l.slug}.summary` as never)}</span>
             </Link>
           </li>
         ))}

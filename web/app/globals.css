@@ -329,3 +329,10 @@ a.chart-card.planned { background: var(--surface-2); box-shadow: none; }
 .explain-grid { margin-top: var(--s4); }
 .explain-grid h2 { font-size: 1.1rem; }
 .explain-grid p { margin: 0; color: var(--muted); font-size: 0.95rem; }
+
+/* A lesson of the basics course: a readable column. */
+.lesson { max-width: 72ch; }
+.lesson .kicker { color: var(--accent); font-size: 0.85rem; font-weight: 600; }
+.lesson h2 { font-size: 1.3rem; margin-top: var(--s5); }
+.lesson p { font-size: 1.05rem; line-height: 1.7; }
+.explain ul { margin: var(--s1) 0 0; padding-left: 1.2em; }
