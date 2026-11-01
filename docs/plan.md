@@ -280,6 +280,11 @@ Until you choose, the site uses the placeholder "Research Terminal" and a neutra
 
 ## 9. Order of work (each phase ends with a stop for your approval)
 
+*Progress 2026-11-01:* at the owners' request the comprehensive chart library was started early (Phase 2 work
+alongside Phase 1): 30 live charts and 21 planned, the Bitcoin network read directly from the network, and a free
+Crypto basics course (`docs/charts.md`; CHANGELOG). Phase 1's accounts and Whop wiring wait for the owners'
+accounts.
+
 *Revised 2026-10-21* after the owners' answers: payments through Whop rather than Stripe (§12.1), crypto first
 (decision 0022), the MiniLizard terminal's licensed parts rebuilt (`docs/minilizard-gap.md`), and a rebalancing lab
 after the lawyer's view.
