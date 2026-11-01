@@ -98,8 +98,27 @@ class SilentPeer(FakePeer):
 def test_a_silent_peer_is_replaced(conn, store, monkeypatch):
     from data_platform.core.collector import Context
 
-    peers = iter([SilentPeer("198.51.100.9"), FakePeer("198.51.100.1"), FakePeer("198.51.100.2")])
+    peers = iter([SilentPeer("198.51.100.9"), FakePeer("198.51.100.1"), SilentPeer("198.51.100.8"), FakePeer("198.51.100.2")])
     monkeypatch.setattr(col.BitcoinNetworkCollector, "connect", lambda self, exclude=frozenset(), min_height=0: next(peers))
     monkeypatch.setattr(col, "CONFIRMATIONS", 0)
     result = col.BitcoinNetworkCollector(Context(conn, store, http=None)).collect()
     assert result.rows_added == 2
+
+
+class OtherChainPeer(FakePeer):
+    """Answers the confirmation with a different block."""
+    def headers_after(self, locator):
+        return headers_message(BLOCK1)
+
+
+@pytest.mark.db
+def test_a_disagreeing_peer_stops_the_run(conn, store, monkeypatch):
+    from data_platform.core.collector import Context
+
+    peers = iter([FakePeer("198.51.100.1"), OtherChainPeer("198.51.100.7")])
+    monkeypatch.setattr(col.BitcoinNetworkCollector, "connect", lambda self, exclude=frozenset(), min_height=0: next(peers))
+    monkeypatch.setattr(col, "CONFIRMATIONS", 0)
+    with pytest.raises(RuntimeError, match="disagrees"):
+        col.BitcoinNetworkCollector(Context(conn, store, http=None)).collect()
+    conn.rollback()
+    assert conn.execute("select count(*) n from bitcoin.block_headers where height > 0").fetchone()["n"] == 0

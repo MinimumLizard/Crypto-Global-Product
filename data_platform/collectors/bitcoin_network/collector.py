@@ -116,13 +116,24 @@ class BitcoinNetworkCollector(Collector):
         # a second, independent peer must have the same block at the newest height we are about to store
         newest = next(r for r in all_rows if r["height"] == keep_to)
         before = next((r for r in all_rows if r["height"] == keep_to - 1), None)
-        check = self.connect(exclude={peer.host, *tried}, min_height=keep_to)
-        try:
-            reply = parse.parse_headers_message(check.headers_after([before["hash"] if before else bytes(tip["hash"])]))
-        finally:
-            check.close()
-        if not reply or parse.block_hash(reply[0]) != newest["hash"]:
-            raise RuntimeError(f"a second peer ({check.host}) disagrees about block {keep_to}; nothing stored")
+        # A silent peer is replaced (up to five); a peer that answers with a different block stops the run.
+        locator = before["hash"] if before else bytes(tip["hash"])
+        asked = {peer.host, *tried}
+        check = None
+        for _ in range(5):
+            check = self.connect(exclude=asked, min_height=keep_to)
+            asked.add(check.host)
+            try:
+                reply = parse.parse_headers_message(check.headers_after([locator]))
+            except (OSError, p2p.P2PError):
+                continue
+            finally:
+                check.close()
+            if not reply or parse.block_hash(reply[0]) != newest["hash"]:
+                raise RuntimeError(f"a second peer ({check.host}) disagrees about block {keep_to}; nothing stored")
+            break
+        else:
+            raise RuntimeError(f"no second peer answered to confirm block {keep_to}; nothing stored")
 
         added = 0
         for fetch_id, sha, rows in batches:
