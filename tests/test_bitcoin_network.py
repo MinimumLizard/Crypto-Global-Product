@@ -48,7 +48,9 @@ def test_message_framing():
     assert p2p.varint(0xFC) == b"\xfc" and p2p.varint(0xFD) == b"\xfd\xfd\x00" and p2p.varint(70000) == b"\xfe\x70\x11\x01\x00"
     gh = p2p.getheaders_payload([parse.block_hash(parse.GENESIS_HEADER)])
     assert len(gh) == 4 + 1 + 32 + 32
-    assert len(p2p.version_payload(now=0, nonce=1)) == 4 + 8 + 8 + 26 + 26 + 8 + 1 + len(p2p.USER_AGENT) + 4 + 1
+    v = p2p.version_payload(now=0, nonce=1)
+    assert len(v) == 4 + 8 + 8 + 26 + 26 + 8 + 1 + len(p2p.USER_AGENT) + 4 + 1
+    assert p2p.start_height(v) == 0
 
 
 class FakePeer:
@@ -71,7 +73,7 @@ def test_a_run_stores_verified_headers_once(conn, store, monkeypatch):
     from data_platform.core.collector import Context
 
     hosts = iter(["198.51.100.1", "198.51.100.2", "198.51.100.3", "198.51.100.4"])
-    monkeypatch.setattr(col.BitcoinNetworkCollector, "connect", lambda self, exclude=frozenset(): FakePeer(next(hosts)))
+    monkeypatch.setattr(col.BitcoinNetworkCollector, "connect", lambda self, exclude=frozenset(), min_height=0: FakePeer(next(hosts)))
     monkeypatch.setattr(col, "CONFIRMATIONS", 0)
     c = col.BitcoinNetworkCollector(Context(conn, store, http=None))
     result = c.collect()
@@ -84,3 +86,20 @@ def test_a_run_stores_verified_headers_once(conn, store, monkeypatch):
     assert again.rows_added == 0
     with pytest.raises(Exception):
         conn.execute("update bitcoin.block_headers set bits = 1 where height = 1")     # append-only
+
+
+class SilentPeer(FakePeer):
+    """Stops answering, as a peer still in its own initial sync does."""
+    def headers_after(self, locator):
+        raise TimeoutError("timed out")
+
+
+@pytest.mark.db
+def test_a_silent_peer_is_replaced(conn, store, monkeypatch):
+    from data_platform.core.collector import Context
+
+    peers = iter([SilentPeer("198.51.100.9"), FakePeer("198.51.100.1"), FakePeer("198.51.100.2")])
+    monkeypatch.setattr(col.BitcoinNetworkCollector, "connect", lambda self, exclude=frozenset(), min_height=0: next(peers))
+    monkeypatch.setattr(col, "CONFIRMATIONS", 0)
+    result = col.BitcoinNetworkCollector(Context(conn, store, http=None)).collect()
+    assert result.rows_added == 2

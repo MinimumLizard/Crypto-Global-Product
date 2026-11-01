@@ -91,9 +91,19 @@ def peer_addresses(rng: random.Random | None = None) -> list[str]:
     return out
 
 
+def start_height(version: bytes) -> int:
+    """The best block height a peer reports in its version message."""
+    from .parse import read_varint
+
+    i = 4 + 8 + 8 + 26 + 26 + 8               # version, services, time, two addresses, nonce
+    length, i = read_varint(version, i)        # user agent
+    return struct.unpack_from("<i", version, i + length)[0]
+
+
 class Peer:
     def __init__(self, host: str, timeout: float = 20.0):
         self.host = host
+        self.height = -1
         self.sock = socket.create_connection((host, PORT), timeout=timeout)
 
     def close(self) -> None:
@@ -109,6 +119,7 @@ class Peer:
             command, payload = read_message(self.sock)
             if command == "version":
                 got_version = True
+                self.height = start_height(payload)
                 self.send("verack")
             elif command == "verack":
                 got_verack = True

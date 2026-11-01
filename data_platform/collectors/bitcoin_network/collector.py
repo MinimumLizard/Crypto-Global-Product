@@ -44,7 +44,8 @@ class BitcoinNetworkCollector(Collector):
         self.fetches += 1
         return fetch_id, sha
 
-    def connect(self, exclude: set[str] = frozenset()) -> p2p.Peer:
+    def connect(self, exclude: set[str] = frozenset(), min_height: int = 0) -> p2p.Peer:
+        """A peer that has finished its own sync: one still syncing reports a low height and ignores requests."""
         errors = []
         for host in p2p.peer_addresses():
             if host in exclude:
@@ -52,12 +53,16 @@ class BitcoinNetworkCollector(Collector):
             try:
                 peer = p2p.Peer(host)
                 peer.handshake()
+                if peer.height < min_height:
+                    peer.close()
+                    errors.append(f"{host}: behind (height {peer.height})")
+                    continue
                 return peer
             except OSError as exc:
                 errors.append(f"{host}: {type(exc).__name__}")
             except p2p.P2PError as exc:
                 errors.append(f"{host}: {exc}")
-            if len(errors) >= 12:
+            if len(errors) >= 20:
                 break
         raise RuntimeError("no Bitcoin peer answered: " + "; ".join(errors[:6]))
 
@@ -73,12 +78,24 @@ class BitcoinNetworkCollector(Collector):
             self.ctx.conn.commit()
             tip = {"height": 0, "hash": g["hash"], "bits": g["bits"]}
 
-        peer = self.connect()
+        batches = []          # (fetch_id, sha256, rows)
+        height, prev_hash, prev_bits = tip["height"] + 1, bytes(tip["hash"]), tip["bits"]
+        tried: set[str] = set()
+        peer = self.connect(min_height=tip["height"])
+        messages = 0
         try:
-            batches = []          # (fetch_id, sha256, rows)
-            height, prev_hash, prev_bits = tip["height"] + 1, bytes(tip["hash"]), tip["bits"]
-            for _ in range(MAX_MESSAGES):
-                payload = peer.headers_after([prev_hash])
+            while messages < MAX_MESSAGES:
+                try:
+                    payload = peer.headers_after([prev_hash])
+                except (OSError, p2p.P2PError):
+                    # this peer stopped answering: carry on from the same block with another one
+                    tried.add(peer.host)
+                    peer.close()
+                    if len(tried) >= 5:
+                        raise
+                    peer = self.connect(exclude=tried, min_height=height - 1)
+                    continue
+                messages += 1
                 fetch_id, sha = self.archive(peer.host, prev_hash, payload)
                 rows = parse.validate_chain(parse.parse_headers_message(payload), height, prev_hash, prev_bits)
                 if not rows:
@@ -99,7 +116,7 @@ class BitcoinNetworkCollector(Collector):
         # a second, independent peer must have the same block at the newest height we are about to store
         newest = next(r for r in all_rows if r["height"] == keep_to)
         before = next((r for r in all_rows if r["height"] == keep_to - 1), None)
-        check = self.connect(exclude={peer.host})
+        check = self.connect(exclude={peer.host, *tried}, min_height=keep_to)
         try:
             reply = parse.parse_headers_message(check.headers_after([before["hash"] if before else bytes(tip["hash"])]))
         finally:

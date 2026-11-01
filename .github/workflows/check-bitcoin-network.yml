@@ -40,3 +40,13 @@ jobs:
           psql "$DATABASE_URL" -c "select count(*) headers, max(height), max(time) from bitcoin.block_headers"
           psql "$DATABASE_URL" -c "select series, round(value::numeric, 4) from models.btc_network_series where day = (select max(day) from models.btc_network_series) order by series"
           psql "$DATABASE_URL" -c "select day, round(value::numeric) supply from models.btc_network_series where series = 'supply' and day in ('2012-11-28', '2016-07-09', '2020-05-11', '2024-04-20')"
+      - name: Keep the raw messages for three days (they replay through the same checks into a development database)
+        run: |
+          psql "$DATABASE_URL" -c "\copy (select f.fetch_id, f.sha256, f.params->>'after' as after from ops.raw_fetches f where f.source_id = 'bitcoin_network' order by f.fetch_id) to 'fetches.csv' csv header"
+          tar czf headers-raw.tgz .raw fetches.csv
+          ls -la headers-raw.tgz
+      - uses: actions/upload-artifact@v4
+        with:
+          name: headers-raw
+          path: headers-raw.tgz
+          retention-days: 3
