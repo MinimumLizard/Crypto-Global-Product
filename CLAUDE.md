@@ -37,10 +37,20 @@ no data costs before revenue (plan §12.2). The free site can be published as pl
 (`export-static.mjs --public`, `.github/workflows/publish-site.yml`, which refuses while `launch_blockers()` is
 non-empty); GitHub Pages' terms forbid commercial sites.
 
+**2026-11-01:** the owners want the paid tier to be "hardcore quantitative analysis" in the spirit of the compared
+service's chart library (public definitions only, never its risk score, designs or names), the free tier to be
+education for first-time users, and only data free for commercial use (CoinMarketCap's free plan as a last resort).
+Built: the chart library (`/charts`, `web/lib/chart-catalogue.ts`: every chart, live or planned, tagged with its
+data's licence status), models `crypto_charts` and `btc_network`, the Bitcoin network collector (peer-to-peer, no
+terms), the Crypto basics course, and the password-protected GitHub Pages preview (decision 0024). What needs a
+licence and what is free: `docs/charts.md`. Next: macro from US agencies, market caps from CoinMarketCap's free plan
+(needs the owners' API key), on-chain once there is a node.
+
 - Done: verified safety copy of the old Crypto repo; the platform, Bitstamp collector, three crypto models, website,
   weekly e-mail, CI and tier-leak suite ported, with every test passing locally and in CI; 30 public cross-checks pass
   on Bitstamp's history; `docs/audit.md` (old Crypto tool); `docs/plan.md`.
-- Next (after approval): `docs/plan.md` §9, Phase 1 (notes publishing, accounts, Stripe, sending the e-mail, staging).
+- Next: `docs/charts.md` "Order of the remaining work"; Phase 1's accounts and Whop wiring when the owners have
+  created the accounts (`docs/plan.md` §9).
 - Launch blockers: Bitstamp's Data License Agreement (`sources.launch_blockers()`), the lawyer's view (plan §5),
   including whether to show the 0–1 "position between the fitted bands" at all.
 

@@ -178,3 +178,133 @@ alternative_me_fng:
     checked: 2026-10-18
     attribution: "Source: alternative.me Crypto Fear & Greed Index"
   datasets: []
+
+# --- Researched 2026-11-01 for the chart library (docs/charts.md) ------------------------------------------------
+
+mempool_space:
+  name: mempool.space public API (Bitcoin blocks)
+  homepage: https://mempool.space/
+  enabled: false
+  rights:
+    status: silent
+    evidence: >-
+      Terms of service (updated 2024-07-10) contain only warranty, liability, advertising and accelerator clauses;
+      nothing restricts the use of data. Rate limits apply. A fallback for block headers if peers cannot be reached.
+    url: https://mempool.space/terms-of-service
+    checked: 2026-11-01
+  datasets: []
+
+open_bitcoin_metrics:
+  name: Open Bitcoin Metrics v0.1.0 (Zenodo record 21156871)
+  homepage: https://zenodo.org/records/21156871
+  enabled: false
+  rights:
+    status: allowed
+    evidence: >-
+      "The CSV data and documentation are released under CC BY 4.0" (scripts MIT). Built from a full node:
+      coin days destroyed by age band, dormancy, liveliness, supply, issuance, fees, miner revenue, UTXO counts,
+      spent value by age band, hash rate and difficulty, 2009-01-03 to 2026-06-28. A one-off snapshot: kept current
+      only by re-running its scripts on our own node. No realised cap or MVRV (those need a price history).
+    url: https://zenodo.org/records/21156871
+    checked: 2026-11-01
+    attribution: "Open Bitcoin Metrics (CC BY 4.0)"
+  datasets: []
+
+us_treasury_fiscal_data:
+  name: US Treasury Fiscal Data API (Daily Treasury Statement, Treasury General Account)
+  homepage: https://fiscaldata.treasury.gov/
+  enabled: false
+  rights:
+    status: allowed
+    evidence: >-
+      "offered free, without restriction, and available to copy, adapt, redistribute, or otherwise use for
+      non-commercial or commercial purposes".
+    url: https://fiscaldata.treasury.gov/api-documentation/
+    checked: 2026-11-01
+    attribution: "Source: U.S. Department of the Treasury, Fiscal Data"
+  datasets: []
+
+us_treasury_yields:
+  name: US Treasury daily par yield curve
+  homepage: https://home.treasury.gov/resource-center/data-chart-center/interest-rates
+  enabled: false
+  rights:
+    status: allowed
+    evidence: >-
+      A work of the US Government: "Copyright protection under this title is not available for any work of the
+      United States Government" (17 U.S.C. 105). The site's own notice page could not be found (404).
+    url: https://home.treasury.gov/resource-center/data-chart-center/interest-rates
+    checked: 2026-11-01
+    attribution: "Source: U.S. Department of the Treasury"
+  datasets: []
+
+federal_reserve_board:
+  name: Federal Reserve Board Data Download Program (H.4.1 balance sheet, H.6 money stock, H.15 rates)
+  homepage: https://www.federalreserve.gov/datadownload/
+  enabled: false
+  rights:
+    status: allowed
+    evidence: >-
+      "information on Board's website is in the public domain and may be copied and distributed without
+      permission. Please cite to the Board". Items marked as third-party are excluded.
+    url: https://www.federalreserve.gov/disclaimer.htm
+    checked: 2026-11-01
+    attribution: "Source: Board of Governors of the Federal Reserve System"
+  datasets: []
+
+bls:
+  name: US Bureau of Labor Statistics public data API (CPI, unemployment)
+  homepage: https://www.bls.gov/developers/
+  enabled: false
+  rights:
+    status: allowed
+    evidence: >-
+      "everything that we publish ... is in the public domain ... we do ask that you cite the Bureau of Labor
+      Statistics". API terms require stating "BLS.gov cannot vouch for the data or analyses derived from these
+      data after the data have been retrieved from BLS.gov." Version 2 needs a free registration key.
+    url: https://www.bls.gov/opub/copyright-information.htm
+    checked: 2026-11-01
+    attribution: "Source: U.S. Bureau of Labor Statistics. BLS.gov cannot vouch for the data or analyses derived from these data after the data have been retrieved from BLS.gov."
+  datasets: []
+
+nyfed_markets:
+  name: New York Fed markets data (overnight reverse repo, SOFR)
+  homepage: https://markets.newyorkfed.org/
+  enabled: false
+  rights:
+    status: allowed
+    evidence: >-
+      "license ... to use, copy, and distribute Content for your personal or business purposes", with notices.
+      For the lawyer: "If you distribute the Content, you must make the Content available with the same
+      permissions ... You may not impose more restrictive terms", which may conflict with a paywall. The Fed's
+      H.4.1 also reports reverse repos, so this source is not needed for net liquidity.
+    url: https://www.newyorkfed.org/privacy/termsofuse
+    checked: 2026-11-01
+  datasets: []
+
+blockchain_com:
+  name: Blockchain.com charts and API (also redistributed as Nasdaq Data Link BCHAIN)
+  homepage: https://www.blockchain.com/explorer/charts
+  enabled: false
+  rights:
+    status: prohibited
+    evidence: >-
+      API terms (updated 2026-08-13): "You shall not commercialize (i.e., sell, rent, or lease), copy, store or
+      cache the Blockchain Content".
+    url: https://www.blockchain.com/legal/api-terms
+    checked: 2026-11-01
+  datasets: []
+
+chainlink_feeds:
+  name: Chainlink price feeds (read on-chain)
+  homepage: https://chain.link/
+  enabled: false
+  rights:
+    status: prohibited
+    evidence: >-
+      Chainlink Labs terms (v3.0, 12 May 2026): you will not "license, sell, resell, loan, retransmit, distribute,
+      redistribute ... any Data to any third party whether commercially or free of charge ... without the prior
+      consent of the third party providers". Feeds start in 2020 and 2021 anyway.
+    url: https://chainlinklabs.com/terms
+    checked: 2026-11-01
+  datasets: []

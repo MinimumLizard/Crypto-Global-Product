@@ -1,5 +1,29 @@
 # Changelog
 
+## 2026-11-01 — The chart library, the Bitcoin network, the basics course, a live preview
+
+- **Chart library** (`/charts`): 30 live charts and 21 planned, by topic, each tagged with the data it needs and
+  whether that data is free, needs a licence or is paid (`docs/charts.md`). Each chart page: the chart for any coin,
+  latest readings, what it shows, how it is calculated, how to read it and its limits, where its data comes from.
+- **New model `crypto_charts`** (Charts tier; migration 0006, long-form series): 350-day and two-year averages, two-
+  and four-year running returns, year to date and quarterly returns, RSI (daily and weekly), MACD, Bollinger bands,
+  one-year volatility, Sharpe and Sortino ratios, and price, correlation and beta against bitcoin. Tested against
+  hand calculations; 452,316 rows on Bitstamp's history in about 10 seconds; on new days every model only added
+  rows (no published row changed).
+- **The Bitcoin network, free**: a collector that speaks Bitcoin's peer-to-peer protocol, verifies every block
+  header (proof of work, links, difficulty rules), stores blocks six deep after a second peer agrees (migration
+  0007, append-only), and the `btc_network` model: supply, issuance, inflation, stock-to-flow, difficulty, hash
+  rate and ribbons, halving countdown, Puell multiple. A day is published only once Bitcoin's median-time rule
+  fixes it.
+- **Crypto basics**: a free ten-lesson course for first-time users (`/learn/basics/…`), now the front page's path.
+- **Live preview on GitHub Pages**, every page encrypted with the owners' password (decision 0024); waits for the
+  owners to turn on Pages and set `PREVIEW_PASSWORD`.
+- **Data research** (`docs/charts.md`, `config/sources.yaml`): no free source allows commercial display of a long
+  price history (cheapest: CoinMarketCap Startup, US$79/month); CoinMarketCap's free plan allows one year; the
+  Bitcoin network, US agencies' macro data and Open Bitcoin Metrics (CC BY 4.0) are free.
+- E-mail: the locked sections now name the Charts and Research plans; the weekly e-mail gains chart-library and
+  network sections. Checks: Python suite, web unit 74, type check, build, tier-leak 36, copy lint clean.
+
 ## 2026-10-21 (evening) — Phases 0 and 1 approved; blue and white for everyday investors; a free way to launch
 
 - **Phases 0 and 1 approved** (decision 0023). The terminal look was too technical for retail investors: the site
