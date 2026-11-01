@@ -35,7 +35,7 @@ mkdirSync(OUT, { recursive: true });
 
 const SEEDS = ["/", "/crypto", "/learn", "/plans", "/methods", "/about", "/feedback", "/email/crypto"];
 // the pages a Pro subscriber sees differently
-const proPage = (path) => path === "/" || path === "/email/crypto" || path === "/crypto" || path.startsWith("/crypto/");
+const proPage = (path) => path === "/" || path === "/email/crypto" || path === "/crypto" || path.startsWith("/crypto/") || path.startsWith("/charts/");
 const ECHARTS = "https://cdnjs.cloudflare.com/ajax/libs/echarts/6.0.0/echarts.min.js";
 const FONTS = "https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400..700&family=Source+Serif+4:opsz,wght@8..60,500..700&display=swap";
 

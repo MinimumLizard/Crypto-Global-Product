@@ -418,7 +418,7 @@ export async function chartBody(slug: string, ctx: Ctx): Promise<React.ReactNode
           <>
             <Chart label={L("supply")} option={lineOption([{ name: L("supply"), points: weekly(ln.supply ?? []) }], "BTC", { area: true })} />
             <h2>{L("inflation_365d")}</h2>
-            <Chart label={L("inflation_365d")} option={lineOption([{ name: L("inflation_365d"), points: percentOf(weekly(ln.inflation_365d ?? [])) }], "%", { logY: false, percentY: true })} />
+            <Chart label={L("inflation_365d")} option={lineOption([{ name: L("inflation_365d"), points: percentOf(weekly(ln.inflation_365d ?? [])) }], "%", { logY: true })} />
             <Readings t={t} day={day} rows={[[L("supply"), int(last(ln.supply))], [L("issuance"), num(last(ln.issuance), 2)], [L("inflation_365d"), pct(last(ln.inflation_365d)).replace("+", "")]]} />
           </>
         );
