@@ -44,3 +44,35 @@ export async function chartLatest(viewer: Viewer, pair: string, date?: string): 
     return { day, values: Object.fromEntries(rows.map((r) => [r.series, r.value])) };
   });
 }
+
+/** Some of the Bitcoin network's daily series (model btc_network), whole history, as [day, value] points. */
+export async function networkLines(viewer: Viewer, series: string[]): Promise<Result<{ day: string | null; lines: Record<string, Points> }>> {
+  return withModel(viewer, "btc_network", async (g) => {
+    const rows = await readOutput<{ series: string; day: string; value: number }>(g, "models.btc_network_series", {
+      columns: ["series", "day", "value"], where: "series = any(?)", params: [series], orderBy: "series, day",
+    });
+    const lines: Record<string, Points> = {};
+    let day: string | null = null;
+    for (const r of rows) {
+      (lines[r.series] ??= []).push([r.day, r.value]);
+      if (!day || r.day > day) day = r.day;
+    }
+    return { day, lines };
+  });
+}
+
+/** Every network series on the latest published day (or the latest on or before `date`). */
+export async function networkLatest(viewer: Viewer, date?: string): Promise<Result<{ day: string | null; values: Record<string, number> }>> {
+  return withModel(viewer, "btc_network", async (g) => {
+    const capped = cappedDate(g, date);
+    const last = await readOutput<{ day: string }>(g, "models.btc_network_series", {
+      columns: ["day"], where: capped ? "day <= ?" : undefined, params: capped ? [capped] : [], orderBy: "day desc", limit: 1,
+    });
+    const day = last[0]?.day ?? null;
+    if (!day) return { day: null, values: {} };
+    const rows = await readOutput<{ series: string; value: number }>(g, "models.btc_network_series", {
+      columns: ["series", "value"], where: "day = ?", params: [day], orderBy: "series",
+    });
+    return { day, values: Object.fromEntries(rows.map((r) => [r.series, r.value])) };
+  });
+}

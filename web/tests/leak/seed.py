@@ -77,6 +77,12 @@ def seed(conn) -> dict:
         for k, v in (("rsi_14d", 52.5), ("rsi_14w", 57.25), ("sharpe_365d", 0.8125), ("sortino_365d", 1.0625),
                      ("roi_730d", 0.25), ("roi_1460d", 2.5), ("macd", 120.5), ("macd_signal", 100.25), ("macd_hist", 20.25))])
 
+    put("btc_network", "models.btc_network_series", [
+        {"series": "supply", "day": d, "value": v} for d, v in ((OLD, 19911111.5), (NEW, 19912345.67))] + [
+        {"series": k, "day": NEW, "value": v}
+        for k, v in (("issuance", 450.0), ("inflation_365d", 0.0083), ("blocks_to_halving", 75125.0), ("height", 974875.0),
+                     ("days_to_halving", 521.7), ("hash_rate_7d", 1050.5), ("difficulty", 1.5e14))])
+
     # A reference version beside the current one, and an unpublished statistic: shown to nobody.
     put("crypto_market", "models.crypto_market_daily", [{"pair": "btcusd", **market(NEW, 97979.79)}], version="0.9.0")
     put("crypto_cycle", "models.crypto_cycle_daily", [
@@ -96,6 +102,8 @@ def seed(conn) -> dict:
                              "old": {"api": ["33333.19", "61616.11"], "page": ["$33,333.19"]}},
             "crypto_trend_bands": {"new": {"api": ["123456.78"], "page": ["$123,456.78"]},
                                   "old": {"api": ["98765.43"], "page": ["$98,765.43"]}},
+            "btc_network": {"new": {"api": ["19912345.67"], "page": ["19,912,346"]},
+                            "old": {"api": ["19911111.5"], "page": ["19,911,112"]}},
             "crypto_charts": {"new": {"api": ["45454.21"], "page": ["$45,454.21"]},
                               "old": {"api": ["43434.19"], "page": ["$43,434.19"]}},
         },
@@ -109,7 +117,8 @@ def seed(conn) -> dict:
         "email": {"crypto_market": ["$77,777.31"],
                   "crypto_cycle": ["$55,555.17", "$44,444.13", "$33,333.19"],
                   "crypto_trend_bands": ["$123,456.78", "$98,765.43"],
-                  "crypto_charts": ["$45,454.21", "$43,434.19"]},
+                  "crypto_charts": ["$45,454.21", "$43,434.19"],
+                  "btc_network": ["19,912,346", "19,911,112"]},
         # reference versions and unpublished statistics: never shown to anyone, raw or formatted
         "never": ["97979.79", "$97,979.79", "96969.69", "$96,969.69", "31.4159", "31.42"],
     }

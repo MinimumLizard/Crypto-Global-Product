@@ -14,10 +14,11 @@ from ..core.collector import run_collector
 
 
 def registry():
+    from ..collectors.bitcoin_network.collector import BitcoinNetworkCollector
     from ..collectors.bitstamp.collector import BitstampCollector
 
     return {c.source_id + ("" if c.job == "collect" else f":{c.job}"): c
-            for c in (BitstampCollector,)}
+            for c in (BitstampCollector, BitcoinNetworkCollector)}
 
 
 def main(argv: list[str] | None = None) -> int:

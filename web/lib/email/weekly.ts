@@ -8,7 +8,7 @@ import { getTranslations } from "next-intl/server";
 import { SITE_WIDE_DISCLAIMERS } from "@/components/Disclaimer";
 import { CRYPTO_ASSETS, assetByPair, price } from "../crypto-display";
 import { cryptoCycle, cryptoOverview, cryptoTrend } from "../data/crypto";
-import { chartLatest } from "../data/charts";
+import { chartLatest, networkLatest } from "../data/charts";
 import type { Viewer } from "../entitlements";
 import { date, int, num, pct, ratio, tone } from "../format";
 import { registry } from "../registry";
@@ -87,6 +87,20 @@ async function cryptoSections(t: T, viewer: Viewer, links: Links): Promise<{ day
     });
   } else if (!lib.access.allowed || lib.access.maxDate) {
     sections.push({ title: t("email.crypto.library"), locked: { text: t("email.crypto.libraryLocked"), cta: t("email.crypto.seePlans"), href: plans, model: "crypto_charts" } });
+  }
+  const network = await networkLatest(viewer);
+  if (network.access.allowed && !network.access.maxDate && network.data?.day) {
+    const v = network.data.values;
+    sections.push({
+      title: t("email.crypto.network"), intro: t("email.crypto.networkIntro"),
+      lines: [
+        { label: t("charts.lines.supply"), value: int(v.supply) },
+        { label: t("charts.lines.blocks_to_halving"), value: int(v.blocks_to_halving) },
+        { label: t("charts.lines.hash_rate_7d"), value: `${num(v.hash_rate_7d, 0)} EH/s` },
+      ],
+    });
+  } else if (!network.access.allowed || network.access.maxDate) {
+    sections.push({ title: t("email.crypto.network"), locked: { text: t("email.crypto.networkLocked"), cta: t("email.crypto.seePlans"), href: plans, model: "btc_network" } });
   }
   sections[sections.length - 1].link = { label: t("email.crypto.link"), href: `${links.site}/crypto` };
   return { day, sections, preheader: t("email.crypto.preheader", { btc: pct(week("btcusd"), 1), eth: pct(week("ethusd"), 1), date: date(day) }) };

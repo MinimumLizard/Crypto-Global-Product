@@ -68,12 +68,12 @@ export const CHARTS: ChartSpec[] = [
   live("correlation", "relative", "alts", ["crypto_charts"]),
   live("beta", "relative", "alts", ["crypto_charts"]),
   // The Bitcoin network (free: read from the network itself)
-  planned("supply-issuance", "network", "network"),
-  planned("hash-rate", "network", "network"),
-  planned("hash-ribbons", "network", "network"),
-  planned("stock-to-flow", "network", "network"),
-  planned("puell-multiple", "network", "network"),
-  planned("halving-countdown", "network", "network"),
+  live("supply-issuance", "network", "btc", ["btc_network"], "network"),
+  live("hash-rate", "network", "btc", ["btc_network"], "network"),
+  live("hash-ribbons", "network", "btc", ["btc_network"], "network"),
+  live("stock-to-flow", "network", "btc", ["btc_network"], "network"),
+  live("puell-multiple", "network", "btc", ["btc_network"], "prices"),
+  live("halving-countdown", "network", "btc", ["btc_network"], "network"),
   // Market capitalisation
   planned("total-market-cap", "marketcap", "marketcaps", "all"),
   planned("dominance", "marketcap", "marketcaps", "all"),

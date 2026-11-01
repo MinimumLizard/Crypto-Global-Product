@@ -175,6 +175,10 @@
     "crypto_charts": {
       "title": "Chart library: averages, momentum, returns and risk",
       "summary": "Long averages, RSI, MACD and Bollinger bands, running and calendar returns, Sharpe and Sortino ratios, and each coin against bitcoin, for every coin we follow."
+    },
+    "btc_network": {
+      "title": "The Bitcoin network: supply, issuance and mining",
+      "summary": "Bitcoin's supply, daily issuance, inflation, stock-to-flow, difficulty, hash rate and the halving countdown, read from the Bitcoin network itself, with the Puell multiple."
     }
   },
   "errors": {
@@ -356,7 +360,10 @@
       "library": "From the chart library",
       "libraryIntro": "Three of bitcoin's chart-library readings on the last day. Descriptions of the past, not forecasts.",
       "libraryRatio": "price is {value} the average",
-      "libraryLocked": "The chart library (long averages, momentum, returns and risk for every coin) is part of the Charts plan."
+      "libraryLocked": "The chart library (long averages, momentum, returns and risk for every coin) is part of the Charts plan.",
+      "network": "The Bitcoin network",
+      "networkIntro": "Read from the Bitcoin network itself, on the last complete day.",
+      "networkLocked": "Bitcoin's supply, issuance, mining and the halving countdown are part of the Charts plan."
     }
   },
   "crypto": {
@@ -640,7 +647,20 @@
       "corr_btc_90d": "Correlation with bitcoin",
       "beta_btc_365d": "Beta to bitcoin",
       "price_btc": "Price in bitcoin",
-      "drawdown": "Fall from the highest close"
+      "drawdown": "Fall from the highest close",
+      "supply": "Supply (bitcoin issued)",
+      "issuance": "New bitcoin per day",
+      "inflation_365d": "Inflation, one year",
+      "hash_rate_7d": "Hash rate, 7-day average",
+      "hash_rate_30d": "Hash rate, 30-day average",
+      "hash_rate_60d": "Hash rate, 60-day average",
+      "difficulty": "Difficulty",
+      "stock_to_flow": "Stock-to-flow",
+      "puell": "Puell multiple",
+      "blocks_to_halving": "Blocks to the next halving",
+      "days_to_halving": "Days to the next halving (estimate)",
+      "halving_date": "Estimated date of the next halving",
+      "height": "Latest block"
     },
     "items": {
       "multiplier-bands": {

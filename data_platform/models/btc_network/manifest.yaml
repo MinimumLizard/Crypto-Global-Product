@@ -1,0 +1,20 @@
+name: btc_network
+market: crypto
+title_key: models.btc_network.title
+summary_key: models.btc_network.summary
+disclaimer_key: crypto_risk
+requires_datasets:
+  - bitcoin.block_headers
+  - crypto.ohlc_daily
+outputs:
+  - models.btc_network_series
+versions:
+  - method_version: "1.0.0"
+    status: current
+    parameters:
+      halving_interval: 210000      # blocks between halvings of the block subsidy
+      initial_subsidy_sats: 5000000000   # 50 bitcoin per block at the start
+      hash_rate_windows: [7, 30, 60]     # days, simple averages of the daily hash-rate estimate
+      year_days: 365
+      countdown_days: 14            # recent block rate used to estimate the next halving's date
+      price_pair: btcusd            # for the Puell multiple

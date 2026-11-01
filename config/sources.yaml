@@ -94,6 +94,26 @@ bitstamp:
     Data License Agreement (partners@bitstamp.net, draft in docs/letters/data-permission-requests.md) must be signed
     before the section is public, and the status then becomes `allowed`.
 
+bitcoin_network:
+  name: Bitcoin block headers, from the Bitcoin peer-to-peer network
+  homepage: https://developer.bitcoin.org/devguide/p2p_network.html
+  enabled: true
+  rights:
+    status: allowed
+    evidence: >-
+      The Bitcoin network is an open peer-to-peer network: "The Bitcoin network protocol allows full nodes (peers)
+      to collaboratively maintain a peer-to-peer network" (Bitcoin developer guide). Any computer may connect; there
+      is no operator, no account, no API agreement and no terms of use to accept. The reference software, Bitcoin
+      Core, is MIT-licensed. Block headers are public and self-proving: every header is verified here by its proof
+      of work and its link to the previous one, so no peer is trusted (collectors/bitcoin_network/parse.py).
+    url: https://developer.bitcoin.org/devguide/p2p_network.html
+    checked: 2026-11-01
+  datasets: [bitcoin.block_headers]
+  notes: >-
+    Free, commercial use allowed. Feeds the Bitcoin network charts (supply, issuance, difficulty, hash rate;
+    model btc_network). Fallback if peers cannot be reached: mempool.space's public API, whose terms of service
+    (updated 2024-07-10) say nothing about data use (status `silent`), not yet built.
+
 kraken:
   name: Kraken public market data and OHLCVT downloads
   homepage: https://www.kraken.com/

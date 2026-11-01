@@ -28,6 +28,7 @@ describe("chart catalogue", () => {
     const mb = CHARTS.find((c) => c.slug === "multiplier-bands")!;
     expect(chartTier(mb)).toBe("plus");                       // crypto_market is free, crypto_charts is plus
     expect(chartTier(CHARTS.find((c) => c.slug === "since-first-close")!)).toBe("free");
-    expect(chartTier(CHARTS.find((c) => c.slug === "hash-rate")!)).toBeNull();
+    expect(chartTier(CHARTS.find((c) => c.slug === "dominance")!)).toBeNull();
+    expect(chartTier(CHARTS.find((c) => c.slug === "hash-rate")!)).toBe("plus");
   });
 });

@@ -1,0 +1,42 @@
+# A manual end-to-end check of the Bitcoin network collector and model, in a throwaway database: downloads every
+# block header from the network, verifies and stores them, runs btc_network, and prints the latest figures.
+name: "Check: Bitcoin network collector"
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_HOST_AUTH_METHOD: trust
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U postgres" --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      DATABASE_URL: postgresql://postgres@localhost:5432/postgres
+      RAW_STORE: local:${{ github.workspace }}/.raw
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+        with:
+          python-version: "3.12"
+      - run: uv sync --frozen --no-dev
+      - run: uv run --no-dev python -m data_platform.jobs.migrate
+      - name: Collect (first run: the whole chain)
+        run: time uv run --no-dev python -m data_platform.jobs.collect bitcoin_network
+      - name: Collect again (only new blocks)
+        run: uv run --no-dev python -m data_platform.jobs.collect bitcoin_network
+      - run: uv run --no-dev python -m data_platform.jobs.models --model btc_network
+      - name: Latest figures
+        run: |
+          psql "$DATABASE_URL" -c "select count(*) headers, max(height), max(time) from bitcoin.block_headers"
+          psql "$DATABASE_URL" -c "select series, round(value::numeric, 4) from models.btc_network_series where day = (select max(day) from models.btc_network_series) order by series"
+          psql "$DATABASE_URL" -c "select day, round(value::numeric) supply from models.btc_network_series where series = 'supply' and day in ('2012-11-28', '2016-07-09', '2020-05-11', '2024-04-20')"

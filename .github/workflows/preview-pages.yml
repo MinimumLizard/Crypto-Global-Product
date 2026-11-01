@@ -78,6 +78,7 @@ jobs:
           psql "$ADMIN_URL" -c "create database preview"
           uv run --no-dev python -m data_platform.jobs.migrate
           uv run --no-dev python -m data_platform.jobs.collect bitstamp
+          uv run --no-dev python -m data_platform.jobs.collect bitcoin_network
           uv run --no-dev python -m data_platform.jobs.models
           psql "$DATABASE_URL" -c "alter role web_reader with login"
       - name: Build the site and copy it page by page

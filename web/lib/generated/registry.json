@@ -21,6 +21,27 @@
     }
   },
   "models": {
+    "btc_network": {
+      "current_version": "1.0.0",
+      "disclaimer_key": "crypto_risk",
+      "free_preview": null,
+      "market": "crypto",
+      "method_md": "# The Bitcoin network: supply, issuance, difficulty and hash rate (btc_network)\n\n**What it is.** Measures of the Bitcoin network itself, per UTC day, computed from the header of every block (and,\nfor the Puell multiple and market value, bitcoin's daily close). The headers come straight from the Bitcoin\nnetwork and are checked block by block (their proof of work, their link to the block before, and the difficulty\nrules) before they are stored. Nobody owns this record; it is free to use and show.\n\n**When a day is published.** A block's time is written by its miner and can be off by up to about two hours, and\nblocks are not always in time order. A day is published only once the median time of the last 11 blocks is past\nthe day's end: Bitcoin's rules forbid any later block from carrying a time at or below that median, so no later\nblock can be dated on a published day, and a published value never changes.\n\n## Supply and issuance\n\n- **Supply** (`supply`): the bitcoin issued by the schedule up to the highest block dated on or before the day.\n  Each block's subsidy started at 50 bitcoin and halves every 210,000 blocks (rounded down to whole satoshis). The\n  genesis block's 50, which can never be spent, are counted; coins lost since are counted too, and the few blocks\n  whose miners claimed less than the full subsidy are not corrected for, so this is the scheduled supply.\n- **Issuance** (`issuance`, `issuance_365d`): the supply's change over the day and over the last 365 days.\n- **Inflation, one year** (`inflation_365d`): issuance over the last 365 days divided by the supply a year earlier.\n- **Stock-to-flow** (`stock_to_flow`): supply divided by issuance over the last 365 days (years of current issuance\n  that the existing supply represents). It roughly doubles at each halving. This is the ratio only; we do not show\n  the price model once fitted to it.\n- **Halving countdown** (`blocks_to_halving`, `days_to_halving`): blocks left until the next multiple of 210,000,\n  and that number divided by the average number of blocks per day over the last 14 days (an estimate).\n\n## Mining\n\n- **Difficulty** (`difficulty`): how many times harder than the easiest allowed target the last block of the day was\n  to find. It is adjusted every 2,016 blocks to keep blocks about ten minutes apart.\n- **Hash rate** (`hash_rate`, in EH/s: 10^18 hashes a second): the computing work the day's blocks represent\n  (each block at difficulty D takes about D \u00d7 2^32 hashes to find on average) divided by the seconds in a day. A\n  single day's estimate is noisy because blocks arrive at random; the 7-, 30- and 60-day averages\n  (`hash_rate_7d`, `hash_rate_30d`, `hash_rate_60d`) are steadier. The 30- and 60-day averages together are often\n  called \"hash ribbons\" (Charles Edwards, 2019); we show them as a description of mining activity.\n\n## With the price\n\n- **Issuance in US dollars** (`issuance_usd`): the day's issuance times bitcoin's close.\n- **Puell multiple** (`puell`), David Puell (2019): that value divided by its 365-day average. It falls sharply at\n  each halving, when issuance halves overnight.\n- **Market value** (`market_cap`): supply times the close.\n\n## Limits\n\n- Block times are set by miners and can be off by hours; daily counts and the hash rate inherit that noise.\n- The hash rate is an estimate from difficulty and block times, not a measurement.\n- Measures that use the price inherit the price data's source and licence (see the chart's data note).\n",
+      "minimum_tier": "plus",
+      "outputs": [
+        "models.btc_network_series"
+      ],
+      "recent_window": null,
+      "summary_key": "models.btc_network.summary",
+      "title_key": "models.btc_network.title",
+      "versions": [
+        {
+          "changes": null,
+          "method_version": "1.0.0",
+          "status": "current"
+        }
+      ]
+    },
     "crypto_charts": {
       "current_version": "1.0.0",
       "disclaimer_key": "crypto_risk",

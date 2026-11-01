@@ -7,7 +7,7 @@ import Locked from "@/components/Locked";
 import PreviewNote from "@/components/PreviewNote";
 import { barOption, dailyFrom, lineOption, overlayOption, sig, weekly, weeklyPoints } from "@/lib/charts";
 import { CRYPTO_ASSETS, price } from "@/lib/crypto-display";
-import { chartLines } from "@/lib/data/charts";
+import { chartLines, networkLines } from "@/lib/data/charts";
 import { cryptoCycle, cryptoHistory, cryptoTrend } from "@/lib/data/crypto";
 import type { Access, Viewer } from "@/lib/entitlements";
 import { NONE, date, int, num, pct, percent, ratio, tone } from "@/lib/format";
@@ -391,6 +391,58 @@ export async function chartBody(slug: string, ctx: Ctx): Promise<React.ReactNode
             keys.map((k, i) => ({ name: L(k), points: weekly(ln[k] ?? []), dashed: i === 1 })), slug === "price-in-bitcoin" ? "BTC" : undefined, opts,
           )} />
           <Readings t={t} day={lines.data!.day} rows={keys.map((k): Reading => [L(k), slug === "price-in-bitcoin" ? price(last(ln[k]), "BTC") : num(last(ln[k]), 2)])} />
+        </>
+      );
+    }
+
+    case "supply-issuance":
+    case "hash-rate":
+    case "hash-ribbons":
+    case "stock-to-flow":
+    case "puell-multiple":
+    case "halving-countdown": {
+      const keys = {
+        "supply-issuance": ["supply", "issuance", "inflation_365d"],
+        "hash-rate": ["hash_rate_7d", "difficulty"],
+        "hash-ribbons": ["hash_rate_30d", "hash_rate_60d"],
+        "stock-to-flow": ["stock_to_flow"],
+        "puell-multiple": ["puell"],
+        "halving-countdown": ["blocks_to_halving", "days_to_halving", "issuance", "height"],
+      }[slug]!;
+      const net = await networkLines(viewer, keys);
+      if (!net.access.allowed) return <Locked access={net.access} />;
+      const ln = net.data!.lines;
+      const day = net.data!.day;
+      if (slug === "supply-issuance") {
+        return (
+          <>
+            <Chart label={L("supply")} option={lineOption([{ name: L("supply"), points: weekly(ln.supply ?? []) }], "BTC", { area: true })} />
+            <h2>{L("inflation_365d")}</h2>
+            <Chart label={L("inflation_365d")} option={lineOption([{ name: L("inflation_365d"), points: percentOf(weekly(ln.inflation_365d ?? [])) }], "%", { logY: false, percentY: true })} />
+            <Readings t={t} day={day} rows={[[L("supply"), int(last(ln.supply))], [L("issuance"), num(last(ln.issuance), 2)], [L("inflation_365d"), pct(last(ln.inflation_365d)).replace("+", "")]]} />
+          </>
+        );
+      }
+      if (slug === "halving-countdown") {
+        const blocks = last(ln.blocks_to_halving);
+        const days = last(ln.days_to_halving);
+        const when = day && days != null ? addDays(day, Math.round(days)) : null;
+        return (
+          <>
+            <h2>{L("issuance")}</h2>
+            <Chart label={L("issuance")} option={lineOption([{ name: L("issuance"), points: weekly(ln.issuance ?? []) }], "BTC")} />
+            <Readings t={t} day={day} rows={[[L("height"), int(last(ln.height))], [L("blocks_to_halving"), int(blocks)], [L("days_to_halving"), num(days, 0)], [L("halving_date"), when ? date(when) : NONE]]} />
+          </>
+        );
+      }
+      const logY = slug !== "puell-multiple";
+      return (
+        <>
+          <Chart label={t(`charts.items.${slug}.title` as never)} height={400} option={lineOption(
+            keys.map((k, i) => ({ name: L(k), points: weekly(ln[k] ?? []), dashed: i === 1 })), slug.startsWith("hash") ? "EH/s" : undefined,
+            { logY, ...(slug === "puell-multiple" ? { refLines: [1] } : {}) },
+          )} />
+          <Readings t={t} day={day} rows={keys.map((k): Reading => [L(k), num(last(ln[k]), k === "difficulty" ? 0 : 2)])} />
         </>
       );
     }

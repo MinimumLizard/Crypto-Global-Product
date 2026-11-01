@@ -6,7 +6,7 @@ import pytest
 pytestmark = pytest.mark.db
 
 
-PLATFORM_SCHEMAS = {"ops", "models", "community", "crypto"}
+PLATFORM_SCHEMAS = {"ops", "models", "community", "crypto", "bitcoin"}
 
 
 def _user_schemas(conn) -> set[str]:
