@@ -13,7 +13,8 @@
     "plans": "Plans",
     "feedback": "Feedback",
     "weekly": "Weekly e-mail",
-    "label": "Main"
+    "label": "Main",
+    "charts": "Charts"
   },
   "tiers": {
     "free": "Free",
@@ -170,6 +171,10 @@
     "crypto_trend_bands": {
       "title": "Bitcoin long-run trend bands",
       "summary": "Two trend lines through bitcoin's price history on log-log axes, re-fitted every day, with bands around them and where the price sits between the bands."
+    },
+    "crypto_charts": {
+      "title": "Chart library: averages, momentum, returns and risk",
+      "summary": "Long averages, RSI, MACD and Bollinger bands, running and calendar returns, Sharpe and Sortino ratios, and each coin against bitcoin, for every coin we follow."
     }
   },
   "errors": {
@@ -339,15 +344,19 @@
       "vs200wNote": "200-week average {value}",
       "mayer": "Mayer multiple (price ÷ 200-day average)",
       "halving": "Days since the last halving",
-      "cycleLocked": "Long averages, Pi cycle lines and the cycle table are part of Plus.",
+      "cycleLocked": "Long averages, Pi cycle lines and the cycle table are part of the Charts plan.",
       "trend": "Long-run trend bands",
       "trendIntro": "Where bitcoin's price sits between the outer bands of each trend fit (0 at the lower band, 1 at the upper). A description of the past, not a forecast.",
       "fit_log_regression": "Log regression",
       "fit_power_law": "Power law",
-      "trendLocked": "Bitcoin's long-run trend bands are part of Pro.",
+      "trendLocked": "Bitcoin's long-run trend bands are part of the Research plan.",
       "seePlans": "See the plans",
       "link": "The full crypto pages",
-      "fitted": "trend line at {value}"
+      "fitted": "trend line at {value}",
+      "library": "From the chart library",
+      "libraryIntro": "Three of bitcoin's chart-library readings on the last day. Descriptions of the past, not forecasts.",
+      "libraryRatio": "price is {value} the average",
+      "libraryLocked": "The chart library (long averages, momentum, returns and risk for every coin) is part of the Charts plan."
     }
   },
   "crypto": {
@@ -476,5 +485,521 @@
   "ticker": {
     "label": "Latest closing prices",
     "close": "Closing prices, {date}"
+  },
+  "charts": {
+    "title": "Chart library",
+    "intro": "Every chart in the library, by topic: {live} live now and {planned} planned. Each says what it shows, how it is calculated, how to read it and its limits, and where its data comes from.",
+    "planned": "Planned",
+    "cost": {
+      "free": "Free data",
+      "freeNote": "free to show on a paid site",
+      "licence": "Licence pending",
+      "licenceNote": "needs a data licence before the site is public",
+      "paid": "Paid data",
+      "paidNote": "needs a paid data plan"
+    },
+    "categories": {
+      "price": {
+        "title": "Price and long averages",
+        "intro": "Where a coin's price sits against its long-run averages and the bands built from them."
+      },
+      "returns": {
+        "title": "Returns",
+        "intro": "How much prices have changed over different spans: running, calendar and seasonal."
+      },
+      "cycles": {
+        "title": "Cycle comparisons",
+        "intro": "Bitcoin's halving cycles, and every coin's moves after its cycle lows and peaks, laid over one another."
+      },
+      "momentum": {
+        "title": "Momentum",
+        "intro": "Standard technical measures of how fast and how far prices have moved recently."
+      },
+      "risk": {
+        "title": "Risk and volatility",
+        "intro": "How bumpy the ride has been, and how much return each unit of that bumpiness brought."
+      },
+      "relative": {
+        "title": "Against bitcoin",
+        "intro": "Each coin measured against bitcoin: its price in bitcoin, and how closely the two move."
+      },
+      "network": {
+        "title": "The Bitcoin network",
+        "intro": "Supply, new issuance and mining power, read from the Bitcoin network itself."
+      },
+      "marketcap": {
+        "title": "Market capitalisation",
+        "intro": "The size of the whole crypto market and of each coin within it."
+      },
+      "onchain": {
+        "title": "On-chain",
+        "intro": "What the record of every Bitcoin transaction says about the age and cost of the coins in circulation."
+      },
+      "derivatives": {
+        "title": "Derivatives",
+        "intro": "Futures markets: funding rates and open interest."
+      },
+      "macro": {
+        "title": "Macro",
+        "intro": "The US economy and money: interest rates, liquidity, inflation and jobs."
+      },
+      "tradfi": {
+        "title": "Traditional markets",
+        "intro": "Stocks, the dollar and gold, for comparison with crypto."
+      }
+    },
+    "data": {
+      "prices": {
+        "short": "Prices · licence pending",
+        "long": "Daily closing prices. The preview uses Bitstamp's, which may be shown publicly only once Bitstamp's data licence is signed (its fee is not published; the request is drafted). CoinMarketCap's free API plan allows commercial display but gives about one year of history, so charts that need a long history wait for a licence: Bitstamp's, or CoinMarketCap's paid plan (US$79 a month)."
+      },
+      "network": {
+        "short": "Bitcoin network · free",
+        "long": "Read directly from the Bitcoin network's public record of blocks: block times, difficulty and the number of new coins. Nobody owns this record and no licence is needed. Charts that also use a price need the price data as well."
+      },
+      "marketcaps": {
+        "short": "Market caps · free plan",
+        "long": "Market capitalisations of all coins. CoinMarketCap's free API plan allows commercial display of current values and about a year of history, with the credit “Data provided by CoinMarketCap”; a longer history needs its paid plan (US$79 a month)."
+      },
+      "onchain": {
+        "short": "Every transaction · free, own node",
+        "long": "Built from every Bitcoin transaction. The data is public and free, but computing it needs our own Bitcoin node: free software on a computer with about a terabyte of disk, synced once over a day or two and then kept up to date. It also needs the long price history."
+      },
+      "derivatives": {
+        "short": "Derivatives · paid data",
+        "long": "Funding rates and open interest from derivatives exchanges. No free source checked allows commercial display; aggregators charge from about US$299 a month."
+      },
+      "macro": {
+        "short": "US agencies · free",
+        "long": "Taken directly from the US agencies that publish them (the Treasury, the Federal Reserve Board, the Bureau of Labor Statistics). Their data is in the public domain and free to show."
+      },
+      "tradfi": {
+        "short": "Index prices · paid",
+        "long": "Stock indices, the dollar index and gold. Index values belong to their providers; showing them on a paid site needs a vendor's display licence (from about US$250 a month for end-of-day data)."
+      }
+    },
+    "page": {
+      "coin": "Coin",
+      "latest": "Latest readings",
+      "what": "What it shows",
+      "how": "How it is calculated",
+      "read": "How to read it, and its limits",
+      "data": "Where the data comes from",
+      "plannedNote": "This chart is planned and not built yet. Its data and licence position are below.",
+      "priceOverAverage": "Price ÷ average",
+      "month": "Month",
+      "mean": "Average",
+      "median": "Median",
+      "positive": "Positive",
+      "years": "Years",
+      "noCycles": "Not enough history for a cycle comparison yet.",
+      "path_halving": "Halving {n} ({date})",
+      "path_cycle_low": "Cycle low {n} ({date})",
+      "path_cycle_peak": "Cycle peak {n} ({date})",
+      "daysSince": "Days since",
+      "latestPath": "Latest cycle",
+      "multiple": "Multiple of the starting close",
+      "sameDay": "{value} on the same day",
+      "daysSinceHigh": "Days since the highest close"
+    },
+    "lines": {
+      "sma_350": "350-day average",
+      "sma_730": "Two-year average",
+      "sma_50": "50-day average",
+      "sma_200": "200-day average",
+      "sma_200w": "200-week average",
+      "sma_20w": "20-week simple average",
+      "ema_21w": "21-week exponential average",
+      "pi_sma_111": "111-day average",
+      "pi_sma_350x2": "2 × 350-day average",
+      "pi_ema_150": "150-day exponential average",
+      "pi_sma_471x0745": "0.745 × 471-day average",
+      "fitted": "Fitted line",
+      "band_1": "+1 standard deviation",
+      "band_1_low": "−1 standard deviation",
+      "band_2": "+2 standard deviations",
+      "band_2_low": "−2 standard deviations",
+      "roi_365d": "One year",
+      "roi_730d": "Two years",
+      "roi_1460d": "Four years",
+      "ret_ytd": "Year to date",
+      "rsi_14d": "RSI, 14 days",
+      "rsi_14w": "RSI, 14 weeks",
+      "macd": "MACD",
+      "macd_signal": "Signal line",
+      "macd_hist": "Histogram",
+      "bb_mid": "20-day average",
+      "bb_upper": "Upper band",
+      "bb_lower": "Lower band",
+      "bb_width": "Band width",
+      "vol_30d": "30 days",
+      "vol_90d": "90 days",
+      "vol_365d": "One year",
+      "sharpe_365d": "Sharpe ratio",
+      "sortino_365d": "Sortino ratio",
+      "corr_btc_90d": "Correlation with bitcoin",
+      "beta_btc_365d": "Beta to bitcoin",
+      "price_btc": "Price in bitcoin",
+      "drawdown": "Fall from the highest close"
+    },
+    "items": {
+      "multiplier-bands": {
+        "title": "Long-average multiplier bands",
+        "summary": "The 350-day average and fixed multiples of it (1.6 to 21 times), on a log scale.",
+        "what": "How far the price has stretched above its long-run average in the past. Each line is the 350-day average multiplied by a fixed number, so the bands widen as the average rises.",
+        "how": "The average of the last 350 daily closes, and that average times 1.6, 2, 3, 5, 8, 13 and 21. The multiples are a convention popularised in 2019 (the golden ratio, 1.6, and the Fibonacci numbers); they have no economic meaning of their own.",
+        "read": "Past highs reached different multiples in different cycles, and they have reached lower multiples over time. The bands describe how stretched the price has been; they do not say how far it will go."
+      },
+      "two-year-multiplier": {
+        "title": "Two-year average and five times it",
+        "summary": "The 730-day average and five times its value, on a log scale.",
+        "what": "Where the price sits against its two-year average, and against a line five times higher, a range many charts use to describe long cycles.",
+        "how": "The average of the last 730 daily closes, and that average multiplied by five.",
+        "read": "The price has spent long spells above and below the average. The five-times line is a convention, not a ceiling: past prices have reached it in some cycles and not in others."
+      },
+      "long-averages": {
+        "title": "Price and its long averages",
+        "summary": "The 50-day, 200-day and 200-week averages with the price, and the Mayer multiple.",
+        "what": "Three widely followed long averages. The 200-week average spans almost four years, about one bitcoin halving cycle.",
+        "how": "Simple averages of the last 50 and 200 daily closes, and of the last 200 weekly closes (Sunday closes, with the current week closing at the day's close). The Mayer multiple is the price divided by the 200-day average.",
+        "read": "An average describes where the price has been. Crossing an average is not a signal of anything by itself; averages lag the price by design."
+      },
+      "weekly-band": {
+        "title": "20-week and 21-week averages",
+        "summary": "The 20-week simple and 21-week exponential averages of weekly closes, with the price.",
+        "what": "A pair of medium-term averages many market commentators watch together, and the price's distance from the 20-week average.",
+        "how": "The 20-week simple average of weekly closes and the 21-week exponential average (weight 2/22), with the current week closing at the day's close.",
+        "read": "The two lines usually sit close together. How the price behaved around them in past cycles says nothing certain about the next one."
+      },
+      "pi-cycle": {
+        "title": "Pi cycle lines",
+        "summary": "The 111-day average against twice the 350-day average, and the 150-day exponential against 0.745 times the 471-day average.",
+        "what": "Two pairs of lines whose crossings have been noticed near some past turning points, and the days they crossed.",
+        "how": "The 111-day simple average and two times the 350-day simple average; the 150-day exponential average and 0.745 times the 471-day simple average. A crossing is the first day one line is above (or below) the other.",
+        "read": "These settings were chosen by their authors to fit past highs and lows, so their past record is not an independent test. They are shown as history, not as a guide to what happens next."
+      },
+      "trend-bands": {
+        "title": "Long-run trend bands (bitcoin)",
+        "summary": "Two straight-line fits through bitcoin's whole history on log axes, with bands one and two standard deviations either side.",
+        "what": "How bitcoin's long-run growth can be summarised by a single line, and how far the price has wandered around it.",
+        "how": "A power law (log price against log days since bitcoin's first block) and a log regression, both re-fitted every day on the data to that day. The bands are the fitted line moved by one and two standard deviations of the past residuals.",
+        "read": "A fitted line summarises the past. It is not a value the price should have, and the fit changes as new data arrives."
+      },
+      "running-returns": {
+        "title": "Running returns over one, two and four years",
+        "summary": "The change in price over the previous one, two and four years, on every day.",
+        "what": "What the return would have been over each trailing one-, two- and four-year span ending on that day.",
+        "how": "The close divided by the close 365, 730 and 1,460 days earlier, minus one.",
+        "read": "Long spans smooth out short moves but depend heavily on the starting point. They describe the past only."
+      },
+      "year-to-date": {
+        "title": "Year to date",
+        "summary": "The change since the last close of the previous year, over the last three years.",
+        "what": "How the current year compares with the start of the year, and how recent years unfolded.",
+        "how": "The close divided by the previous 31 December's close, minus one. The line restarts at zero each January.",
+        "read": "One year is a short span for an asset this volatile; a large move early in the year dominates the figure."
+      },
+      "monthly-returns": {
+        "title": "Monthly returns",
+        "summary": "Every completed month's change, year by year.",
+        "what": "A calendar of monthly returns since the coin's first full month.",
+        "how": "Each month's last close against the previous month's last close, minus one. A month appears once it has ended.",
+        "read": "A calendar shows how uneven returns have been. Patterns in it can be coincidence: the history covers only a dozen or so years."
+      },
+      "quarterly-returns": {
+        "title": "Quarterly returns",
+        "summary": "Every completed calendar quarter's change, year by year.",
+        "what": "A calendar of quarterly returns.",
+        "how": "Each quarter's last close against the previous quarter's last close, minus one. A quarter appears once it has ended.",
+        "read": "As with monthly returns, a few years of history cannot separate a pattern from chance."
+      },
+      "seasonality": {
+        "title": "Average return by calendar month",
+        "summary": "The average and median return of each calendar month across all completed years, and how often it was positive.",
+        "what": "Whether some months have tended to be better or worse than others in the past.",
+        "how": "For each calendar month, the average and the median of that month's returns in every year, and the share of years in which it was positive.",
+        "read": "Each month has only about a dozen observations, and a single extreme year moves the average a lot (the median is less affected). Seasonal averages are a description of the past, not a calendar of the future."
+      },
+      "since-first-close": {
+        "title": "Every coin since its first close",
+        "summary": "Each coin's price as a multiple of its first close in our data, on one log chart.",
+        "what": "How each coin's price has grown since it started trading on the exchange, all on one chart.",
+        "how": "The close divided by the coin's first close in the data. Coins started on different dates, so the lines start at different points.",
+        "read": "Coins that began trading later started from different conditions. A multiple since listing says nothing about any other starting date."
+      },
+      "after-halving": {
+        "title": "After each halving",
+        "summary": "The price after each bitcoin halving, as a multiple of its close on halving day, laid over one another.",
+        "what": "How the price moved in the days after each halving, cycle by cycle, from the same starting line.",
+        "how": "For each halving, every later close divided by the close on the halving day, until the next halving. Day 0 is the halving.",
+        "read": "There have been only four halvings, so each cycle is one observation. The paths differ a lot; the chart shows that range, not a template."
+      },
+      "after-cycle-low": {
+        "title": "After each cycle low",
+        "summary": "The price after each cycle's low, as a multiple of that low, laid over one another.",
+        "what": "How far and how fast the price rose from each cycle's low, cycle by cycle.",
+        "how": "A cycle's low is the end of the largest fall between two halvings (see the cycle table). Each later close is divided by the low's close, until the next cycle's low. The latest low is provisional until its cycle ends.",
+        "read": "A low is only known after the fact, and the latest one can still move. Few cycles exist, so averages across them are fragile."
+      },
+      "after-cycle-peak": {
+        "title": "After each cycle peak",
+        "summary": "The price after each cycle's peak, as a fraction of that peak, laid over one another.",
+        "what": "How deep and how long the falls after each cycle's peak were.",
+        "how": "A cycle's peak is the start of the largest fall between two halvings. Each later close is divided by the peak's close, until the next cycle's peak. The latest peak is provisional.",
+        "read": "Peaks are known only after the fact. Past falls ranged widely; the chart shows that range, not what the next one will be."
+      },
+      "rsi": {
+        "title": "Relative strength index (RSI)",
+        "summary": "Wilder's 14-period RSI on weekly and daily closes, from 0 to 100.",
+        "what": "The balance of recent gains and losses: near 100 after mostly rising periods, near 0 after mostly falling ones. Lines at 30 and 70 are the conventional reference levels.",
+        "how": "Average gain divided by average loss over the last 14 changes, with Wilder's smoothing, turned into a 0 to 100 scale: 100 minus 100 / (1 + gain / loss).",
+        "read": "RSI can stay high or low for long periods in a strong trend. The 30 and 70 lines are conventions, not boundaries."
+      },
+      "macd": {
+        "title": "MACD",
+        "summary": "The 12-day minus the 26-day exponential average, its 9-day signal line and the difference, over the last two years.",
+        "what": "Whether shorter-term prices are running above or below longer-term ones, and whether that gap is widening or narrowing.",
+        "how": "MACD is the 12-day exponential average of closes minus the 26-day one; the signal line is the 9-day exponential average of MACD; the histogram is MACD minus its signal. In US dollars.",
+        "read": "Crossings of MACD and its signal are frequent and often reverse. Because it is in dollars, its size grows with the price."
+      },
+      "bollinger": {
+        "title": "Bollinger bands",
+        "summary": "The 20-day average with bands two standard deviations above and below, and the bands' width.",
+        "what": "Where the price sits within its recent range, and whether that range is wide or narrow.",
+        "how": "The 20-day average of closes, plus and minus two times the standard deviation of the same 20 closes. Width is the distance between the bands divided by the average.",
+        "read": "Prices often move outside the bands. Narrow bands mean recent prices were calm, not that a move is coming."
+      },
+      "volatility": {
+        "title": "Realised volatility",
+        "summary": "Annualised volatility of daily returns over 30, 90 and 365 days.",
+        "what": "How much the price has swung from day to day, expressed per year so different windows compare.",
+        "how": "The standard deviation of daily log returns over the window, times the square root of 365.",
+        "read": "Volatility describes the past. It rises and falls in spells and can change quickly."
+      },
+      "sharpe-sortino": {
+        "title": "Sharpe and Sortino ratios (one year)",
+        "summary": "Return per unit of volatility over the last year, and return per unit of downside volatility.",
+        "what": "Whether the past year's return was large or small compared with how bumpy it was.",
+        "how": "Sharpe: the average daily log return over 365 days, times 365, divided by annualised volatility, with the risk-free rate taken as zero. Sortino: the same return divided by the downside deviation (only falling days count).",
+        "read": "Both ratios swing widely for assets this volatile and depend on the window. A high past ratio says nothing about the next year."
+      },
+      "drawdown": {
+        "title": "Fall from the highest close",
+        "summary": "How far the price sits below its highest close so far, on every day.",
+        "what": "The depth and length of every fall from a high, and the current one.",
+        "how": "The close divided by the highest close up to that day, minus one. It is zero on a day the price sets a new high.",
+        "read": "Drawdowns in crypto have been deep and long. A past recovery does not mean a future one."
+      },
+      "price-in-bitcoin": {
+        "title": "Price in bitcoin",
+        "summary": "The coin's price measured in bitcoin rather than dollars, on a log scale.",
+        "what": "Whether the coin has gained or lost against bitcoin over time.",
+        "how": "The coin's US-dollar close divided by bitcoin's US-dollar close on the same day.",
+        "read": "A falling line means the coin did worse than bitcoin in dollar terms over that span, not that it fell in dollars."
+      },
+      "correlation": {
+        "title": "Correlation with bitcoin (90 days)",
+        "summary": "How closely the coin's daily moves have followed bitcoin's over the last 90 days, from −1 to 1.",
+        "what": "How much the coin and bitcoin have moved together recently.",
+        "how": "The Pearson correlation of the two coins' daily log returns over the last 90 days.",
+        "read": "Correlation changes over time and tends to rise when markets fall sharply. It says nothing about cause."
+      },
+      "beta": {
+        "title": "Beta to bitcoin (one year)",
+        "summary": "How large the coin's daily moves have been relative to bitcoin's, over the last year.",
+        "what": "Whether the coin has tended to move more (above 1) or less (below 1) than bitcoin on the same days.",
+        "how": "The covariance of the coin's daily log returns with bitcoin's over 365 days, divided by the variance of bitcoin's.",
+        "read": "Beta depends on the window and on how closely the two move together; it changes over time."
+      },
+      "supply-issuance": {
+        "title": "Supply and new issuance",
+        "summary": "How many bitcoin exist, how many are added each day, and the yearly inflation rate.",
+        "what": "Bitcoin's fixed issuance schedule in practice: the number of coins in circulation and the rate at which new ones appear.",
+        "how": "Counted from the blocks themselves: each block adds a fixed reward that halves every 210,000 blocks.",
+        "read": "Issuance is set by the protocol and known in advance, apart from the exact timing of blocks."
+      },
+      "hash-rate": {
+        "title": "Hash rate and difficulty",
+        "summary": "The estimated computing power securing bitcoin, and the mining difficulty.",
+        "what": "How much computing power miners devote to bitcoin, and how the difficulty adjusts to keep blocks about ten minutes apart.",
+        "how": "Estimated from each block's difficulty and the time between blocks.",
+        "read": "The hash rate is an estimate and is noisy day to day; averages over weeks are more reliable."
+      },
+      "hash-ribbons": {
+        "title": "Hash ribbons",
+        "summary": "The 30-day and 60-day averages of the hash rate.",
+        "what": "When short-term mining power drops below its longer average, a sign some miners have switched off.",
+        "how": "The 30-day and 60-day simple averages of the estimated hash rate.",
+        "read": "Shown as a description of mining activity, not as a market signal."
+      },
+      "stock-to-flow": {
+        "title": "Stock-to-flow",
+        "summary": "Bitcoin's existing supply divided by its yearly new supply.",
+        "what": "How scarce new issuance is relative to existing supply, a ratio that doubles at each halving.",
+        "how": "The supply in circulation divided by the number of coins issued over the last year (from the blocks), shown with the price.",
+        "read": "A price model fitted to this ratio became popular in 2019 and has not held since; we show the ratio, not a model price."
+      },
+      "puell-multiple": {
+        "title": "Puell multiple",
+        "summary": "The dollar value of new bitcoin issued each day against its one-year average.",
+        "what": "Whether miners' daily revenue from new coins is high or low compared with the past year.",
+        "how": "Daily issuance (from the blocks) times the price, divided by its 365-day average.",
+        "read": "It changes sharply at each halving, when issuance halves overnight."
+      },
+      "halving-countdown": {
+        "title": "Halving countdown",
+        "summary": "The number of blocks until the next halving, and an estimated date.",
+        "what": "When the next halving is due, from the current block height and recent block times.",
+        "how": "210,000 blocks per halving; the estimate assumes recent average block times continue.",
+        "read": "The date is an estimate and moves as block times change."
+      },
+      "total-market-cap": {
+        "title": "Total crypto market capitalisation",
+        "summary": "The value of all coins together, with a long-run trend line.",
+        "what": "How large the crypto market as a whole has become and how it has grown.",
+        "how": "The sum of every coin's price times its circulating supply, from a market-data aggregator.",
+        "read": "Circulating supply figures for small coins are uncertain, and stablecoins inflate the total."
+      },
+      "dominance": {
+        "title": "Dominance",
+        "summary": "Bitcoin's and ether's share of the whole crypto market's value.",
+        "what": "How the market's value is split between bitcoin, ether and everything else.",
+        "how": "Each coin's market capitalisation divided by the total.",
+        "read": "A rising share can mean the coin rose or the others fell."
+      },
+      "stablecoin-supply-ratio": {
+        "title": "Stablecoin supply ratio",
+        "summary": "Bitcoin's market value divided by the value of the main stablecoins.",
+        "what": "How large bitcoin's value is compared with the dollar-pegged coins in the crypto market.",
+        "how": "Bitcoin's market capitalisation divided by the combined market capitalisation of the largest stablecoins.",
+        "read": "The stablecoin supply has grown for reasons unrelated to bitcoin; the ratio describes, it does not predict."
+      },
+      "altcoin-market-cap": {
+        "title": "Market capitalisation without bitcoin",
+        "summary": "The value of the crypto market excluding bitcoin, and excluding bitcoin and ether.",
+        "what": "How the rest of the crypto market has grown apart from the two largest coins.",
+        "how": "The total market capitalisation minus bitcoin's (and ether's).",
+        "read": "Includes thousands of small coins whose figures are uncertain."
+      },
+      "market-cap-what-if": {
+        "title": "Market capitalisation comparisons",
+        "summary": "What a coin's price would be at another coin's market value, as arithmetic only.",
+        "what": "A way to understand market capitalisation: price times supply, compared across coins.",
+        "how": "Another coin's market capitalisation divided by this coin's circulating supply.",
+        "read": "This is arithmetic to explain market capitalisation, not an estimate of what any price could or will be."
+      },
+      "heatmap": {
+        "title": "Market heatmap",
+        "summary": "The largest coins sized by market value and coloured by their change on the day.",
+        "what": "The whole market at a glance.",
+        "how": "Each tile's area is the coin's market capitalisation; its colour is the day's change.",
+        "read": "A single day's change is mostly noise."
+      },
+      "altcoin-season": {
+        "title": "Coins beating bitcoin",
+        "summary": "The share of the 50 largest coins that did better than bitcoin over the last 90 days.",
+        "what": "Whether bitcoin or the other large coins have done better recently.",
+        "how": "Of the 50 largest coins (excluding stablecoins and wrapped coins), the share whose 90-day return beat bitcoin's.",
+        "read": "The list of the largest coins changes over time."
+      },
+      "realised-price-mvrv": {
+        "title": "Realised price and MVRV",
+        "summary": "The average price at which every bitcoin last moved, and the market value against it.",
+        "what": "The average cost of the coins in circulation, valued at the price when each last moved.",
+        "how": "Each unspent coin valued at the price on the day it last moved, summed and divided by the supply. MVRV is market value divided by that realised value.",
+        "read": "Coins that are lost forever still count at their old price."
+      },
+      "supply-in-profit": {
+        "title": "Supply in profit and in loss",
+        "summary": "The share of bitcoin whose price when it last moved is below (or above) today's price.",
+        "what": "How much of the supply would show a gain or a loss at today's price.",
+        "how": "Every unspent coin compared with the price on the day it last moved.",
+        "read": "A coin's last move is not necessarily a purchase; exchanges and wallets move coins for many reasons."
+      },
+      "hodl-waves": {
+        "title": "HODL waves",
+        "summary": "The supply split by how long ago each coin last moved.",
+        "what": "How much of the supply has been still for a day, a month, a year or many years.",
+        "how": "Every unspent coin grouped by the age since it last moved.",
+        "read": "Lost coins appear as very old coins."
+      },
+      "coin-days-destroyed": {
+        "title": "Coin days destroyed",
+        "summary": "How much long-still bitcoin moved on each day.",
+        "what": "Whether coins that had not moved for a long time moved that day.",
+        "how": "For each coin spent, its amount times the days since it last moved, summed per day.",
+        "read": "Large internal moves by exchanges and custodians can dominate a day."
+      },
+      "terminal-price": {
+        "title": "Transferred and terminal price",
+        "summary": "Price measures built from the coin days destroyed over bitcoin's whole history.",
+        "what": "Long-run measures of the price at which coins have changed hands, built from coin days destroyed.",
+        "how": "Cumulative value-weighted coin days destroyed divided by the supply and bitcoin's age, and a multiple of it, as published by their authors.",
+        "read": "These measures were designed by fitting past cycles, so their past record is not an independent test."
+      },
+      "rhodl-ratio": {
+        "title": "RHODL ratio",
+        "summary": "The value of coins moved in the last week compared with coins moved one to two years ago.",
+        "what": "The balance between recently moved coins and coins that have been still for one to two years.",
+        "how": "The realised value of coins last moved within a week divided by that of coins last moved one to two years ago, as published by its author.",
+        "read": "Settings were chosen by fitting past cycles."
+      },
+      "funding-rates": {
+        "title": "Funding rates",
+        "summary": "What holders of perpetual futures pay each other to keep futures prices near the spot price.",
+        "what": "Whether futures traders have been paying to be long or to be short.",
+        "how": "The average funding rate across the main perpetual futures exchanges.",
+        "read": "Funding swings quickly and differs between exchanges."
+      },
+      "open-interest": {
+        "title": "Open interest",
+        "summary": "The value of futures contracts outstanding.",
+        "what": "How much leverage is in the futures market.",
+        "how": "The total value of open futures contracts across the main exchanges.",
+        "read": "Open interest says how much is outstanding, not which way it points."
+      },
+      "net-liquidity": {
+        "title": "Federal Reserve net liquidity",
+        "summary": "The Federal Reserve's balance sheet minus the Treasury's account and reverse repos.",
+        "what": "A common measure of how much money the US central bank is providing to markets.",
+        "how": "The Fed's total assets (weekly) minus the Treasury General Account and the overnight reverse repo facility.",
+        "read": "One of several ways to describe liquidity; its link with asset prices is debated."
+      },
+      "money-supply": {
+        "title": "Money supply (M2)",
+        "summary": "The US M2 money stock and its change over a year.",
+        "what": "How quickly the amount of money in the US economy is growing or shrinking.",
+        "how": "The Federal Reserve's M2 series and its year-on-year change.",
+        "read": "Money supply affects prices with long and variable lags."
+      },
+      "rates-yield-curve": {
+        "title": "Interest rates and the yield curve",
+        "summary": "The Fed funds rate and US Treasury yields, and the gap between long and short yields.",
+        "what": "The cost of money in the US and the shape of the yield curve.",
+        "how": "Treasury par yields (2, 10 years and 3 months) and their differences.",
+        "read": "An inverted curve has preceded some recessions, with long and uneven lags."
+      },
+      "inflation-jobs": {
+        "title": "Inflation and jobs",
+        "summary": "US consumer price inflation and unemployment.",
+        "what": "Two figures that shape interest-rate decisions.",
+        "how": "The Bureau of Labor Statistics' CPI (year-on-year change) and unemployment rate.",
+        "read": "Monthly figures are revised after publication."
+      },
+      "equities": {
+        "title": "Stock markets",
+        "summary": "Major stock indices against bitcoin.",
+        "what": "How crypto has moved compared with stock markets.",
+        "how": "Daily closes of major indices from a licensed vendor.",
+        "read": "Index values need a display licence."
+      },
+      "dollar-gold": {
+        "title": "The dollar and gold",
+        "summary": "The US dollar index and gold against bitcoin.",
+        "what": "How crypto compares with the dollar and gold.",
+        "how": "Daily closes from a licensed vendor.",
+        "read": "Needs a display licence."
+      }
+    }
   }
 }

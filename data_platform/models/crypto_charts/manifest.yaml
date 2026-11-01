@@ -1,0 +1,24 @@
+name: crypto_charts
+market: crypto
+title_key: models.crypto_charts.title
+summary_key: models.crypto_charts.summary
+disclaimer_key: crypto_risk
+requires_datasets:
+  - crypto.ohlc_daily
+outputs:
+  - models.crypto_charts_series
+versions:
+  - method_version: "1.0.0"
+    status: current
+    parameters:
+      pairs: [btcusd, ethusd, xrpusd, ltcusd, solusd, adausd, linkusd, dogeusd, avaxusd, dotusd]   # every USD pair
+      btc_pair: btcusd             # the pair the others are measured against
+      annualisation_days: 365      # crypto trades every day of the year
+      sma_days: [350, 730]         # long averages behind the multiplier bands (350 days; two years)
+      roi_days: [730, 1460]        # running returns over two and four years (one year is in crypto_market)
+      rsi_days: 14                 # Wilder's relative strength index on daily closes ...
+      rsi_weeks: 14                # ... and on weekly closes
+      macd: [12, 26, 9]            # fast EMA, slow EMA, signal EMA (days)
+      bollinger: [20, 2]           # days, standard deviations
+      risk_days: 365               # window for volatility, the Sharpe and Sortino ratios, and beta
+      corr_days: 90                # window for the correlation with bitcoin

@@ -6,8 +6,9 @@ import type { ModelName } from "./registry";
 // preview in an e-mail), which its own leak test checks for every model.
 export const MODEL_ROUTES: Record<ModelName, { api: string[]; pages: string[] }> = {
   crypto_market: { api: ["/api/v1/crypto/market"], pages: ["/", "/crypto"] },
-  crypto_cycle: { api: ["/api/v1/crypto/cycle"], pages: ["/", "/crypto", "/crypto/btc"] },
-  crypto_trend_bands: { api: ["/api/v1/crypto/trend-bands"], pages: ["/crypto/btc"] },
+  crypto_cycle: { api: ["/api/v1/crypto/cycle"], pages: ["/", "/crypto", "/crypto/btc", "/charts/long-averages"] },
+  crypto_trend_bands: { api: ["/api/v1/crypto/trend-bands"], pages: ["/crypto/btc", "/charts/trend-bands"] },
+  crypto_charts: { api: ["/api/v1/crypto/charts"], pages: ["/charts/multiplier-bands"] },
 };
 
 // Detail pages, at the assets the tier-leak seed writes (web/tests/leak/seed.py).
@@ -15,4 +16,5 @@ export const DETAIL_PAGES = ["/crypto/btc", "/crypto/eth", "/crypto/ethbtc"];
 
 // Every page of the site, for the checks that apply to all of them (no paid data for free visitors, ever).
 // The weekly e-mail's preview is a page like any other, so every e-mail is covered too.
-export const ALL_PAGES = ["/", "/crypto", "/crypto/btc", "/crypto/eth", "/crypto/ethbtc", "/learn", "/plans", "/methods", "/about", "/feedback", "/feedback/thanks", "/email/crypto"];
+export const ALL_PAGES = ["/", "/crypto", "/crypto/btc", "/crypto/eth", "/crypto/ethbtc", "/learn", "/plans", "/methods", "/about", "/feedback", "/feedback/thanks", "/email/crypto", "/charts", "/charts/multiplier-bands", "/charts/long-averages", "/charts/after-cycle-low", "/charts/rsi",
+  "/charts/sharpe-sortino", "/charts/trend-bands", "/charts/since-first-close", "/charts/hash-rate"];

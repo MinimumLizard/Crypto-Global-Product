@@ -306,3 +306,26 @@ dl.facts dd { margin: 0; font-weight: 500; font-variant-numeric: tabular-nums; }
 .tabs a { padding: var(--s1) var(--s4); border-radius: 999px; border: 1px solid var(--border); text-decoration: none; color: var(--muted); }
 .tabs a[aria-current="page"] { border-color: var(--accent); background: var(--accent); color: #ffffff; }
 .email-frame { border-radius: var(--radius); overflow: hidden; margin-top: var(--s3); }
+
+/* The chart library. */
+.chart-cards { display: grid; gap: var(--s3); grid-template-columns: 1fr; }
+@media (min-width: 720px) { .chart-cards { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1000px) { .chart-cards { grid-template-columns: repeat(3, 1fr); } }
+a.chart-card { color: var(--text); display: grid; gap: var(--s1); align-content: start; padding: var(--s4); }
+a.chart-card:hover { text-decoration: none; border-color: var(--accent); }
+a.chart-card strong { font-family: var(--display); font-size: 1.05rem; }
+a.chart-card.planned { background: var(--surface-2); box-shadow: none; }
+.card-tags { display: flex; gap: var(--s2); flex-wrap: wrap; align-items: center; margin-bottom: var(--s1); }
+.tier-pill.planned { color: var(--muted); border-style: dashed; }
+.data-badge { display: inline-block; font-size: 0.75rem; font-weight: 600; border-radius: 999px; padding: 1px 10px; }
+.data-badge.free { background: var(--up-soft); color: var(--up); }
+.data-badge.licence { background: var(--warn-bg); color: var(--warn-text); }
+.data-badge.paid { background: var(--down-soft); color: var(--down); }
+.data-legend { list-style: none; padding: 0; margin: 0 0 var(--s4); display: grid; gap: var(--s2); font-size: 0.9rem; color: var(--muted); }
+.chart-body { margin: var(--s4) 0 var(--s5); }
+.chart-body h2 { font-size: 1.15rem; margin: var(--s5) 0 var(--s2); }
+.chart-body .readings { margin-top: var(--s4); }
+.chart-body .readings h2 { margin-top: 0; }
+.explain-grid { margin-top: var(--s4); }
+.explain-grid h2 { font-size: 1.1rem; }
+.explain-grid p { margin: 0; color: var(--muted); font-size: 0.95rem; }

@@ -8,6 +8,7 @@ import { getTranslations } from "next-intl/server";
 import { SITE_WIDE_DISCLAIMERS } from "@/components/Disclaimer";
 import { CRYPTO_ASSETS, assetByPair, price } from "../crypto-display";
 import { cryptoCycle, cryptoOverview, cryptoTrend } from "../data/crypto";
+import { chartLatest } from "../data/charts";
 import type { Viewer } from "../entitlements";
 import { date, int, num, pct, ratio, tone } from "../format";
 import { registry } from "../registry";
@@ -71,6 +72,21 @@ async function cryptoSections(t: T, viewer: Viewer, links: Links): Promise<{ day
     });
   } else if (!trend.access.allowed || trend.access.maxDate) {
     sections.push({ title: t("email.crypto.trend"), locked: { text: t("email.crypto.trendLocked"), cta: t("email.crypto.seePlans"), href: plans, model: "crypto_trend_bands" } });
+  }
+  const lib = await chartLatest(viewer, "btcusd");
+  if (lib.access.allowed && !lib.access.maxDate && lib.data?.day) {
+    const v = lib.data.values;
+    const btcClose = rows.find((r) => r.pair === "btcusd")?.close ?? null;
+    sections.push({
+      title: t("email.crypto.library"), intro: t("email.crypto.libraryIntro"),
+      lines: [
+        { label: t("charts.lines.sma_350"), value: price(v.sma_350), note: v.sma_350 && btcClose ? t("email.crypto.libraryRatio", { value: ratio(btcClose / v.sma_350) }) : undefined },
+        { label: t("charts.lines.rsi_14w"), value: num(v.rsi_14w, 1) },
+        { label: t("charts.lines.sharpe_365d"), value: num(v.sharpe_365d, 2) },
+      ],
+    });
+  } else if (!lib.access.allowed || lib.access.maxDate) {
+    sections.push({ title: t("email.crypto.library"), locked: { text: t("email.crypto.libraryLocked"), cta: t("email.crypto.seePlans"), href: plans, model: "crypto_charts" } });
   }
   sections[sections.length - 1].link = { label: t("email.crypto.link"), href: `${links.site}/crypto` };
   return { day, sections, preheader: t("email.crypto.preheader", { btc: pct(week("btcusd"), 1), eth: pct(week("ethusd"), 1), date: date(day) }) };

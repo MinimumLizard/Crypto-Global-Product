@@ -12,6 +12,7 @@ export default async function SiteHeader({ viewer }: { viewer: Viewer }) {
     ["/", t("nav.home")],
     ["/learn", t("nav.learn")],
     ["/crypto", t("nav.crypto")],
+    ["/charts", t("nav.charts")],
     ["/methods", t("nav.methods")],
     ["/plans", t("nav.plans")],
   ] as const;

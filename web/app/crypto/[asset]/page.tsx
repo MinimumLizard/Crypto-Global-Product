@@ -12,10 +12,11 @@ import StatTile from "@/components/StatTile";
 import Term from "@/components/Term";
 import { lineOption, sig, weeklyPoints } from "@/lib/charts";
 import { assetBySlug, price } from "@/lib/crypto-display";
-import { type CycleAnchor, type CycleMonth, type TrendDay, cryptoCycle, cryptoHistory, cryptoTrend } from "@/lib/data/crypto";
+import { type CycleAnchor, type TrendDay, cryptoCycle, cryptoHistory, cryptoTrend } from "@/lib/data/crypto";
 import { NONE, date, int, num, pct, percent, ratio, tone } from "@/lib/format";
 import type { ModelName } from "@/lib/registry";
 import { decodeSegment } from "@/lib/params";
+import { monthGrid } from "@/lib/overlays";
 import { getViewer } from "@/lib/viewer";
 
 export const dynamic = "force-dynamic";
@@ -25,16 +26,6 @@ export async function generateMetadata({ params }: { params: Promise<{ asset: st
   if (!asset) return {};
   const t = await getTranslations();
   return { title: t(`crypto.assets.${asset.slug}` as never) };
-}
-
-function monthGrid(months: CycleMonth[]): { year: number; cells: (number | null | undefined)[] }[] {
-  const byYear = new Map<number, (number | null | undefined)[]>();
-  for (const m of months) {
-    const [y, mo] = m.month.split("-").map(Number);
-    if (!byYear.has(y)) byYear.set(y, Array(12).fill(undefined));
-    byYear.get(y)![mo - 1] = m.ret_month;
-  }
-  return [...byYear.entries()].sort((a, b) => b[0] - a[0]).map(([year, cells]) => ({ year, cells }));
 }
 
 export default async function CryptoAssetPage({ params }: { params: Promise<{ asset: string }> }) {

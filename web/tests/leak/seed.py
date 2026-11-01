@@ -71,6 +71,12 @@ def seed(conn) -> dict:
          "position": 0.4}
         for d, f in ((OLD, 98765.43), (NEW, 123456.78)) for fit in ("power_law", "log_regression")])
 
+    put("crypto_charts", "models.crypto_charts_series", [
+        {"pair": "btcusd", "series": "sma_350", "day": d, "value": v} for d, v in ((OLD, 43434.19), (NEW, 45454.21))] + [
+        {"pair": "btcusd", "series": k, "day": NEW, "value": v}
+        for k, v in (("rsi_14d", 52.5), ("rsi_14w", 57.25), ("sharpe_365d", 0.8125), ("sortino_365d", 1.0625),
+                     ("roi_730d", 0.25), ("roi_1460d", 2.5), ("macd", 120.5), ("macd_signal", 100.25), ("macd_hist", 20.25))])
+
     # A reference version beside the current one, and an unpublished statistic: shown to nobody.
     put("crypto_market", "models.crypto_market_daily", [{"pair": "btcusd", **market(NEW, 97979.79)}], version="0.9.0")
     put("crypto_cycle", "models.crypto_cycle_daily", [
@@ -90,6 +96,8 @@ def seed(conn) -> dict:
                              "old": {"api": ["33333.19", "61616.11"], "page": ["$33,333.19"]}},
             "crypto_trend_bands": {"new": {"api": ["123456.78"], "page": ["$123,456.78"]},
                                   "old": {"api": ["98765.43"], "page": ["$98,765.43"]}},
+            "crypto_charts": {"new": {"api": ["45454.21"], "page": ["$45,454.21"]},
+                              "old": {"api": ["43434.19"], "page": ["$43,434.19"]}},
         },
         # bitcoin's own page (formatted as that page shows it): each part only to the tiers that include it
         "crypto_page": {"crypto_market": {"new": ["$77,777.31"], "old": []},
@@ -100,7 +108,8 @@ def seed(conn) -> dict:
         # The first value is the one a subscriber with the tier sees; the rest must never appear.
         "email": {"crypto_market": ["$77,777.31"],
                   "crypto_cycle": ["$55,555.17", "$44,444.13", "$33,333.19"],
-                  "crypto_trend_bands": ["$123,456.78", "$98,765.43"]},
+                  "crypto_trend_bands": ["$123,456.78", "$98,765.43"],
+                  "crypto_charts": ["$45,454.21", "$43,434.19"]},
         # reference versions and unpublished statistics: never shown to anyone, raw or formatted
         "never": ["97979.79", "$97,979.79", "96969.69", "$96,969.69", "31.4159", "31.42"],
     }

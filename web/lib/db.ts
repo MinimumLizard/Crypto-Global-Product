@@ -53,6 +53,7 @@ const DATE_COLUMN: Record<string, string | null> = {
   "models.crypto_cycle_anchor": "day",
   "models.crypto_cycle_monthly": "day", // the month's last day
   "models.crypto_trend_band": "day",
+  "models.crypto_charts_series": "day",
 };
 
 export function dateColumn(table: string): string | null {

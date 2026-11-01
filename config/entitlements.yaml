@@ -20,6 +20,7 @@ models:
   crypto_cycle:         { minimum_tier: plus, free_preview: { delay_days: 7 } }
                         # long averages, Pi cycle lines, halvings, cycle table, monthly returns: free sees them a week late
   crypto_trend_bands:    { minimum_tier: pro }     # bitcoin's long-run trend bands, re-fitted daily
+  crypto_charts:        { minimum_tier: plus }    # the chart library's price lines: long averages, RSI, MACD, Bollinger, returns, risk, against bitcoin
 
 # Computed and stored, but served to nobody until the owner decides otherwise. models.model_stats holds figures a
 # model measures from its own outputs (e.g. how often a reading was followed by a given move); beside a live reading
