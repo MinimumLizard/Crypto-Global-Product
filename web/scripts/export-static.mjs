@@ -2,7 +2,7 @@
 // --public the free site as plain files for a static host (plan §12.5).
 //
 //   DATABASE_URL=... ALLOW_TEST_TIERS=1 npx next start -p 3100 &      # the site, on the data to show
-//   node scripts/export-static.mjs <out_dir> [--as-of "16 Oct 2026"] [--pro-details N]
+//   node scripts/export-static.mjs <out_dir> [--as-of "16 Oct 2026"] [--pro-details N] [--standalone]
 //   DATABASE_URL=... npx next start -p 3100 &                          # public: no test tiers at all
 //   node scripts/export-static.mjs <out_dir> --public
 //
@@ -24,6 +24,9 @@ const OUT = process.argv[2];
 const arg = (name) => (process.argv.includes(name) ? process.argv[process.argv.indexOf(name) + 1] : undefined);
 const AS_OF = arg("--as-of") ?? "";
 const PUBLIC = process.argv.includes("--public");
+// --standalone: every page is a whole document (for a static host such as GitHub Pages); without it the main page
+// carries only its content, because a claude.ai Artifact wraps it in a document itself
+const STANDALONE = PUBLIC || process.argv.includes("--standalone");
 // A published preview holds at most 511 files, so the Pro copy can be limited to the first N asset pages (the other
 // asset pages then show the Pro view greyed out in the banner). Unset: every asset page gets a Pro copy.
 const PRO_DETAILS = PUBLIC ? 0 : arg("--pro-details") === undefined ? Infinity : Number(arg("--pro-details"));
@@ -172,7 +175,7 @@ for (const [tier, map] of [["free", pages], ["pro", proPages]]) {
   for (const [path, html] of map) {
     const name = fileName(path, tier);
     const page = rewrite(html, path, tier);
-    const body = name === "index.html" && !PUBLIC ? bodyOnly(page) : page;
+    const body = name === "index.html" && !STANDALONE ? bodyOnly(page) : page;
     mkdirSync(join(OUT, name, ".."), { recursive: true });
     writeFileSync(join(OUT, name), body);
     files[name] = path + (tier === "pro" ? " (pro)" : "");

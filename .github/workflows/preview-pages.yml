@@ -1,0 +1,122 @@
+# The owners' live preview on GitHub Pages, behind a password (decision 0024).
+#
+# Builds the whole site from scratch on every run, in a throwaway database: Bitstamp's daily prices are collected
+# fresh, the models run, the site is built and copied page by page (the free view and the Research view, as the
+# private preview always was), and every page is then encrypted with the owners' password (StatiCrypt: AES-256, the
+# password never leaves the visitor's browser). Bitstamp's data may be used for development and the owners' private
+# preview only until its licence is signed (config/sources.yaml), so the pages are never published unencrypted:
+# without the PREVIEW_PASSWORD secret the job stops before deploying. Nothing is committed to the repository; the
+# pages go to GitHub Pages as a build artifact.
+#
+# One-time setup by the owners: Settings -> Pages -> Source: "GitHub Actions"; Settings -> Secrets and variables ->
+# Actions -> New repository secret PREVIEW_PASSWORD (a long password you share with each other).
+name: "Preview: password-protected site on GitHub Pages"
+
+on:
+  push:
+    branches: [claude/keen-cerf-l6ruel]
+    paths: ["web/**", "data_platform/**", "db/**", "config/**", ".github/workflows/preview-pages.yml"]
+  schedule:
+    - cron: "41 1 * * *"          # 01:41 UTC daily, after the UTC day's close
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: preview-pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_HOST_AUTH_METHOD: trust      # throwaway database: no password, so none appears in this file
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U postgres" --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      PREVIEW_PASSWORD: ${{ secrets.PREVIEW_PASSWORD }}
+      ADMIN_URL: postgresql://postgres@localhost:5432/postgres
+      DATABASE_URL: postgresql://postgres@localhost:5432/preview
+      RAW_STORE: local:${{ github.workspace }}/.raw
+      NEXT_TELEMETRY_DISABLED: "1"
+    outputs:
+      ready: ${{ steps.cfg.outputs.ready }}
+    steps:
+      - name: Password set?
+        id: cfg
+        run: |
+          if [ -z "$PREVIEW_PASSWORD" ]; then
+            echo "::notice::PREVIEW_PASSWORD secret not set. Nothing is published without it."
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          fi
+      - uses: actions/checkout@v4
+        if: steps.cfg.outputs.ready == 'true'
+      - uses: astral-sh/setup-uv@v5
+        if: steps.cfg.outputs.ready == 'true'
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        if: steps.cfg.outputs.ready == 'true'
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - name: Data (collect Bitstamp, run the models)
+        if: steps.cfg.outputs.ready == 'true'
+        run: |
+          uv sync --frozen --no-dev
+          psql "$ADMIN_URL" -c "create database preview"
+          uv run --no-dev python -m data_platform.jobs.migrate
+          uv run --no-dev python -m data_platform.jobs.collect bitstamp
+          uv run --no-dev python -m data_platform.jobs.models
+          psql "$DATABASE_URL" -c "alter role web_reader with login"
+      - name: Build the site and copy it page by page
+        if: steps.cfg.outputs.ready == 'true'
+        working-directory: web
+        run: |
+          npm ci
+          npm run build
+          DATABASE_URL=postgresql://web_reader@localhost:5432/preview ALLOW_TEST_TIERS=1 npx next start -p 3100 > next.log 2>&1 &
+          for i in $(seq 1 60); do curl -sf -o /dev/null http://127.0.0.1:3100/ && break; sleep 1; done
+          AS_OF="$(date -u -d yesterday '+%-d %b %Y')"
+          BASE=http://127.0.0.1:3100 node scripts/export-static.mjs ../preview-plain --as-of "$AS_OF" --standalone
+          rm -f ../preview-plain/manifest.json
+      - name: Encrypt every page with the owners' password
+        if: steps.cfg.outputs.ready == 'true'
+        run: |
+          mkdir -p preview-site
+          # The salt is not a secret (every encrypted page carries it); a fixed one keeps "Remember me" working
+          # from one day's build to the next.
+          STATICRYPT_PASSWORD="$PREVIEW_PASSWORD" npx --yes staticrypt@3.5.4 preview-plain/*.html -d preview-site \
+            --config false --salt 4a3837302963dad62f491ef17e1d612e --remember 30 --short \
+            --template-title "Cointrigue preview" --template-instructions "Private preview for the owners." \
+            --template-button "Open" --template-color-primary "#1d5fd6" --template-color-secondary "#eaf1fd"
+          # never publish a page that is not encrypted
+          for f in preview-site/*.html; do grep -q 'staticrypt' "$f" || { echo "::error::$f is not encrypted"; exit 1; }; done
+          test "$(ls preview-site/*.html | wc -l)" = "$(ls preview-plain/*.html | wc -l)"
+          touch preview-site/.nojekyll
+      - uses: actions/upload-pages-artifact@v3
+        if: steps.cfg.outputs.ready == 'true'
+        with:
+          path: preview-site
+
+  deploy:
+    needs: build
+    if: needs.build.outputs.ready == 'true'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
