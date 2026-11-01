@@ -30,7 +30,7 @@ jobs:
           python-version: "3.12"
       - run: uv sync --frozen --no-dev
       - run: uv run --no-dev python -m data_platform.jobs.migrate
-      - name: Collect (first run: the whole chain)
+      - name: "Collect (first run: the whole chain)"
         run: time uv run --no-dev python -m data_platform.jobs.collect bitcoin_network
       - name: Collect again (only new blocks)
         run: uv run --no-dev python -m data_platform.jobs.collect bitcoin_network
