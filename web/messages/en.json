@@ -14,7 +14,8 @@
     "feedback": "Feedback",
     "weekly": "Weekly e-mail",
     "label": "Main",
-    "charts": "Charts"
+    "charts": "Charts",
+    "start": "Start here"
   },
   "tiers": {
     "free": "Free",
@@ -44,8 +45,6 @@
     "eyebrow": "Crypto, explained",
     "heroTitle": "Understand crypto markets, one chart at a time",
     "heroSub": "Plain-English lessons and charts on bitcoin and the largest coins. Every number comes with what it means, how it is calculated and what it cannot tell you.",
-    "ctaLearn": "Start with the basics",
-    "ctaPrices": "See today's prices",
     "todayTitle": "Today in 30 seconds",
     "todayWhen": "Closing prices for {date}",
     "briefAsset": "{name} closed at {price}, {change} on the day. That is {below} below its highest close so far.",
@@ -1307,6 +1306,83 @@
         ]
       }
     },
-    "see": "See it on the site:"
+    "see": "See it on the site:",
+    "voteQuestion": "Was this lesson useful?",
+    "foundUseful": "{n, plural, one {# person} other {# people}} found this lesson useful."
+  },
+  "start": {
+    "title": "Start here",
+    "question": "Where are you starting from?",
+    "intro": "Pick the one closest to you. We'll show you where to begin: three short steps, no sign-up.",
+    "change": "Choose a different starting point",
+    "seenLabel": "You're not alone",
+    "stepsTitle": "Your next three steps",
+    "stepsSub": "Based on your answers, here's where to start learning. Take them in order, at your own pace.",
+    "begin": "Start with step 1",
+    "kindLesson": "Lesson",
+    "kindChart": "Chart",
+    "kindPage": "Page",
+    "note": "We only ask what you'd like to learn about, never about your money or your plans. Everything here is general education, not advice about what to do with your money.",
+    "links": {
+      "glossary": "Glossary of terms",
+      "glossarySummary": "Plain-English definitions of the words used in the charts."
+    },
+    "paths": {
+      "new": {
+        "choice": "I'm completely new to crypto",
+        "hint": "Never owned any, and not sure what it is.",
+        "title": "Starting from zero",
+        "intro": "Everyone starts here. A few short lessons take you from “what is it?” to understanding the basics, with no jargon left unexplained.",
+        "question": "What would you like to understand first?",
+        "options": {
+          "how-it-works": "How crypto works",
+          "safety": "How people keep their coins safe",
+          "prices": "Why prices move so much"
+        },
+        "stats": []
+      },
+      "curious": {
+        "choice": "I know a bit, but haven't started",
+        "hint": "You've heard about it, maybe read about it, but haven't put any money in.",
+        "title": "You know a bit, and you haven't started",
+        "intro": "That's where most people are. It helps to understand what's actually involved first: these steps cover what people most often wish they had known.",
+        "question": "What has held you back so far?",
+        "options": {
+          "where-to-start": "Not knowing where to begin",
+          "scams": "Worry about scams",
+          "losing-money": "Worry about losing money",
+          "jargon": "The jargon"
+        },
+        "stats": []
+      },
+      "holder": {
+        "choice": "I own some, but I'm confused",
+        "hint": "You have some crypto and want to understand what's going on.",
+        "title": "You own some crypto and want to make sense of it",
+        "intro": "Many people start before they feel they understand it. These steps explain what you're seeing in the price, in plain English.",
+        "question": "What confuses you most?",
+        "options": {
+          "price-swings": "Why the price swings so much",
+          "charts": "How to read the charts",
+          "cycles": "What people mean by “cycles”",
+          "safety": "Keeping coins safe"
+        },
+        "stats": []
+      },
+      "investor": {
+        "choice": "I invest and want deeper analysis",
+        "hint": "You follow the market and want the full chart library.",
+        "title": "Deeper analysis",
+        "intro": "Go straight to the chart library: long averages, cycles, momentum, risk and the Bitcoin network, each with its method and its limits.",
+        "question": "What do you look at most?",
+        "options": {
+          "cycles": "Cycles and long-run trends",
+          "momentum": "Momentum",
+          "network": "The Bitcoin network",
+          "risk": "Risk and correlation"
+        },
+        "stats": []
+      }
+    }
   }
 }

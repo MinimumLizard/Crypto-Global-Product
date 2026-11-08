@@ -117,6 +117,18 @@ export async function readOutput<T = Record<string, unknown>>(access: Granted, t
   return result.rows as T[];
 }
 
+/** How many people found a page useful: a real count of senders whose latest vote said so, or null below the
+ * database's minimum (migration 0008). The website cannot read the votes themselves. */
+export async function usefulCount(page: string): Promise<number | null> {
+  try {
+    const result = await getPool().query("select community.useful_count($1) as n", [page]);
+    const n = result.rows[0]?.n;
+    return typeof n === "number" ? n : null;
+  } catch {
+    return null; // a count is a nicety: never break a lesson page over it
+  }
+}
+
 // The website's only write. Its database role cannot read or change the feedback table; it can only call this
 // function, which checks every field again and limits how often one sender can write (migration 0004).
 export async function submitFeedback(input: FeedbackInput, viewerTier: string, senderKey: string): Promise<Outcome> {

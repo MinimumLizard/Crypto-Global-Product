@@ -5,6 +5,7 @@ import Chart from "@/components/Chart";
 import CryptoNotice from "@/components/CryptoNotice";
 import Locked from "@/components/Locked";
 import ModelFooter from "@/components/ModelFooter";
+import PathChooser from "@/components/PathChooser";
 import PreviewNote from "@/components/PreviewNote";
 import Sparkline from "@/components/Sparkline";
 import Term from "@/components/Term";
@@ -55,10 +56,7 @@ export default async function Home() {
           <div className="eyebrow">{t("home.eyebrow")}</div>
           <h1>{t("home.heroTitle")}</h1>
           <p className="lead">{t("home.heroSub")}</p>
-          <div className="actions">
-            <Link className="button" href="#lessons">{t("home.ctaLearn")}</Link>
-            <Link className="button secondary" href="/crypto">{t("home.ctaPrices")}</Link>
-          </div>
+          <PathChooser />
         </div>
         {brief.length > 0 && day && (
           <aside className="today" aria-labelledby="today-title">

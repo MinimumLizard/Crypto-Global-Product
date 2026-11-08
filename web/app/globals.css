@@ -336,3 +336,33 @@ a.chart-card.planned { background: var(--surface-2); box-shadow: none; }
 .lesson h2 { font-size: 1.3rem; margin-top: var(--s5); }
 .lesson p { font-size: 1.05rem; line-height: 1.7; }
 .explain ul { margin: var(--s1) 0 0; padding-left: 1.2em; }
+
+/* "Was this lesson useful?" at the end of a lesson. */
+.lesson-vote { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s3); margin-top: var(--s5); padding: var(--s4); border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface-2); }
+.lesson-vote .buttons { display: inline-flex; gap: var(--s2); }
+.lesson-vote button { font: inherit; color: var(--text); background: var(--surface); border: 1px solid var(--border); border-radius: 999px; padding: 4px 16px; cursor: pointer; }
+.lesson-vote button:hover { border-color: var(--accent); color: var(--accent); }
+
+/* "Where are you starting from?" */
+.chooser h2 { margin-top: 0; }
+.chooser-options { display: grid; gap: var(--s3); grid-template-columns: 1fr; }
+@media (min-width: 720px) { .chooser-options { grid-template-columns: 1fr 1fr; } }
+a.chooser-option { display: grid; gap: 2px; padding: var(--s4) var(--s5); border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); color: var(--text); box-shadow: var(--shadow); }
+a.chooser-option strong { font-family: var(--display); font-size: 1.1rem; }
+a.chooser-option span { color: var(--muted); font-size: 0.92rem; }
+a.chooser-option:hover { text-decoration: none; border-color: var(--accent); background: var(--accent-soft); }
+.start { max-width: 860px; }
+.seen { list-style: none; padding: 0; margin: var(--s4) 0; display: grid; gap: var(--s3); grid-template-columns: 1fr; }
+@media (min-width: 720px) { .seen { grid-template-columns: 1fr 1fr; } }
+.seen li { display: grid; gap: 2px; padding: var(--s4); border-radius: var(--radius); background: var(--tint); }
+.seen strong { font-family: var(--display); font-size: 1.6rem; color: var(--accent-strong); }
+.seen a { color: var(--muted); }
+.focus { margin: var(--s5) 0; }
+.focus h2 { margin-top: 0; font-size: 1.2rem; }
+.focus-options { display: flex; flex-wrap: wrap; gap: var(--s2); }
+.focus-options a { padding: 8px 16px; border: 1px solid var(--border); border-radius: 999px; color: var(--text); background: var(--surface); }
+.focus-options a:hover { text-decoration: none; border-color: var(--accent); }
+.focus-options a[aria-current="true"] { background: var(--accent); border-color: var(--accent); color: #ffffff; }
+.start-steps { grid-template-columns: 1fr !important; }
+.hero .chooser { margin-top: var(--s4); }
+.hero .chooser h2 { font-size: 1.2rem; margin-bottom: var(--s3); }

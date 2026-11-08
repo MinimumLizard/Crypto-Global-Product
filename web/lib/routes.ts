@@ -18,4 +18,4 @@ export const DETAIL_PAGES = ["/crypto/btc", "/crypto/eth", "/crypto/ethbtc"];
 // Every page of the site, for the checks that apply to all of them (no paid data for free visitors, ever).
 // The weekly e-mail's preview is a page like any other, so every e-mail is covered too.
 export const ALL_PAGES = ["/", "/crypto", "/crypto/btc", "/crypto/eth", "/crypto/ethbtc", "/learn", "/plans", "/methods", "/about", "/feedback", "/feedback/thanks", "/email/crypto", "/charts", "/charts/multiplier-bands", "/charts/long-averages", "/charts/after-cycle-low", "/charts/rsi",
-  "/charts/sharpe-sortino", "/charts/trend-bands", "/charts/since-first-close", "/charts/hash-rate", "/charts/supply-issuance", "/charts/halving-countdown", "/learn/basics/what-is-bitcoin", "/learn/basics/scams"];
+  "/charts/sharpe-sortino", "/charts/trend-bands", "/charts/since-first-close", "/charts/hash-rate", "/charts/supply-issuance", "/charts/halving-countdown", "/learn/basics/what-is-bitcoin", "/learn/basics/scams", "/start", "/start/new", "/start/curious?focus=scams", "/start/holder", "/start/investor?focus=network"];

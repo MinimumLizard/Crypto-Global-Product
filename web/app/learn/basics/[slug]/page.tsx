@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 
+import { foundUseful } from "@/lib/data/feedback";
 import { LESSONS, lessonIndex } from "@/lib/lessons";
 import { decodeSegment } from "@/lib/params";
 
@@ -22,6 +23,8 @@ export default async function LessonPage({ params }: { params: Promise<{ slug: s
   const sections = t.raw(k("sections")) as { heading: string; paragraphs: string[] }[];
   const points = t.raw(k("points")) as string[];
   const next = LESSONS[i + 1];
+  const path = `/learn/basics/${lesson.slug}`;
+  const found = await foundUseful(path);
   const seeLabel = (href: string) =>
     href.startsWith("/charts/") ? t(`charts.items.${href.slice(8)}.title` as never)
     : href.startsWith("/learn#") ? t(`learn.terms.${href.slice(7)}.name` as never)
@@ -48,6 +51,16 @@ export default async function LessonPage({ params }: { params: Promise<{ slug: s
           {lesson.see.map((href, j) => <span key={href}>{j > 0 && " · "}<Link href={href}>{seeLabel(href)}</Link></span>)}
         </p>
       )}
+      <form className="lesson-vote" method="post" action="/api/feedback">
+        <input type="hidden" name="kind" value="page_vote" />
+        <input type="hidden" name="page" value={path} />
+        <strong>{t("basics.voteQuestion")}</strong>
+        <span className="buttons">
+          <button type="submit" name="useful" value="yes">{t("feedback.vote.yes")}</button>
+          <button type="submit" name="useful" value="no">{t("feedback.vote.no")}</button>
+        </span>
+        {found != null && <span className="muted small">{t("basics.foundUseful", { n: found })}</span>}
+      </form>
       {next && (
         <p style={{ marginTop: 24 }}>
           <Link className="button" href={`/learn/basics/${next.slug}`}>{t("basics.next")}: {t(`basics.lessons.${next.slug}.title` as never)} →</Link>

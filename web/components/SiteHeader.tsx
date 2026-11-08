@@ -10,6 +10,7 @@ export default async function SiteHeader({ viewer }: { viewer: Viewer }) {
   const t = await getTranslations();
   const links = [
     ["/", t("nav.home")],
+    ["/start", t("nav.start")],
     ["/learn", t("nav.learn")],
     ["/crypto", t("nav.crypto")],
     ["/charts", t("nav.charts")],
