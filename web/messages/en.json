@@ -1339,7 +1339,20 @@
           "safety": "How people keep their coins safe",
           "prices": "Why prices move so much"
         },
-        "stats": []
+        "stats": [
+          {
+            "value": "9 in 10",
+            "text": "UK adults have heard of crypto, but fewer than 1 in 10 own any.",
+            "source": "UK Financial Conduct Authority, consumer research 2025",
+            "url": "https://www.fca.org.uk/publication/research-notes/cryptoasset-consumer-research-2025-wave-6.pdf"
+          },
+          {
+            "value": "1 in 3",
+            "text": "adults worldwide reach a basic level of financial knowledge, and only 41% know that crypto is not legal tender.",
+            "source": "OECD/INFE adult financial literacy survey 2023, 39 countries",
+            "url": "https://www.oecd.org/content/dam/oecd/en/publications/reports/2023/12/oecd-infe-2023-international-survey-of-adult-financial-literacy_8ce94e2c/56003a32-en.pdf"
+          }
+        ]
       },
       "curious": {
         "choice": "I know a bit, but haven't started",
@@ -1353,7 +1366,20 @@
           "losing-money": "Worry about losing money",
           "jargon": "The jargon"
         },
-        "stats": []
+        "stats": [
+          {
+            "value": "35%",
+            "text": "of Australians planning to start investing say what stops them is not feeling confident in their knowledge, and half say they'll start once they know more.",
+            "source": "ASX Australian Investor Study 2026 (investing in general)",
+            "url": "https://www.asx.com.au/content/dam/asx/investors/investment-tools-and-resources/ais/asx-australian-investor-study-2026.pdf"
+          },
+          {
+            "value": "No. 1",
+            "text": "reason UK adults who know about crypto give for not getting into it: not understanding how it works.",
+            "source": "UK Financial Conduct Authority, consumer research 2025",
+            "url": "https://www.fca.org.uk/publication/research-notes/cryptoasset-consumer-research-2025-wave-6.pdf"
+          }
+        ]
       },
       "holder": {
         "choice": "I own some, but I'm confused",
@@ -1367,7 +1393,20 @@
           "cycles": "What people mean by “cycles”",
           "safety": "Keeping coins safe"
         },
-        "stats": []
+        "stats": [
+          {
+            "value": "Half",
+            "text": "of UK crypto owners say they understand how it works, and only 42% of those with £1,000 or less in it.",
+            "source": "UK Financial Conduct Authority, consumer research 2025",
+            "url": "https://www.fca.org.uk/publication/research-notes/cryptoasset-consumer-research-2025-wave-6.pdf"
+          },
+          {
+            "value": "4 in 10",
+            "text": "Australian crypto investors say crypto was the first investment they ever made.",
+            "source": "ASX Australian Investor Study 2026",
+            "url": "https://www.asx.com.au/content/dam/asx/investors/investment-tools-and-resources/ais/asx-australian-investor-study-2026.pdf"
+          }
+        ]
       },
       "investor": {
         "choice": "I invest and want deeper analysis",
@@ -1381,7 +1420,20 @@
           "network": "The Bitcoin network",
           "risk": "Risk and correlation"
         },
-        "stats": []
+        "stats": [
+          {
+            "value": "24%",
+            "text": "of Australian investors own crypto or traded it in the past year, up from 15% in 2023.",
+            "source": "ASX Australian Investor Study 2026",
+            "url": "https://www.asx.com.au/content/dam/asx/investors/investment-tools-and-resources/ais/asx-australian-investor-study-2026.pdf"
+          },
+          {
+            "value": "36%",
+            "text": "of all money reported lost to Scamwatch in 2025 was paid in crypto.",
+            "source": "National Anti-Scam Centre, Targeting scams 2025 (Scamwatch reports)",
+            "url": "https://www.nasc.gov.au/system/files/targeting-scams-report-2025.pdf"
+          }
+        ]
       }
     }
   }

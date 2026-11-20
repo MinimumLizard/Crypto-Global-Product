@@ -1,5 +1,19 @@
 # Changelog
 
+## 2026-11-08 — Janu's feedback: start from where the visitor is
+
+- The front page opens with **"Where are you starting from?"** (new to crypto; knows a bit but hasn't started; owns
+  some but confused; invests and wants deeper analysis). Each leads to `/start/…`: two sourced statistics so
+  people feel seen (FCA, ASX, OECD, National Anti-Scam Centre; source beside each), **one** question about what they
+  want to understand first, and **three** next steps. Questions are about knowledge only, never money or goals
+  (that would be personal advice: hard rule 3). "Start here" joins the menu.
+- **"Was this lesson useful?"** after every lesson, and the real count once 25 different people have said yes
+  (migration 0008: the website reads one number, never the votes).
+- Decision 0025 records the chart library, the free network data and Janu's feedback, including what waits: a free
+  week of Research for a review (needs accounts; disclosure rules), a chatbot (cost, lawyer), e-mail capture, and
+  care over Sri Lanka (the central bank's 2023 warning against promoting crypto).
+- Checks: Python 133 passed + 2 skipped, web unit 76, type check, build, tier-leak 36, copy lint clean.
+
 ## 2026-11-01 — The chart library, the Bitcoin network, the basics course, a live preview
 
 - **Chart library** (`/charts`): 30 live charts and 21 planned, by topic, each tagged with the data it needs and

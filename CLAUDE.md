@@ -46,6 +46,14 @@ terms), the Crypto basics course, and the password-protected GitHub Pages previe
 licence and what is free: `docs/charts.md`. Next: macro from US agencies, market caps from CoinMarketCap's free plan
 (needs the owners' API key), on-chain once there is a node.
 
+**2026-11-08 (Janu's feedback, decision 0025):** the front page asks "Where are you starting from?" and each answer
+has its own page (`/start/…`, `web/lib/onboarding.ts`): sourced statistics, one question about **knowledge only**
+(never money or goals: personal advice), three next steps. Lessons end with "Was this lesson useful?" and show real
+counts only (migration 0008). Waiting: review-for-a-free-week (accounts), chatbot (owners' decision, cost, lawyer),
+e-mail capture. The owners have not yet answered whether to use the openly labelled Kaggle copy of Bitstamp's
+bitcoin history (provenance risk, `docs/charts.md`), nor set up GitHub Pages (decision 0024). Uncommitted work is
+lost when the cloud container resets: commit as you go.
+
 - Done: verified safety copy of the old Crypto repo; the platform, Bitstamp collector, three crypto models, website,
   weekly e-mail, CI and tier-leak suite ported, with every test passing locally and in CI; 30 public cross-checks pass
   on Bitstamp's history; `docs/audit.md` (old Crypto tool); `docs/plan.md`.
