@@ -138,9 +138,15 @@ function banner(path, tier) {
   return `<div style="${style}"><strong>Preview copy of Cointrigue</strong><span>Real data${AS_OF ? ` to ${AS_OF}` : ""}; not yet the live site.</span><span>Viewing as:</span>${view}</div>`;
 }
 
+// The site's own plain script (public/terminal.js: sorting, search, stars, the portfolio tracker) is kept, inlined;
+// every other script is the app's and is dropped.
+const TERMINAL = await (await fetch(BASE + "/terminal.js")).text();
+
 function rewrite(html, path, tier) {
   let out = html
+    .replace(/<script\b[^>]*data-static[^>]*><\/script>/g, "<!--terminal-->")
     .replace(/<script\b[^>]*>[\s\S]*?<\/script>/g, "")
+    .replace("<!--terminal-->", () => `<script>${TERMINAL.replace(/<\/script/gi, "<\\/script")}</script>`)
     .replace(/<link\b[^>]*rel="(?:preload|modulepreload|icon|apple-touch-icon|manifest)"[^>]*>/g, "")
     .replace(/<link rel="stylesheet" href="[^"]+\.css"[^>]*>/g, "")
     .replace(/<meta name="next-size-adjust"[^>]*>/g, "")

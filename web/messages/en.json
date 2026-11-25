@@ -6,7 +6,7 @@
   },
   "nav": {
     "home": "Home",
-    "crypto": "Prices",
+    "crypto": "Markets",
     "methods": "Methods",
     "about": "About",
     "learn": "Learn",
@@ -15,7 +15,8 @@
     "weekly": "Weekly e-mail",
     "label": "Main",
     "charts": "Charts",
-    "start": "Start here"
+    "start": "Start here",
+    "portfolio": "My coins"
   },
   "tiers": {
     "free": "Free",
@@ -102,7 +103,8 @@
     },
     "plansTitle": "Plans",
     "plansBody": "The main bitcoin and ether figures, the weekly e-mail and every Learn page are free. Paid plans add the full chart library and, later, macro and global markets with written analysis. Accounts are not open yet.",
-    "plansLink": "See the plans"
+    "plansLink": "See the plans",
+    "continue": "Continue where you left off:"
   },
   "methods": {
     "title": "Methods",
@@ -1436,5 +1438,69 @@
         ]
       }
     }
+  },
+  "markets": {
+    "tableTitle": "All coins",
+    "price": "Price",
+    "fromHigh": "From the high",
+    "vol30": "Volatility, 30 days",
+    "last90": "Last 90 days",
+    "coin": "Coin",
+    "search": "Search coins",
+    "watchOnly": "My watchlist only",
+    "watch": "Add to watchlist",
+    "unwatch": "Remove from watchlist",
+    "gainers1d": "Biggest rises today",
+    "losers1d": "Biggest falls today",
+    "gainers7d": "Biggest rises this week",
+    "losers7d": "Biggest falls this week",
+    "none": "None today."
+  },
+  "portfolio": {
+    "title": "My coins",
+    "intro": "Your watchlist and a simple portfolio tracker. Everything you enter stays in this browser only: nothing is sent to us, and clearing your browser's data removes it.",
+    "watchTitle": "Watchlist",
+    "watchEmpty": "Your watchlist is empty. Tap the star next to any coin on the markets page or a coin's page to add it.",
+    "portTitle": "Portfolio tracker",
+    "portIntro": "Enter how much of each coin you have, and if you like what you paid per coin. The tracker values them at the latest daily close and shows each coin's share of the total. It is a calculator, not advice.",
+    "coin": "Coin",
+    "choose": "Choose a coin",
+    "amount": "Amount",
+    "paid": "Price paid per coin (optional)",
+    "add": "Add",
+    "price": "Latest close",
+    "value": "Value",
+    "share": "Share",
+    "change": "Change since paid",
+    "remove": "Remove",
+    "clear": "Clear the portfolio",
+    "total": "Total value",
+    "totalChange": "Change since paid (all coins)",
+    "empty": "No coins yet. Add one above.",
+    "needsJs": "The watchlist and the tracker need JavaScript turned on in your browser.",
+    "note": "Values use each coin's latest daily close in US dollars, so they will differ from an exchange's live price. Data for {date}."
+  },
+  "search": {
+    "label": "Search coins, charts and lessons",
+    "placeholder": "Search coins, charts, lessons",
+    "coin": "Coin",
+    "chart": "Chart",
+    "lesson": "Lesson",
+    "page": "Page"
+  },
+  "coin": {
+    "watch": "Add to watchlist",
+    "unwatch": "Remove from watchlist",
+    "keyStats": "Key figures",
+    "range52": "52-week range",
+    "rangeAll": "All-time range",
+    "low": "Low",
+    "high": "High",
+    "atl": "Lowest close",
+    "ath": "Highest close",
+    "firstClose": "First close in our data",
+    "daysSinceAth": "Days since the highest close",
+    "chartsTitle": "Every chart for {name}",
+    "chartsIntro": "The chart library's charts that cover {name}. Charts marked with a plan need that plan."
   }
 }

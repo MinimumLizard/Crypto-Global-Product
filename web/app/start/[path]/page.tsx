@@ -33,6 +33,7 @@ export default async function StartPathPage({ params, searchParams }: {
   return (
     <div className="start">
       <p className="small"><Link href="/start">← {t("start.change")}</Link></p>
+      <div hidden data-remember-path={path} />
       <h1>{t(`start.paths.${path}.title`)}</h1>
       <p className="lead">{t(`start.paths.${path}.intro`)}</p>
 

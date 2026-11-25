@@ -29,6 +29,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           </NextIntlClientProvider>
         </main>
         <SiteFooter />
+        {/* Sorting, search, stars and the portfolio tracker: plain JavaScript, kept in static copies too. */}
+        <script src="/terminal.js" defer data-static="" />
       </body>
     </html>
   );

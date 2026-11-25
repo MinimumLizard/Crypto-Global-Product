@@ -14,6 +14,7 @@ import { CRYPTO_ASSETS, assetByPair, price } from "@/lib/crypto-display";
 import { type MarketDay, cryptoCycle, cryptoHistory, cryptoOverview } from "@/lib/data/crypto";
 import { date, pct, percent, tone } from "@/lib/format";
 import { LESSONS } from "@/lib/lessons";
+import { PATHS } from "@/lib/onboarding";
 import { getViewer } from "@/lib/viewer";
 
 export const dynamic = "force-dynamic";
@@ -56,6 +57,12 @@ export default async function Home() {
           <div className="eyebrow">{t("home.eyebrow")}</div>
           <h1>{t("home.heroTitle")}</h1>
           <p className="lead">{t("home.heroSub")}</p>
+          <p className="continue" data-continue="" hidden>
+            {t("home.continue")}{" "}
+            {PATHS.map((p) => (
+              <Link key={p} href={`/start/${p}`} data-continue-path={p} hidden>{t(`start.paths.${p}.title`)} →</Link>
+            ))}
+          </p>
           <PathChooser />
         </div>
         {brief.length > 0 && day && (

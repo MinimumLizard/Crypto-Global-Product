@@ -8,6 +8,7 @@ import CryptoNotice from "@/components/CryptoNotice";
 import Locked from "@/components/Locked";
 import ModelFooter from "@/components/ModelFooter";
 import PreviewNote from "@/components/PreviewNote";
+import Sparkline from "@/components/Sparkline";
 import StatTile from "@/components/StatTile";
 import Term from "@/components/Term";
 import { lineOption, sig, weeklyPoints } from "@/lib/charts";
@@ -17,6 +18,7 @@ import { NONE, date, int, num, pct, percent, ratio, tone } from "@/lib/format";
 import type { ModelName } from "@/lib/registry";
 import { decodeSegment } from "@/lib/params";
 import { monthGrid } from "@/lib/overlays";
+import { CHARTS, chartTier, isLive } from "@/lib/chart-catalogue";
 import { getViewer } from "@/lib/viewer";
 
 export const dynamic = "force-dynamic";
@@ -46,6 +48,10 @@ export default async function CryptoAssetPage({ params }: { params: Promise<{ as
   const daily = cyc?.daily ?? [];
   const lc = daily[daily.length - 1];
   const p = (v: number | null | undefined) => price(v, asset.quote);
+  const year = rows.slice(-365);
+  const low = rows.reduce((m, r) => (r.close < m.close ? r : m), rows[0] ?? { close: NaN, day: "" });
+  const libCharts = CHARTS.filter((c) => isLive(c) && asset.quote === "USD"
+    && (c.assets === "usd" || (c.assets === "alts" && asset.slug !== "btc") || (c.assets === "btc" && asset.slug === "btc")));
   const unit = asset.quote === "USD" ? "USD" : "BTC";
   const models: ModelName[] = ["crypto_market", ...(asset.cycle ? (["crypto_cycle"] as const) : []), ...(isBtc ? (["crypto_trend_bands"] as const) : [])];
 
@@ -66,52 +72,55 @@ export default async function CryptoAssetPage({ params }: { params: Promise<{ as
   return (
     <>
       <p className="small"><Link href="/crypto">← {t("crypto.title")}</Link></p>
-      <h1>{name}</h1>
+      <div className="coin-head">
+        <h1>{name} <span className="code">{asset.label}</span></h1>
+        <button type="button" className="star big" data-star={asset.slug} aria-pressed="false" hidden data-needs-js=""
+                data-label-on={t("coin.unwatch")} data-label-off={t("coin.watch")} aria-label={t("coin.watch")}>☆</button>
+      </div>
       {last && <p className="lead">{t("cryptoAsset.pairLine", { pair: asset.label, date: date(rows[0].day) })}</p>}
       <CryptoNotice />
       {!history.access.allowed ? (
         <Locked access={history.access} />
       ) : (
         <>
-          <AsOf day={last.day} calendar="crypto" />
-          <div className="tiles">
-            <StatTile label={t("cryptoAsset.latest")} value={p(last.close)} change={last.ret_1d}
-                      spark={rows.slice(-90).map((r) => r.close)} sparkCaption={t("crypto.last90")} />
-            <div className="tile stat">
-              <span className="label"><Term id="drawdown">{t("cryptoAsset.drawdown")}</Term></span>
-              <span className="value">{pct(last.drawdown)}</span>
-              <span className="sub">
-                {t("cryptoAsset.high")}: {p(last.ath_close)}, {t("cryptoAsset.highOn", { date: date(last.ath_day), days: int(last.days_since_ath) })}
-              </span>
-            </div>
-            <div className="tile stat">
-              <span className="label"><Term id="volatility">{t("cryptoAsset.vol30")}</Term></span>
-              <span className="value">{percent(last.vol_30d == null ? null : last.vol_30d * 100, 0)}</span>
-              <span className="sub">
-                {t("cryptoAsset.vol90")}: {percent(last.vol_90d == null ? null : last.vol_90d * 100, 0)} · {t("cryptoAsset.volNote")}
-              </span>
-            </div>
+          <div className="coin-price">
+            <span className="big-price">{p(last.close)}</span>
+            {([["d1", last.ret_1d], ["d7", last.ret_7d], ["d30", last.ret_30d], ["y1", last.ret_1y]] as const).map(([k, v]) => (
+              <span key={k} className="chip-group"><span className="muted small">{t(`crypto.${k}`)}</span> <span className={`chip ${tone(v)}`}>{pct(v)}</span></span>
+            ))}
           </div>
-          {asset.slug === "eth" && <p className="small" style={{ marginTop: 8 }}><Link href="/crypto/ethbtc">{t("cryptoAsset.ethbtc")} →</Link></p>}
-
-          <h2>{t("cryptoAsset.returns")}</h2>
-          <div className="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>{t("cryptoAsset.window")}</th>
-                  <th className="num">{t("cryptoAsset.change")}</th>
-                </tr>
-              </thead>
-              <tbody>
-                {([["d1", last.ret_1d], ["d7", last.ret_7d], ["d30", last.ret_30d], ["y1", last.ret_1y]] as const).map(([k, v]) => (
-                  <tr key={k}>
-                    <td>{t(`crypto.${k}`)}</td>
-                    <td className={`num ${tone(v)}`}>{pct(v)}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <AsOf day={last.day} calendar="crypto" />
+          <div className="grid two">
+            <section className="card">
+              <h2>{t("coin.keyStats")}</h2>
+              <dl className="facts">
+                <dt>{t("coin.ath")}</dt><dd>{p(last.ath_close)} · {date(last.ath_day)}</dd>
+                <dt>{t("coin.atl")}</dt><dd>{p(low.close)} · {date(low.day)}</dd>
+                <dt>{t("coin.daysSinceAth")}</dt><dd>{int(last.days_since_ath)}</dd>
+                <dt><Term id="drawdown">{t("cryptoAsset.drawdown")}</Term></dt><dd>{pct(last.drawdown)}</dd>
+                <dt><Term id="volatility">{t("cryptoAsset.vol30")}</Term></dt><dd>{percent(last.vol_30d == null ? null : last.vol_30d * 100, 0)} · {t("cryptoAsset.vol90")} {percent(last.vol_90d == null ? null : last.vol_90d * 100, 0)}</dd>
+                <dt>{t("coin.firstClose")}</dt><dd>{p(rows[0].close)} · {date(rows[0].day)}</dd>
+              </dl>
+              {asset.slug === "eth" && <p className="small" style={{ marginTop: 8, marginBottom: 0 }}><Link href="/crypto/ethbtc">{t("cryptoAsset.ethbtc")} →</Link></p>}
+            </section>
+            <section className="card">
+              {([["range52", year], ["rangeAll", rows]] as const).map(([k, span]) => {
+                const lo = Math.min(...span.map((r) => r.close));
+                const hi = Math.max(...span.map((r) => r.close));
+                const at = hi > lo ? Math.round(((last.close - lo) / (hi - lo)) * 100) : 50;
+                return (
+                  <div key={k} className="range-block">
+                    <h2>{t(`coin.${k}`)}</h2>
+                    <div className="range" role="img" aria-label={`${t(`coin.${k}`)}: ${p(lo)} – ${p(hi)}`}>
+                      <span className="range-mark" style={{ left: `${at}%` }} />
+                    </div>
+                    <div className="range-labels"><span>{t("coin.low")} {p(lo)}</span><span>{t("coin.high")} {p(hi)}</span></div>
+                  </div>
+                );
+              })}
+              <Sparkline values={rows.slice(-90).map((r) => r.close)} label={`${name}, ${t("crypto.last90")}`} />
+              <span className="caption small muted">{t("crypto.last90")}</span>
+            </section>
           </div>
 
           <h2><Term id="movingAverage">{daily.length ? t("cryptoAsset.priceChart") : t("cryptoAsset.priceOnly")}</Term></h2>
@@ -330,6 +339,24 @@ export default async function CryptoAssetPage({ params }: { params: Promise<{ as
             </>
           )}
         </>
+      )}
+      {libCharts.length > 0 && (
+        <section style={{ marginTop: 40 }}>
+          <div className="section-head"><h2>{t("coin.chartsTitle", { name })}</h2></div>
+          <p className="section-sub">{t("coin.chartsIntro", { name })}</p>
+          <div className="chart-cards">
+            {libCharts.map((c) => {
+              const tier = chartTier(c);
+              return (
+                <Link key={c.slug} href={`/charts/${c.slug}?asset=${asset.slug}`} className="card chart-card">
+                  <span className="card-tags">{tier && <span className={`tier-pill ${tier}`}>{t(`tiers.${tier}`)}</span>}</span>
+                  <strong>{t(`charts.items.${c.slug}.title` as never)}</strong>
+                  <span className="muted small">{t(`charts.items.${c.slug}.summary` as never)}</span>
+                </Link>
+              );
+            })}
+          </div>
+        </section>
       )}
       <ModelFooter models={models} shownAbove={["crypto_risk"]} />
     </>

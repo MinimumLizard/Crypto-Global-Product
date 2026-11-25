@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server";
 
 import Logo from "./Logo";
 import NavLinks from "./NavLinks";
+import SiteSearch from "./SiteSearch";
 import Ticker from "./Ticker";
 import type { Viewer } from "@/lib/entitlements";
 
@@ -14,7 +15,7 @@ export default async function SiteHeader({ viewer }: { viewer: Viewer }) {
     ["/learn", t("nav.learn")],
     ["/crypto", t("nav.crypto")],
     ["/charts", t("nav.charts")],
-    ["/methods", t("nav.methods")],
+    ["/portfolio", t("nav.portfolio")],
     ["/plans", t("nav.plans")],
   ] as const;
   const name = t("site.name");
@@ -31,6 +32,7 @@ export default async function SiteHeader({ viewer }: { viewer: Viewer }) {
           </span>
         </Link>
         <NavLinks links={[...links]} label={t("nav.label")} />
+        <SiteSearch />
         <Link href="/plans" className="tier-badge">
           {t("tiers.viewing", { tier: t(`tiers.${viewer.tier}`) })}
         </Link>

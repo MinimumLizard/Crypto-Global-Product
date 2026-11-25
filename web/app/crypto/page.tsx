@@ -5,7 +5,9 @@ import AsOf from "@/components/AsOf";
 import Chart from "@/components/Chart";
 import CryptoNotice from "@/components/CryptoNotice";
 import Locked from "@/components/Locked";
+import CoinTable from "@/components/CoinTable";
 import ModelFooter from "@/components/ModelFooter";
+import Movers from "@/components/Movers";
 import PreviewNote from "@/components/PreviewNote";
 import Sparkline from "@/components/Sparkline";
 import Term from "@/components/Term";
@@ -45,26 +47,9 @@ export default async function CryptoPage() {
       ) : (
         <>
           <AsOf day={overview.data?.day ?? null} calendar="crypto" />
-          <h2>{t("crypto.assetsTitle")}</h2>
-          <div className="tiles">
-            {latest.map((r) => {
-              const asset = assetByPair(r.pair)!;
-              return (
-                <Link key={r.pair} href={`/crypto/${asset.slug}`} className="tile stat asset-card">
-                  <span className="label">
-                    {name(r.pair)} <span className="code">{asset.label}</span>
-                  </span>
-                  <span className="value">{price(r.close, asset.quote)}</span>
-                  <span className="sub">
-                    <span className={`chip ${tone(r.ret_1d)}`}>{pct(r.ret_1d)}</span>{" "}
-                    {r.drawdown < 0 ? t("crypto.fromHigh", { pct: pct(r.drawdown) }) : t("crypto.atHigh")}
-                  </span>
-                  <Sparkline values={overview.data?.recent[r.pair] ?? []} label={`${name(r.pair)}, ${t("crypto.last90")}`} />
-                  <span className="caption">{t("crypto.last90")}</span>
-                </Link>
-              );
-            })}
-          </div>
+          <Movers rows={latest} />
+          <h2>{t("markets.tableTitle")}</h2>
+          <CoinTable id="markets" rows={latest} recent={overview.data?.recent ?? {}} />
           <p className="small muted" style={{ marginTop: 12 }}>{t("crypto.utcDay")} {t("crypto.history")}</p>
         </>
       )}
@@ -109,47 +94,6 @@ export default async function CryptoPage() {
         </>
       )}
 
-      {overview.access.allowed && latest.length > 0 && (
-        <>
-          <h2>{t("crypto.tableTitle")}</h2>
-          <div className="table-wrap">
-            <table>
-              <thead>
-                <tr>
-                  <th>{t("crypto.asset")}</th>
-                  <th className="num">{t("crypto.close")}</th>
-                  <th className="num">{t("crypto.d1")}</th>
-                  <th className="num">{t("crypto.d7")}</th>
-                  <th className="num">{t("crypto.d30")}</th>
-                  <th className="num">{t("crypto.y1")}</th>
-                  <th className="num"><Term id="drawdown">{t("crypto.drawdown")}</Term></th>
-                  <th className="num"><Term id="volatility">{t("crypto.vol30")}</Term></th>
-                </tr>
-              </thead>
-              <tbody>
-                {latest.map((r) => {
-                  const asset = assetByPair(r.pair)!;
-                  return (
-                    <tr key={r.pair}>
-                      <td>
-                        <Link href={`/crypto/${asset.slug}`}>{name(r.pair)}</Link>
-                        <span className="sub">{asset.label}</span>
-                      </td>
-                      <td className="num">{price(r.close, asset.quote)}</td>
-                      <td className={`num ${tone(r.ret_1d)}`}>{pct(r.ret_1d)}</td>
-                      <td className={`num ${tone(r.ret_7d)}`}>{pct(r.ret_7d)}</td>
-                      <td className={`num ${tone(r.ret_30d)}`}>{pct(r.ret_30d)}</td>
-                      <td className={`num ${tone(r.ret_1y)}`}>{pct(r.ret_1y)}</td>
-                      <td className="num">{pct(r.drawdown)}</td>
-                      <td className="num">{percent(r.vol_30d == null ? null : r.vol_30d * 100, 0)}</td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
-        </>
-      )}
       <ModelFooter models={["crypto_market", "crypto_cycle"]} shownAbove={["crypto_risk"]} />
     </>
   );
