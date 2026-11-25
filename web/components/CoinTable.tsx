@@ -28,10 +28,10 @@ export default async function CoinTable({ id, rows, recent }: { id: string; rows
           <thead>
             <tr>
               <th className="star-col"><span className="visually-hidden">{t("markets.watch")}</span></th>
-              <th className="num" data-col="1">#</th>
+              <th className="num" data-col="1" tabIndex={0}>#</th>
               <th>{t("markets.coin")}</th>
               {cols.map(([k, label], i) => (
-                <th key={k} className={`num${k === "y1" || k === "dd" || k === "vol" ? " hide-sm" : ""}`} data-col={i + 3}>
+                <th key={k} className={`num${k === "y1" || k === "dd" || k === "vol" ? " hide-sm" : ""}`} data-col={i + 3} tabIndex={0}>
                   {k === "dd" ? <Term id="drawdown">{label}</Term> : k === "vol" ? <Term id="volatility">{label}</Term> : label}
                 </th>
               ))}
@@ -45,7 +45,7 @@ export default async function CoinTable({ id, rows, recent }: { id: string; rows
               return (
                 <tr key={r.pair} data-slug={asset.slug} data-search={`${name} ${asset.label}`.toLowerCase()}>
                   <td className="star-col">
-                    <button type="button" className="star" data-star={asset.slug} aria-pressed="false" hidden data-needs-js=""
+                    <button type="button" className="star" suppressHydrationWarning data-star={asset.slug} aria-pressed="false" hidden data-needs-js=""
                             data-label-on={t("markets.unwatch")} data-label-off={t("markets.watch")} aria-label={`${t("markets.watch")}: ${name}`}>☆</button>
                   </td>
                   <td className="num muted" data-v={i + 1}>{i + 1}</td>

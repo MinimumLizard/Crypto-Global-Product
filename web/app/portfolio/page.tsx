@@ -41,7 +41,7 @@ export default async function PortfolioPage() {
                 const a = assetByPair(r.pair)!;
                 return (
                   <li key={r.pair} data-watch-row={a.slug} hidden>
-                    <button type="button" className="star" data-star={a.slug} aria-pressed="true" hidden data-needs-js=""
+                    <button type="button" className="star" suppressHydrationWarning data-star={a.slug} aria-pressed="true" hidden data-needs-js=""
                             data-label-on={t("markets.unwatch")} data-label-off={t("markets.watch")} aria-label={`${t("markets.unwatch")}: ${name(r.pair)}`}>★</button>
                     <Link href={`/crypto/${a.slug}`}>{name(r.pair)}</Link>
                     <span className="num">{price(r.close)}</span>
@@ -86,9 +86,9 @@ export default async function PortfolioPage() {
                         <td className="num"><input type="number" min="0" step="any" data-amount="" aria-label={t("portfolio.amount")} /></td>
                         <td className="num"><input type="number" min="0" step="any" data-paid="" aria-label={t("portfolio.paid")} /></td>
                         <td className="num">{price(r.close)}</td>
-                        <td className="num" data-value="" />
-                        <td className="num" data-share="" />
-                        <td className="num" data-change="" />
+                        <td className="num" data-value="" suppressHydrationWarning>—</td>
+                        <td className="num" data-share="" suppressHydrationWarning>—</td>
+                        <td className="num" data-change="" suppressHydrationWarning>—</td>
                         <td><button type="button" className="link-button" data-port-remove={a.slug}>{t("portfolio.remove")}</button></td>
                       </tr>
                     );
@@ -97,8 +97,8 @@ export default async function PortfolioPage() {
               </table>
             </div>
             <dl className="facts port-total">
-              <dt>{t("portfolio.total")}</dt><dd data-total="" />
-              <dt>{t("portfolio.totalChange")}</dt><dd data-total-change="" />
+              <dt>{t("portfolio.total")}</dt><dd data-total="" suppressHydrationWarning>—</dd>
+              <dt>{t("portfolio.totalChange")}</dt><dd data-total-change="" suppressHydrationWarning>—</dd>
             </dl>
             <p className="small muted">
               {t("portfolio.note", { date: date(overview.data?.day ?? null) })}{" "}

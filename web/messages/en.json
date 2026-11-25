@@ -1440,6 +1440,7 @@
     }
   },
   "markets": {
+    "inBitcoin": "Priced in bitcoin instead of dollars:",
     "tableTitle": "All coins",
     "price": "Price",
     "fromHigh": "From the high",
@@ -1448,13 +1449,13 @@
     "coin": "Coin",
     "search": "Search coins",
     "watchOnly": "My watchlist only",
-    "watch": "Add to watchlist",
+    "watch": "Put on my watchlist",
     "unwatch": "Remove from watchlist",
     "gainers1d": "Biggest rises today",
     "losers1d": "Biggest falls today",
     "gainers7d": "Biggest rises this week",
     "losers7d": "Biggest falls this week",
-    "none": "None today."
+    "none": "No coin in this period."
   },
   "portfolio": {
     "title": "My coins",
@@ -1482,14 +1483,14 @@
   },
   "search": {
     "label": "Search coins, charts and lessons",
-    "placeholder": "Search coins, charts, lessons",
+    "placeholder": "Search coins, charts…",
     "coin": "Coin",
     "chart": "Chart",
     "lesson": "Lesson",
     "page": "Page"
   },
   "coin": {
-    "watch": "Add to watchlist",
+    "watch": "Put on my watchlist",
     "unwatch": "Remove from watchlist",
     "keyStats": "Key figures",
     "range52": "52-week range",

@@ -49,7 +49,15 @@ export default async function CryptoPage() {
           <AsOf day={overview.data?.day ?? null} calendar="crypto" />
           <Movers rows={latest} />
           <h2>{t("markets.tableTitle")}</h2>
-          <CoinTable id="markets" rows={latest} recent={overview.data?.recent ?? {}} />
+          {/* Coins priced in US dollars share one table, so every column compares like with like; pairs priced in
+              bitcoin (ETH/BTC) are linked below it. */}
+          <CoinTable id="markets" rows={latest.filter((r) => assetByPair(r.pair)!.quote === "USD")} recent={overview.data?.recent ?? {}} />
+          <p className="small" style={{ marginTop: 12 }}>
+            {t("markets.inBitcoin")}{" "}
+            {latest.filter((r) => assetByPair(r.pair)!.quote === "BTC").map((r) => (
+              <Link key={r.pair} href={`/crypto/${assetByPair(r.pair)!.slug}`}>{assetByPair(r.pair)!.label} →</Link>
+            ))}
+          </p>
           <p className="small muted" style={{ marginTop: 12 }}>{t("crypto.utcDay")} {t("crypto.history")}</p>
         </>
       )}

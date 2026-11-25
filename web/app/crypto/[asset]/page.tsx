@@ -74,7 +74,7 @@ export default async function CryptoAssetPage({ params }: { params: Promise<{ as
       <p className="small"><Link href="/crypto">← {t("crypto.title")}</Link></p>
       <div className="coin-head">
         <h1>{name} <span className="code">{asset.label}</span></h1>
-        <button type="button" className="star big" data-star={asset.slug} aria-pressed="false" hidden data-needs-js=""
+        <button type="button" className="star big" suppressHydrationWarning data-star={asset.slug} aria-pressed="false" hidden data-needs-js=""
                 data-label-on={t("coin.unwatch")} data-label-off={t("coin.watch")} aria-label={t("coin.watch")}>☆</button>
       </div>
       {last && <p className="lead">{t("cryptoAsset.pairLine", { pair: asset.label, date: date(rows[0].day) })}</p>}
