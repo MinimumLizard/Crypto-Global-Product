@@ -50,8 +50,24 @@ licence and what is free: `docs/charts.md`. Next: macro from US agencies, market
 has its own page (`/start/…`, `web/lib/onboarding.ts`): sourced statistics, one question about **knowledge only**
 (never money or goals: personal advice), three next steps. Lessons end with "Was this lesson useful?" and show real
 counts only (migration 0008). Waiting: review-for-a-free-week (accounts), chatbot (owners' decision, cost, lawyer),
-e-mail capture. The owners have not yet answered whether to use the openly labelled Kaggle copy of Bitstamp's
-bitcoin history (provenance risk, `docs/charts.md`), nor set up GitHub Pages (decision 0024). Uncommitted work is
+e-mail capture. The owners have not yet set up GitHub Pages (decision 0024).
+
+**2026-11-25 (decision 0026):** the owners asked for "more like CoinGecko… a research terminal with the personal
+elements, a hybrid". Built:
+- Markets: movers, and a sortable and searchable coin table with stars.
+- Coin pages: key figures, ranges, and every chart for that coin.
+- My coins (`/portfolio`): a watchlist and a portfolio tracker.
+- Header search, and "continue where you left off".
+
+All of it is the one plain script `web/public/terminal.js`. Its rules:
+- Personal data lives only in the browser's localStorage, and a unit test forbids any way of sending it.
+- Elements the script fills in need `suppressHydrationWarning` and server-rendered placeholder text, or React redraws
+  the page.
+- The tracker never suggests changes.
+
+They left the Kaggle question to us. The decision: Bitstamp for private previews, and the Bitstamp letter sent now.
+The Kaggle CC BY-SA copy is the public-launch fallback only without a licence or revenue. Market caps and more
+coins wait for the owners' free CoinMarketCap key. Uncommitted work is
 lost when the cloud container resets: commit as you go.
 
 - Done: verified safety copy of the old Crypto repo; the platform, Bitstamp collector, three crypto models, website,

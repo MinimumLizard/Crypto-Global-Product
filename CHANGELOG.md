@@ -1,5 +1,37 @@
 # Changelog
 
+## 2026-11-25 — A markets terminal with personal tools
+
+- **Markets** reads like a research terminal:
+  - the biggest rises and falls today and this week;
+  - one table of every coin priced in dollars, sortable by any column, with search, stars and "my watchlist only";
+  - 90-day sparklines;
+  - ETH/BTC linked below the table.
+- **Coin pages**:
+  - a large price with 1-day, 7-day, 30-day and 1-year changes;
+  - key figures: highest and lowest close and their dates, days since the high, fall from it, volatility;
+  - 52-week and all-time range bars;
+  - every chart in the library for that coin.
+- **My coins** (`/portfolio`, new in the menu):
+  - a watchlist;
+  - a portfolio tracker (amounts, optional price paid, value, share, change since paid).
+  - Everything stays in the visitor's browser; nothing is sent to us. It is a calculator, not advice.
+- **Search** in the header (coins, charts, lessons, main pages). The front page offers "continue where you left off"
+  after a visitor has chosen a starting point.
+- How it works:
+  - All of the above is one small plain script (`web/public/terminal.js`). It only sorts, filters, shows, hides and
+    adds up; every link and figure is rendered by the server.
+  - Its listeners sit on the document, so React's own page code cannot break them.
+  - Static preview copies keep it inline.
+- Decision 0026:
+  - this terminal;
+  - the price history for a public launch: Bitstamp for private previews; send the Bitstamp letter now;
+  - the labelled Kaggle copy of Bitstamp's history (CC BY-SA, credited), but only if there is neither a licence nor
+    revenue by launch, and taken down if anyone objects;
+  - never Yahoo-derived data or Mt. Gox's records.
+- Checks: Python 133 passed + 2 skipped, web unit 80, type check, build, tier-leak 36 (now including `/portfolio`),
+  copy lint clean.
+
 ## 2026-11-08 — Janu's feedback: start from where the visitor is
 
 - The front page opens with **"Where are you starting from?"** (new to crypto; knows a bit but hasn't started; owns

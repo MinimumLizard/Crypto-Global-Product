@@ -519,7 +519,10 @@ and can we keep using what the preview uses until there is revenue?
   Binance, Bitfinex, Pyth, DefiLlama, Alpha Vantage, Twelve Data, Tiingo and others) either forbids commercial display
   or does not say clearly that it allows it.
 - **Free openly licensed datasets** (for example on Kaggle, labelled "CC0" or "CC BY-SA") are copies of Bitstamp or
-  CoinMarketCap data; an uploader cannot give away rights they never had. Not a safe source.
+  CoinMarketCap data; an uploader cannot give away rights they never had. Not a safe source. *Decision 0026 (2026-11-25):* the owners
+  left the choice to us. The Kaggle copy of Bitstamp's bitcoin history (CC BY-SA, credited) is the fallback for a
+  public launch only if there is neither a Bitstamp licence nor revenue for CoinMarketCap Startup by then, and it
+  comes down the day anyone objects. Never Yahoo-derived data or Mt. Gox's records.
 - **Cheapest ways to the long history, when there is revenue:** Bitstamp's licence (fee unknown, possibly low or free
   for a small business: the letter asks), CoinMarketCap Startup (US$79/month, history from 2010), CoinGecko Analyst
   (US$129/month, from 2013, with storage clauses to clear first). Everything else is internal-use only or costs
