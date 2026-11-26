@@ -1,5 +1,11 @@
 # Changelog
 
+## 2026-11-26 — Preview for the walk-through with Janu; Bitstamp without a licence request
+
+- The private preview was refreshed: prices to 25 November 2026; the Bitcoin network data stays at 19 November.
+- Decision 0027: use Bitstamp's data without asking for a licence, and switch sources only if there are issues. The
+  public-launch blocker stays until the owners say "go public".
+
 ## 2026-11-25 — A markets terminal with personal tools
 
 - **Markets** reads like a research terminal:

@@ -65,8 +65,13 @@ All of it is the one plain script `web/public/terminal.js`. Its rules:
   the page.
 - The tracker never suggests changes.
 
-They left the Kaggle question to us. The decision: Bitstamp for private previews, and the Bitstamp letter sent now.
-The Kaggle CC BY-SA copy is the public-launch fallback only without a licence or revenue. Market caps and more
+They left the Kaggle question to us. The decision: Bitstamp for private previews; the Kaggle CC BY-SA copy is the
+fallback.
+
+**2026-11-26 (decision 0027):** the owner says to use Bitstamp's data without asking for a licence, and to switch
+sources only if there are issues. So **don't send the Bitstamp letter.** `launch_blockers()` still lists it until
+they say "go public"; lifting it then is a one-line change in `config/sources.yaml`. The preview (artifact version 7,
+data to 2026-11-25) is for their walk-through with Janu. Market caps and more
 coins wait for the owners' free CoinMarketCap key. Uncommitted work is
 lost when the cloud container resets: commit as you go.
 
